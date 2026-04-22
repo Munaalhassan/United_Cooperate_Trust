@@ -58,6 +58,13 @@ Route::prefix('media')->group(function () {
     Route::inertia('publications', 'media/publications')->name('media.publications');
 });
 
+Route::prefix('legal')->group(function () {
+    Route::inertia('legal-disclaimer', 'legal/legal-disclaimer')->name('legal.disclaimer');
+    Route::inertia('complaints', 'legal/complaints')->name('legal.complaints');
+    Route::inertia('terms-of-use', 'legal/terms-of-use')->name('legal.terms');
+    Route::inertia('personal-data-notice', 'legal/personal-data-notice')->name('legal.data-notice');
+});
+
 Route::inertia('contact', 'contact')->name('contact');
 
 require __DIR__.'/settings.php';

@@ -1,6 +1,7 @@
 import { PublicHeader } from '@/components/public-header';
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from '@inertiajs/react';
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
     return (
@@ -21,14 +22,19 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
                     >
                         {/* Legal Links */}
                         <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 mb-12">
-                            {['Legal Disclaimer', 'Complaints', 'Terms of Use', 'Personal Data Notice'].map((link) => (
-                                <a 
-                                    key={link}
-                                    href="#" 
+                            {([
+                                { label: 'Legal Disclaimer', href: '/legal/legal-disclaimer' },
+                                { label: 'Complaints', href: '/legal/complaints' },
+                                { label: 'Terms of Use', href: '/legal/terms-of-use' },
+                                { label: 'Personal Data Notice', href: '/legal/personal-data-notice' },
+                            ] as { label: string; href: string }[]).map((link) => (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
                                     className="text-white text-lg font-medium hover:text-brand-blue transition-all duration-300 border-b border-white/30 hover:border-brand-blue pb-1"
                                 >
-                                    {link}
-                                </a>
+                                    {link.label}
+                                </Link>
                             ))}
                         </div>
 
