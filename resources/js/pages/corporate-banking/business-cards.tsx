@@ -72,26 +72,39 @@ export default function BusinessCards() {
                                 
                                 <div className="bg-white border border-slate-100 shadow-xl p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center">
                                     <div className="w-full md:w-1/2 flex justify-center">
-                                        {/* Card Image Placeholder - using a styled div to resemble the provided image if the actual image is missing */}
-                                        <div className="w-full max-w-[320px] aspect-[1.586/1] rounded-xl bg-gradient-to-br from-slate-400 to-slate-600 shadow-2xl relative overflow-hidden flex flex-col justify-between p-6">
-                                            <div className="flex justify-between items-start">
-                                                <div className="text-white/80 font-serif text-2xl tracking-widest">Omnium</div>
-                                                <div className="w-12 h-8 bg-slate-300/50 rounded-sm" /> {/* Chip */}
+                                        {/* CSS Recreated Omnium Card */}
+                                        <div 
+                                            className="w-full max-w-[320px] aspect-[1.586/1] rounded-xl shadow-2xl relative overflow-hidden flex flex-col justify-between p-6"
+                                            style={{ background: 'linear-gradient(135deg, #9ca3af 0%, #4b5563 100%)' }}
+                                        >
+                                            <div className="flex justify-between items-start relative z-10">
+                                                <div className="text-white/90 font-serif text-2xl tracking-widest drop-shadow-md">Omnium</div>
+                                                <div className="w-12 h-8 bg-slate-300/60 rounded-md border border-white/20 shadow-inner" /> {/* Chip */}
                                             </div>
-                                            <div className="space-y-4">
-                                                <div className="text-white font-mono text-xl tracking-widest shadow-sm">5412 7512 3412 3456</div>
+                                            <div className="space-y-4 relative z-10">
+                                                <div className="text-white font-mono text-xl tracking-widest drop-shadow-md">5412 7512 3412 3456</div>
                                                 <div className="flex justify-between items-end">
-                                                    <div className="text-white/80 font-mono text-xs uppercase tracking-widest leading-relaxed">
+                                                    <div className="text-white/90 font-mono text-[10px] uppercase tracking-widest leading-relaxed drop-shadow-md">
                                                         LEE M. CARDHOLDER<br/>ANY COMPANY, INC.
                                                     </div>
-                                                    <div className="text-white/90 font-bold italic">Mastercard<br/>Business</div>
+                                                    
+                                                    {/* Mastercard Logo CSS */}
+                                                    <div className="flex flex-col items-center">
+                                                        <div className="flex -space-x-3 mb-1">
+                                                            <div className="w-8 h-8 rounded-full bg-red-600/90 mix-blend-multiply" />
+                                                            <div className="w-8 h-8 rounded-full bg-orange-500/90 mix-blend-multiply" />
+                                                        </div>
+                                                        <div className="text-white/90 font-bold italic text-[9px] tracking-wider">Mastercard</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             {/* Decorative circles */}
-                                            <div className="absolute -right-10 -bottom-10 w-40 h-40 border-[20px] border-slate-800/20 rounded-full" />
-                                            <div className="absolute top-4 left-1/4 w-12 h-12 border-4 border-slate-800/10 rounded-full" />
+                                            <div className="absolute -right-12 -bottom-12 w-48 h-48 border-[24px] border-slate-800/10 rounded-full" />
+                                            <div className="absolute top-4 left-1/4 w-12 h-12 border-[3px] border-slate-800/10 rounded-full" />
+                                            <div className="absolute bottom-1/3 left-8 w-6 h-6 border-[2px] border-slate-800/10 rounded-full" />
                                         </div>
                                     </div>
+
                                     
                                     <div className="w-full md:w-1/2 space-y-6">
                                         <div>

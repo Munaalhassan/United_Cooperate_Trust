@@ -52,17 +52,45 @@ export default function CorporateFinancing() {
                         </div>
 
                         <div className="max-w-3xl">
-                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Strategic Capital for Corporate Growth</h2>
+                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Corporate Financing through the Globafin Group</h2>
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-16">
                                 <p>
-                                    Our Corporate Financing solutions, delivered through the Globafin Group, provide the strategic capital your business needs to scale, acquire, or restructure. We offer bespoke debt and equity solutions tailored to your industry and growth phase.
+                                    Our Group offers various credit solutions to meet your cash requirements and investment plans.
+                                </p>
+                                <p>
+                                    We have exclusive cooperation agreements with Globafin Group Business Centres and Large Corporate divisions in USA and south-eastern Europe.
                                 </p>
                             </div>
 
-                            {/* Placeholder for incoming text */}
-                            <div className="p-12 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center text-slate-400 italic">
-                                Content update pending...
+                            {/* Financing Solutions */}
+                            <div className="mb-20">
+                                <h3 className="text-2xl font-bold text-brand-navy mb-10 flex items-center gap-4">
+                                    <span className="w-12 h-px bg-brand-blue" />
+                                    Our Corporate Financing Solutions
+                                </h3>
+                                
+                                <div className="bg-white border border-slate-100 p-8 shadow-sm">
+                                    <div className="grid sm:grid-cols-2 gap-y-6 gap-x-12">
+                                        {[
+                                            "Short-term financing",
+                                            "Long-term financing",
+                                            "Overdraft facilities",
+                                            "Term loans",
+                                            "Bond Loans",
+                                            "Investment loans",
+                                            "Club deals",
+                                            "Syndicated loans"
+                                        ].map((solution, i) => (
+                                            <div key={i} className="flex items-center gap-4 border-b border-slate-50 pb-4 last:border-0 sm:last:border-b sm:nth-last-child(-n+2):border-0">
+                                                <div className="w-8 h-8 rounded-full bg-brand-blue/5 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-blue transition-colors">
+                                                    <ChevronRight className="w-4 h-4 text-brand-blue" />
+                                                </div>
+                                                <span className="text-slate-700 font-semibold">{solution}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

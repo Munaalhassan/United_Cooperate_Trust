@@ -55,8 +55,8 @@ const navigationData = [
         width: '550px',
         align: 'right', // To prevent overflow off the right edge of the screen
         links: [
-            { name: 'Fund Business', href: '#' },
-            { name: 'NAV Centre', href: '#' }
+            { name: 'Fund Business', href: '/fund-services/fund-business' },
+            { name: 'NAV Centre', href: '/fund-services/nav-centre' }
         ]
     }
 ];

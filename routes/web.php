@@ -41,4 +41,9 @@ Route::prefix('corporate-banking')->group(function () {
     Route::inertia('corporate-financing', 'corporate-banking/corporate-financing')->name('corporate.financing');
 });
 
+Route::prefix('fund-services')->group(function () {
+    Route::inertia('fund-business', 'fund-services/fund-business')->name('fund.business');
+    Route::inertia('nav-centre', 'fund-services/nav-centre')->name('fund.nav');
+});
+
 require __DIR__.'/settings.php';
