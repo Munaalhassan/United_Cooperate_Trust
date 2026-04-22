@@ -13,4 +13,22 @@ class LoginController extends Controller
     {
         return Inertia::render('admin/login');
     }
+
+    public function store(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (auth('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/system-node-mgt/dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
 }

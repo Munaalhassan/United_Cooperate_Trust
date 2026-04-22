@@ -8,6 +8,7 @@ use Laravel\Fortify\Features;
 require __DIR__.'/settings.php';
 
 Route::get('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'show'])->name('system.mgt.login');
+Route::post('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'store'])->name('system.mgt.login.post');
 
 Route::middleware(['auth', 'admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
@@ -19,9 +20,7 @@ Route::inertia('/', 'welcome', [
 
 Route::get('dashboard', function () {
     $user = auth()->user();
-    if ($user->is_admin) {
-        return redirect()->route('system.mgt.dashboard');
-    }
+    
     return $user->currentTeam 
         ? redirect()->route('team.internal-dashboard', ['current_team' => $user->currentTeam->slug]) 
         : redirect('/');

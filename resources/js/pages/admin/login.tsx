@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-import { store } from '@/routes/login';
+import { login as store } from '@/routes/system/mgt';
 import AuthSimpleLayout from '@/layouts/auth/auth-simple-layout';
 
 export default function AdminLogin({ status }: { status?: string }) {
@@ -33,7 +33,7 @@ export default function AdminLogin({ status }: { status?: string }) {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md px-6">
                 <div className="bg-white/5 backdrop-blur-xl py-12 px-10 border border-white/10 shadow-2xl">
                     <Form
-                        {...store.form()}
+                        {...store.post().form()}
                         resetOnSuccess={['password']}
                         className="space-y-8"
                     >
