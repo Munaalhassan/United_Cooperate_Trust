@@ -53,4 +53,11 @@ Route::prefix('quick-services')->group(function () {
     Route::inertia('third-party-payments', 'quick-services/third-party')->name('quick.third-party');
 });
 
+Route::prefix('media')->group(function () {
+    Route::inertia('news-events', 'media/news-events')->name('media.news-events');
+    Route::inertia('publications', 'media/publications')->name('media.publications');
+});
+
+Route::inertia('contact', 'contact')->name('contact');
+
 require __DIR__.'/settings.php';

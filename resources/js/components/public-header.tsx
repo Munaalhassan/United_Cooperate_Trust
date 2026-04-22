@@ -179,10 +179,10 @@ export function PublicHeader() {
                                     Quick Services <ChevronDown className="w-3 h-3 group-hover/qs:-rotate-180 transition-transform duration-300" />
                                 </span>
                                 <div className="absolute top-full right-0 min-w-[230px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/qs:opacity-100 group-hover/qs:visible group-hover/qs:scale-100 group-hover/qs:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
-                                    <Link href="#" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">E-Banking Registration</Link>
-                                    <Link href="#" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Credit Cards</Link>
-                                    <Link href="#" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Security Awareness</Link>
-                                    <Link href="#" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Third-Party Payment Services</Link>
+                                    <Link href="/quick-services/e-banking-registration" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">E-Banking Registration</Link>
+                                    <Link href="/quick-services/credit-cards" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Credit Cards</Link>
+                                    <Link href="/quick-services/security-awareness" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Security Awareness</Link>
+                                    <Link href="/quick-services/third-party-payments" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Third-Party Payment Services</Link>
                                 </div>
                             </div>
 
@@ -191,9 +191,9 @@ export function PublicHeader() {
                                 <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-semibold cursor-pointer h-full py-2">
                                     Media <ChevronDown className="w-3 h-3 group-hover/media:-rotate-180 transition-transform duration-300" />
                                 </span>
-                                <div className="absolute top-full right-0 min-w-[150px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/media:opacity-100 group-hover/media:visible group-hover/media:scale-100 group-hover/media:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
-                                    <Link href="#" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">News</Link>
-                                    <Link href="#" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Events</Link>
+                                <div className="absolute top-full right-0 min-w-[200px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/media:opacity-100 group-hover/media:visible group-hover/media:scale-100 group-hover/media:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
+                                    <Link href="/media/news-events" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">News and Events</Link>
+                                    <Link href="/media/publications" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Publications</Link>
                                 </div>
                             </div>
 
