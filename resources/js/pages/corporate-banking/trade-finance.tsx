@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { CorporateBankingSidebar } from '@/components/corporate-banking-sidebar';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export default function TradeFinance() {
     return (
@@ -43,9 +44,11 @@ export default function TradeFinance() {
                     >
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
-                            <img 
+                            <OptimizedImage 
                                 src="/images/slider_lobby.png" 
                                 alt="UCT Trade Finance" 
+                                width={800}
+                                height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-brand-navy/10" />

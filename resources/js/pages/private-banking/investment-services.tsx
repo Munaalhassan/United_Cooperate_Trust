@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { PrivateBankingSidebar } from '@/components/private-banking-sidebar';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export default function InvestmentServices() {
     return (
@@ -43,9 +44,11 @@ export default function InvestmentServices() {
                     >
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
-                            <img 
+                            <OptimizedImage 
                                 src="/images/slider_wealth.png" 
                                 alt="UCT Investment Services" 
+                                width={800}
+                                height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-brand-navy/10" />

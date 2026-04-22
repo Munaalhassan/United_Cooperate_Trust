@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 // Extracted Navigation Data
 const navigationData = [
@@ -191,9 +192,12 @@ export function PublicHeader() {
                     <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
                         {/* Logo */}
                         <Link href="/" className="flex items-center -ml-2 py-0 h-auto">
-                            <img
+                            <OptimizedImage
                                 src={asset('images/logo.png')}
                                 alt="United Cooperate Bank"
+                                width={300}
+                                height={84}
+                                priority={true}
                                 className="h-14 md:h-13 lg:h-18 w-auto drop-shadow-sm block"
                             />
                         </Link>
@@ -244,7 +248,7 @@ export function PublicHeader() {
                                     </SheetTrigger>
                                     <SheetContent side="right" className="w-[90vw] sm:w-[400px] bg-white border-l shadow-2xl p-0 flex flex-col">
                                         <SheetHeader className="px-6 py-5 border-b border-slate-100 flex justify-between items-center flex-row">
-                                            <img src={asset('images/logo.png')} alt="United Cooperate Bank" className="h-12 w-auto" />
+                                            <OptimizedImage src={asset('images/logo.png')} alt="United Cooperate Bank" width={200} height={56} className="h-12 w-auto" />
                                             <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
                                         </SheetHeader>
                                         <div className="flex-1 overflow-y-auto w-full">

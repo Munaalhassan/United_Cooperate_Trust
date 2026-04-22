@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { store } from '@/routes/system/mgt/login';
 import AuthSimpleLayout from '@/layouts/auth/auth-simple-layout';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export default function AdminLogin({ status }: { status?: string }) {
     return (
@@ -16,8 +17,11 @@ export default function AdminLogin({ status }: { status?: string }) {
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="flex justify-center mb-10">
-                    <img
+                    <OptimizedImage
                         src="/images/logo.png"
+                        width={200}
+                        height={60}
+                        priority={true}
                         className="h-12 w-auto brightness-0 invert"
                         alt="UCT Bank Admin"
                     />

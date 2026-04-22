@@ -16,6 +16,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
 import { useAsset } from '@/hooks/use-asset';
 import { edit as profileEdit } from '@/routes/system/mgt/profile';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 interface Props {
     children: ReactNode;
@@ -36,9 +37,12 @@ export default function AdminLayout({ children, title }: Props) {
             {/* Sidebar */}
             <aside className="w-64 bg-brand-navy text-white flex flex-col fixed inset-y-0 shadow-2xl z-40">
                 <div className="p-8 border-b border-white/5">
-                    <img 
+                    <OptimizedImage 
                         src={asset('images/logo.png')} 
                         alt="UCT Bank Admin" 
+                        width={120}
+                        height={32}
+                        priority={true}
                         className="h-8 w-auto brightness-0 invert" 
                     />
                     <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-brand-blue uppercase tracking-widest">

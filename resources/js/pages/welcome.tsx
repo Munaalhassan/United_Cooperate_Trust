@@ -13,6 +13,7 @@ import {
     Mail, 
     MapPin
 } from 'lucide-react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 const slides = [
     '/images/hero/slide-1.jpg',
@@ -123,6 +124,8 @@ export default function Welcome() {
                         style={{ 
                             backgroundImage: `url('${slides[currentSlide]}')` 
                         }}
+                        /* @ts-ignore */
+                        fetchpriority={currentSlide === 0 ? "high" : "auto"}
                     />
                 </AnimatePresence>
                 
@@ -228,8 +231,11 @@ export default function Welcome() {
                             >
                                 {/* Background Image with Color Shift */}
                                 <div className="absolute inset-0 z-0">
-                                    <motion.img 
+                                    <OptimizedImage 
                                         src={service.image} 
+                                        alt={service.title}
+                                        width={800}
+                                        height={600}
                                         className="w-full h-full object-cover grayscale-0 lg:grayscale lg:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
                                     />
                                     {/* Overlays */}
@@ -276,10 +282,12 @@ export default function Welcome() {
                 <div className="flex flex-col lg:flex-row min-h-[600px]">
                     {/* Image Half */}
                     <div className="w-full lg:w-1/2 relative h-[400px] lg:h-auto">
-                        <img 
+                        <OptimizedImage 
                             src="/images/usa-hub.jpg" 
-                            className="w-full h-full object-cover"
                             alt="United Cooperate Trust Bank Headquarters in the USA Financial Hub"
+                            width={1200}
+                            height={800}
+                            className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-brand-blue/10 mix-blend-overlay" />
                     </div>

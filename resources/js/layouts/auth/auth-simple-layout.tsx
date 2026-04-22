@@ -3,6 +3,7 @@ import AppLogoIcon from '@/components/app-logo-icon';
 import { home } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
 import { ShieldCheck, ArrowLeft } from 'lucide-react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export default function AuthSimpleLayout({
     children,
@@ -26,9 +27,12 @@ export default function AuthSimpleLayout({
             {/* Header Logo */}
             <div className="w-full flex flex-col items-center justify-center mb-8">
                 <Link href={home()} className="flex items-center gap-3">
-                    <img 
+                    <OptimizedImage 
                         src="/images/logo.png" 
                         alt="United Cooperate Trust Bank" 
+                        width={250}
+                        height={70}
+                        priority={true}
                         className="h-12 w-auto drop-shadow-sm" 
                     />
                 </Link>

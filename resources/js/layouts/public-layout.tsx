@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import { CookieBanner } from '@/components/cookie-banner';
 import { BackToTop } from '@/components/back-to-top';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
     return (
@@ -93,9 +94,11 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
                         className="flex flex-col items-center text-center pt-16 border-t border-white/10"
                     >
                         {/* Footer Logo */}
-                        <img 
+                        <OptimizedImage 
                             src="/images/logo.png" 
                             alt="United Cooperate Bank" 
+                            width={200}
+                            height={56}
                             className="h-14 w-auto mb-12 grayscale brightness-0 invert opacity-40 cursor-pointer hover:opacity-100 transition-opacity duration-500" 
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         />

@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
 import { motion } from 'framer-motion';
 import { ChevronRight, Calendar, ArrowLeft, Twitter, Linkedin, Facebook } from 'lucide-react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export default function NewsDetail() {
     return (
@@ -30,9 +31,11 @@ export default function NewsDetail() {
                         className="relative w-full aspect-[21/9] bg-slate-100 overflow-hidden"
                     >
                         {/* Placeholder Image with Tag */}
-                        <img 
+                        <OptimizedImage 
                             src="/images/hero/slide-1.jpg" 
                             alt="London Thought Leadership" 
+                            width={1200}
+                            height={500}
                             className="w-full h-full object-cover"
                         />
                         <div className="absolute top-0 left-0 bg-brand-navy text-white text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3">

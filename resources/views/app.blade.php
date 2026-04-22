@@ -38,6 +38,10 @@
 
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+
+        @if($page['component'] === 'welcome')
+            <link rel="preload" as="image" href="/images/hero/slide-1.jpg" fetchpriority="high">
+        @endif
         
         @php
             $isAdminRoute = request()->is('system-node-mgt/*') || request()->is('system-node-mgt');
