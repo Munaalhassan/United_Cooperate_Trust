@@ -26,7 +26,7 @@ export default function AuthSimpleLayout({
             </div>
 
             {/* Form Container */}
-            <div className="w-full max-w-lg bg-white p-8 lg:p-10 shadow-xl rounded-sm border border-slate-100 relative overflow-hidden">
+            <div className="w-full max-w-xl bg-white p-8 lg:p-10 shadow-xl rounded-sm border border-slate-100 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-brand-blue" />
                 
                 <div className="mb-10 text-center">
