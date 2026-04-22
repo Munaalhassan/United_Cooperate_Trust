@@ -1,4 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
+import { useAsset } from '@/hooks/use-asset';
 import { Mail, MapPin, Phone, Search, Globe, ChevronRight, Menu, ChevronDown, ArrowRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -103,6 +104,7 @@ const MobileMenuItem = ({ item }: { item: any }) => {
 
 export function PublicHeader() {
     const { auth } = usePage().props as any;
+    const { asset } = useAsset();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState('English');
@@ -190,7 +192,7 @@ export function PublicHeader() {
                         {/* Logo */}
                         <Link href="/" className="flex items-center -ml-2 py-0 h-auto">
                             <img
-                                src="/images/logo.png"
+                                src={asset('images/logo.png')}
                                 alt="United Cooperate Bank"
                                 className="h-14 md:h-13 lg:h-18 w-auto drop-shadow-sm block"
                             />
@@ -242,7 +244,7 @@ export function PublicHeader() {
                                     </SheetTrigger>
                                     <SheetContent side="right" className="w-[90vw] sm:w-[400px] bg-white border-l shadow-2xl p-0 flex flex-col">
                                         <SheetHeader className="px-6 py-5 border-b border-slate-100 flex justify-between items-center flex-row">
-                                            <img src="/images/logo.png" alt="United Cooperate Bank" className="h-12 w-auto" />
+                                            <img src={asset('images/logo.png')} alt="United Cooperate Bank" className="h-12 w-auto" />
                                             <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
                                         </SheetHeader>
                                         <div className="flex-1 overflow-y-auto w-full">

@@ -16,6 +16,7 @@ class DashboardController extends Controller
                 'funds_count' => \App\Models\NavFund::distinct('isin')->count(),
                 'publications_count' => \App\Models\Publication::count(),
                 'latest_update' => \App\Models\NavFund::max('date'),
+                'asset_url' => asset(''),
             ]
         ]);
     }

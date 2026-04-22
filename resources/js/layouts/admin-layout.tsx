@@ -13,6 +13,7 @@ import { index as navIndex } from '@/routes/system/mgt/nav-funds';
 import { index as pubIndex } from '@/routes/system/mgt/publications';
 import { Toaster } from '@/components/ui/sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
+import { useAsset } from '@/hooks/use-asset';
 
 interface Props {
     children: ReactNode;
@@ -21,6 +22,7 @@ interface Props {
 
 export default function AdminLayout({ children, title }: Props) {
     const { url } = usePage();
+    const { asset } = useAsset();
     useFlashToast();
 
     const isActive = (path: string) => url === path || url.startsWith(path + '/');
@@ -33,7 +35,7 @@ export default function AdminLayout({ children, title }: Props) {
             <aside className="w-64 bg-brand-navy text-white flex flex-col fixed inset-y-0 shadow-2xl z-40">
                 <div className="p-8 border-b border-white/5">
                     <img 
-                        src="/images/logo.png" 
+                        src={asset('images/logo.png')} 
                         alt="UCT Bank Admin" 
                         className="h-8 w-auto brightness-0 invert" 
                     />
