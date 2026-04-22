@@ -19,4 +19,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('invitations/{invitation}/accept', [TeamInvitationController::class, 'accept'])->name('invitations.accept');
 });
 
+Route::prefix('about-us')->group(function () {
+    Route::inertia('ceo-welcome', 'about/ceo-welcome')->name('about.ceo-welcome');
+    Route::inertia('our-bank', 'about/our-bank')->name('about.our-bank');
+    Route::inertia('governance', 'about/governance')->name('about.governance');
+    Route::inertia('why-usa', 'about/why-usa')->name('about.why-usa');
+    Route::inertia('london-branch', 'about/london-branch')->name('about.london-branch');
+    Route::inertia('human-resources', 'about/human-resources')->name('about.human-resources');
+});
+
+Route::prefix('private-banking')->group(function () {
+    Route::inertia('investment-services', 'private-banking/investment-services')->name('private.investment');
+    Route::inertia('credit-solutions', 'private-banking/credit-solutions')->name('private.credit');
+    Route::inertia('family-office', 'private-banking/family-office')->name('private.family');
+});
+
+Route::prefix('corporate-banking')->group(function () {
+    Route::inertia('payment-fx', 'corporate-banking/payment-fx')->name('corporate.payment');
+    Route::inertia('trade-finance', 'corporate-banking/trade-finance')->name('corporate.trade');
+    Route::inertia('business-cards', 'corporate-banking/business-cards')->name('corporate.cards');
+    Route::inertia('corporate-financing', 'corporate-banking/corporate-financing')->name('corporate.financing');
+});
+
 require __DIR__.'/settings.php';

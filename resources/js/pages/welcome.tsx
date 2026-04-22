@@ -1,9 +1,19 @@
 import { Head } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { 
+    ArrowRight, 
+    Monitor, 
+    CreditCard, 
+    ShieldCheck, 
+    Share2, 
+    Globe, 
+    PhoneCall, 
+    Mail, 
+    MapPin
+} from 'lucide-react';
 
 const slides = [
     '/images/hero/slide-1.jpg',
@@ -42,6 +52,40 @@ const services = [
         image: "/images/service-4.jpg",
         reverse: true
     }
+];
+
+const quickServices = [
+    {
+        title: "E-Banking Registration",
+        description: "Secure, real-time access to your wealth from any device, anywhere in the world.",
+        icon: Monitor,
+        linkText: "Register Now"
+    },
+    {
+        title: "Credit Cards",
+        description: "Experience premium rewards and global recognition with our tailored card solutions.",
+        icon: CreditCard,
+        linkText: "Explore Cards"
+    },
+    {
+        title: "Security Awareness",
+        description: "Your security is our priority. Learn about our advanced protection measures.",
+        icon: ShieldCheck,
+        linkText: "Stay Protected"
+    },
+    {
+        title: "Digital Integration",
+        description: "Seamlessly connect with third-party payment services through secure API integration.",
+        icon: Share2,
+        linkText: "Learn More"
+    }
+];
+
+const heritageStats = [
+    { label: "Assets Under Management", value: "$42.5B+" },
+    { label: "Years of Excellence", value: "25+" },
+    { label: "Global Offices", value: "12" },
+    { label: "Client Retention", value: "99.2%" }
 ];
 
 export default function Welcome() {
@@ -254,7 +298,232 @@ export default function Welcome() {
                     </div>
                 </div>
             </section>
-            
+
+            {/* Digital Suite Section - Bento Grid Design */}
+            <section className="py-40 bg-[#fdfdfd] relative overflow-hidden">
+                {/* Micro-Typography Detail */}
+                <div className="absolute top-20 left-10 hidden lg:block">
+                    <span className="text-[10px] font-bold text-slate-300 uppercase tracking-[0.5em] [writing-mode:vertical-lr]">
+                        Digital Infrastructure / Vol. 2026
+                    </span>
+                </div>
+
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                    <div className="flex flex-col lg:flex-row items-end justify-between mb-24 gap-12">
+                        <motion.div 
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="max-w-3xl"
+                        >
+                            <span className="text-brand-blue font-bold tracking-[0.4em] uppercase text-[10px] mb-6 block">Innovation Hub</span>
+                            <h2 className="text-5xl md:text-7xl font-bold text-brand-navy tracking-tight leading-[0.95]">
+                                The Future of <br />
+                                <span className="text-brand-blue/80 italic font-light">Wealth</span> is Personal.
+                            </h2>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="lg:w-1/3 border-l-2 border-brand-blue/20 pl-8"
+                        >
+                            <p className="text-slate-500 text-lg leading-relaxed">
+                                Beyond the balance sheet, our digital tools are designed to provide absolute clarity, security, and control over your global portfolio.
+                            </p>
+                        </motion.div>
+                    </div>
+
+                    <motion.div 
+                        variants={{
+                            hidden: { opacity: 0 },
+                            show: {
+                                opacity: 1,
+                                transition: {
+                                    staggerChildren: 0.2
+                                }
+                            }
+                        }}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true }}
+                        className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-[240px]"
+                    >
+                        {/* Main Digital Card */}
+                        <motion.div 
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                            }}
+                            className="lg:col-span-8 lg:row-span-2 group relative overflow-hidden bg-brand-navy"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy to-brand-blue/30" />
+                            {/* Abstract Shape Overlay */}
+                            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[100px] group-hover:bg-brand-blue/20 transition-all duration-1000" />
+                            
+                            <div className="relative h-full p-12 md:p-16 flex flex-col justify-end">
+                                <Monitor className="w-12 h-12 text-brand-blue mb-8" />
+                                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">UCT Online Platform</h3>
+                                <p className="text-slate-400 max-w-md mb-10 text-lg leading-relaxed">
+                                    A unified ecosystem for your private, corporate, and investment accounts. Secure, intuitive, and borderless.
+                                </p>
+                                <Button className="w-fit bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-10 py-7 font-bold uppercase tracking-widest transition-all">
+                                    Enter Portal
+                                </Button>
+                            </div>
+                        </motion.div>
+
+                        {/* Security Card */}
+                        <motion.div 
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                            }}
+                            className="lg:col-span-4 lg:row-span-1 p-10 bg-slate-50 border border-slate-100 flex flex-col justify-between hover:bg-white hover:shadow-2xl hover:shadow-brand-blue/5 transition-all group"
+                        >
+                            <div className="flex justify-between items-start">
+                                <ShieldCheck className="w-8 h-8 text-brand-blue" />
+                                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Certified</span>
+                            </div>
+                            <div>
+                                <h4 className="text-xl font-bold text-brand-navy mb-2">Absolute Security</h4>
+                                <p className="text-slate-500 text-sm">Military-grade encryption and biometric access protocols.</p>
+                            </div>
+                        </motion.div>
+
+                        {/* Card Solutions */}
+                        <motion.div 
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                            }}
+                            className="lg:col-span-4 lg:row-span-1 p-10 bg-brand-gold text-white flex flex-col justify-between group overflow-hidden relative"
+                        >
+                            <div className="absolute top-[-50%] right-[-50%] w-[200px] h-[200px] bg-white/10 rounded-full blur-[40px] group-hover:scale-150 transition-transform duration-700" />
+                            <CreditCard className="w-8 h-8 mb-4 relative z-10" />
+                            <div className="relative z-10">
+                                <h4 className="text-xl font-bold mb-2">Infinite Cards</h4>
+                                <p className="text-white/80 text-sm mb-4">Request your bespoke UCT card with global limits.</p>
+                                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Heritage & Trust Section - Human Centric */}
+            <section className="py-32 bg-white">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <div className="border-t border-slate-100 pt-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                        >
+                            <h3 className="text-3xl font-light italic text-slate-400 mb-12 leading-relaxed">
+                                "Our bank was founded on a simple principle: that wealth is more than numbers. It is the legacy of families, the growth of businesses, and the fuel for global progress. We are honored to be your partner in this journey."
+                            </h3>
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-[1px] bg-brand-blue" />
+                                <span className="font-bold text-brand-navy uppercase tracking-[0.2em] text-xs">A Message from the CEO</span>
+                            </div>
+                        </motion.div>
+                        
+                        <motion.div 
+                            variants={{
+                                hidden: { opacity: 0 },
+                                show: {
+                                    opacity: 1,
+                                    transition: {
+                                        staggerChildren: 0.15,
+                                        delayChildren: 0.4
+                                    }
+                                }
+                            }}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true }}
+                            className="grid grid-cols-2 gap-x-12 gap-y-16"
+                        >
+                            {heritageStats.map((stat, i) => (
+                                <motion.div 
+                                    key={i}
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                                    }}
+                                >
+                                    <div className="text-4xl md:text-5xl font-bold text-brand-navy mb-2 tracking-tighter">{stat.value}</div>
+                                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Global Reach / Contact Section - Refined Split */}
+            <section className="relative bg-brand-navy text-white overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-32 flex flex-col lg:flex-row gap-24">
+                    <div className="flex-1">
+                        <span className="text-brand-gold font-bold tracking-[0.4em] uppercase text-[10px] mb-8 block">Global Reach</span>
+                        <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-[0.9]">
+                            Expertise <br /> Without <br /> <span className="text-brand-blue">Borders.</span>
+                        </h2>
+                        
+                        <div className="space-y-12">
+                            <div className="group cursor-pointer">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="w-1 h-8 bg-brand-blue group-hover:h-12 transition-all duration-500" />
+                                    <h4 className="text-xl font-bold">New York HQ</h4>
+                                </div>
+                                <p className="text-slate-400 text-sm max-w-sm ml-5">Our strategic center bridging American financial strength with global markets.</p>
+                            </div>
+                            <div className="group cursor-pointer">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="w-1 h-8 bg-brand-gold group-hover:h-12 transition-all duration-500" />
+                                    <h4 className="text-xl font-bold">London & Poland</h4>
+                                </div>
+                                <p className="text-slate-400 text-sm max-w-sm ml-5">Specialized services for the European corridor and emerging markets.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <motion.div 
+                        className="flex-1 bg-[#152e4d] p-12 md:p-16 rounded-3xl relative overflow-hidden"
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                    >
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl" />
+                        <h3 className="text-2xl font-bold mb-12">Start a conversation.</h3>
+                        
+                        <div className="space-y-10">
+                            <div className="flex items-center gap-6 group">
+                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-blue transition-all">
+                                    <Mail className="w-5 h-5 text-brand-blue group-hover:text-white" />
+                                </div>
+                                <div>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Email Inquiry</div>
+                                    <p className="text-lg font-medium">contact@unitedcooperatetrust.com</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-6 group">
+                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-gold transition-all">
+                                    <PhoneCall className="w-5 h-5 text-brand-gold group-hover:text-white" />
+                                </div>
+                                <div>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Global Support</div>
+                                    <p className="text-lg font-medium">+1 (555) UCT-BANK</p>
+                                </div>
+                            </div>
+                            <Button className="w-full bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none py-8 font-bold uppercase tracking-[0.2em] transition-all duration-500 text-xs mt-6">
+                                Request a Call Back
+                            </Button>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
         </PublicLayout>
     );
 }

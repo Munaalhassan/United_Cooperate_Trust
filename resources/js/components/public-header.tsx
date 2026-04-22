@@ -18,12 +18,12 @@ const navigationData = [
         width: '650px',
         align: 'left',
         links: [
-            { name: 'CEO welcome', href: '#' },
-            { name: 'Our Bank', href: '#' },
-            { name: 'Governance', href: '#' },
-            { name: 'Why USA ?', href: '#' },
-            { name: 'Our Poland branch', href: '#' },
-            { name: 'Human Resources', href: '#' }
+            { name: 'CEO welcome', href: '/about-us/ceo-welcome' },
+            { name: 'Our Bank', href: '/about-us/our-bank' },
+            { name: 'Governance', href: '/about-us/governance' },
+            { name: 'Why USA ?', href: '/about-us/why-usa' },
+            { name: 'Our London branch', href: '/about-us/london-branch' },
+            { name: 'Human Resources', href: '/about-us/human-resources' }
         ]
     },
     {
@@ -32,9 +32,9 @@ const navigationData = [
         width: '600px',
         align: 'center',
         links: [
-            { name: 'Investment Services', href: '#' },
-            { name: 'Credit Solutions', href: '#' },
-            { name: 'Family Office', href: '#' }
+            { name: 'Investment Services', href: '/private-banking/investment-services' },
+            { name: 'Credit Solutions', href: '/private-banking/credit-solutions' },
+            { name: 'Family Office', href: '/private-banking/family-office' }
         ]
     },
     {
@@ -43,10 +43,10 @@ const navigationData = [
         width: '700px',
         align: 'center',
         links: [
-            { name: 'Payment and FX services', href: '#' },
-            { name: 'Trade Finance Services', href: '#' },
-            { name: 'Business Credit Cards', href: '#' },
-            { name: 'Corporate Financing through the Globafin Group', href: '#' }
+            { name: 'Payment and FX services', href: '/corporate-banking/payment-fx' },
+            { name: 'Trade Finance Services', href: '/corporate-banking/trade-finance' },
+            { name: 'Business Credit Cards', href: '/corporate-banking/business-cards' },
+            { name: 'Corporate Financing through the Globafin Group', href: '/corporate-banking/corporate-financing' }
         ]
     },
     {
