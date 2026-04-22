@@ -34,29 +34,35 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600&display=swap" rel="stylesheet" />
 
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         
-        <!-- Google Translate -->
-        <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'en',
-                    includedLanguages: 'pl,fr,de,es,ar,zh-CN,ja,ru,en',
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                    autoDisplay: false
-                }, 'google_translate_element');
-            }
-        </script>
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-        <style>
-            .goog-te-banner-frame.skiptranslate { display: none !important; }
-            body { top: 0px !important; }
-            #google_translate_element { display: none; }
-        </style>
+        @php
+            $isAdminRoute = request()->is('system-node-mgt/*') || request()->is('system-node-mgt');
+        @endphp
+
+        @if(!$isAdminRoute)
+            <!-- Google Translate -->
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'en',
+                        includedLanguages: 'pl,fr,de,es,ar,zh-CN,ja,ru,en',
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                        autoDisplay: false
+                    }, 'google_translate_element');
+                }
+            </script>
+            <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
+            <style>
+                .goog-te-banner-frame.skiptranslate { display: none !important; }
+                body { top: 0px !important; }
+                #google_translate_element { display: none; }
+            </style>
+        @endif
 
         <x-inertia::head>
             <title inertia>{{ config('app.name', 'United Cooperate Trust Bank') }}</title>

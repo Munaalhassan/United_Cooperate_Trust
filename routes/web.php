@@ -12,6 +12,12 @@ Route::post('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginControlle
 
 Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    
+    // NAV Centre Management
+    Route::get('nav-funds', [\App\Http\Controllers\Admin\NavCentreController::class, 'index'])->name('nav-funds.index');
+    Route::post('nav-funds', [\App\Http\Controllers\Admin\NavCentreController::class, 'store'])->name('nav-funds.store');
+    Route::put('nav-funds/{nav_fund}', [\App\Http\Controllers\Admin\NavCentreController::class, 'update'])->name('nav-funds.update');
+    Route::delete('nav-funds/{nav_fund}', [\App\Http\Controllers\Admin\NavCentreController::class, 'destroy'])->name('nav-funds.destroy');
 });
 
 Route::inertia('/', 'welcome', [
@@ -60,8 +66,8 @@ Route::prefix('corporate-banking')->group(function () {
 });
 
 Route::prefix('fund-services')->group(function () {
-    Route::inertia('fund-business', 'fund-services/fund-business')->name('fund.business');
-    Route::inertia('nav-centre', 'fund-services/nav-centre')->name('fund.nav');
+    Route::get('fund-business', function() { return inertia('fund-services/fund-business'); })->name('fund.business');
+    Route::get('nav-centre', [\App\Http\Controllers\Public\NavCentreController::class, 'index'])->name('fund.nav');
 });
 
 Route::prefix('quick-services')->group(function () {
