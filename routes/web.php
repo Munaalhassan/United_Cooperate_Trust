@@ -70,6 +70,10 @@ Route::inertia('contact', 'contact')->name('contact');
 
 require __DIR__.'/settings.php';
 
+Route::middleware(['auth', 'admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+});
+
 Route::get('sitemap.xml', function () {
     $urls = [
         ['loc' => url('/'), 'priority' => '1.0'],
