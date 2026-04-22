@@ -46,4 +46,11 @@ Route::prefix('fund-services')->group(function () {
     Route::inertia('nav-centre', 'fund-services/nav-centre')->name('fund.nav');
 });
 
+Route::prefix('quick-services')->group(function () {
+    Route::inertia('e-banking-registration', 'quick-services/e-banking')->name('quick.ebanking');
+    Route::inertia('credit-cards', 'quick-services/credit-cards')->name('quick.cards');
+    Route::inertia('security-awareness', 'quick-services/security')->name('quick.security');
+    Route::inertia('third-party-payments', 'quick-services/third-party')->name('quick.third-party');
+});
+
 require __DIR__.'/settings.php';

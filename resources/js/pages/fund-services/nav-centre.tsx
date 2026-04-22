@@ -1,11 +1,173 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
 import { motion } from 'framer-motion';
-import React from 'react';
-import { ChevronRight } from 'lucide-react';
-import { FundServicesSidebar } from '@/components/fund-services-sidebar';
+import React, { useState } from 'react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
+
+const funds = [
+    { name: "Prelium A (LF) Total Return", isin: "LU0517761358", ccy: "EUR", date: "30/03/2022", price: "10.6408", lastPrice: "10.6527", change: "-0.0119", yield: "-4.00%" },
+    { name: "Prelium B (LF) Total Return", isin: "LU0517761515", ccy: "EUR", date: "30/03/2022", price: "11.8810", lastPrice: "11.8940", change: "-0.0130", yield: "-3.76%" },
+    { name: "United Cooperate Trust Bank (LF) Equity - Global Equities Fund", isin: "LU0273960111", ccy: "EUR", date: "30/03/2022", price: "1.6250", lastPrice: "1.6371", change: "-0.0121", yield: "-5.19%" },
+    { name: "United Cooperate Trust Bank I (LF) Equity - Global Equities Fund", isin: "LU0273959709", ccy: "EUR", date: "30/03/2022", price: "1.8599", lastPrice: "1.8737", change: "-0.0138", yield: "-4.97%" },
+    { name: "Interamerican (LF) Equity - Global Equities Fund", isin: "LU0648401262", ccy: "EUR", date: "30/03/2022", price: "1.5931", lastPrice: "1.6050", change: "-0.0119", yield: "-5.25%" },
+    { name: "Private Banking Class (LF) Equity - Global Equities", isin: "LU1102785356", ccy: "EUR", date: "30/03/2022", price: "1.6246", lastPrice: "1.6367", change: "-0.0121", yield: "-5.19%" },
+    { name: "Private Banking Class (USD) (LF) Equity - Global Equities Fund", isin: "LU1102785430", ccy: "USD", date: "30/03/2022", price: "1.8070", lastPrice: "1.8138", change: "-0.0068", yield: "-6.86%" },
+    { name: "Postbank (BGN) (LF) Equity -Global Equities Fund", isin: "LU0391044582", ccy: "BGN", date: "30/03/2022", price: "3.1785", lastPrice: "3.2022", change: "-0.0237", yield: "-1.30%" },
+    { name: "Postbank (LF) Equity -Global Equities Fund", isin: "LU0273960384", ccy: "EUR", date: "30/03/2022", price: "1.6251", lastPrice: "1.6372", change: "-0.0121", yield: "-1.31%" },
+    { name: "Romania (RON) (LF) Equity-Global Equities Fund", isin: "LU0273960467", ccy: "RON", date: "30/03/2022", price: "8.0403", lastPrice: "8.1003", change: "-0.06", yield: "-1.28%" },
+    { name: "United Cooperate Trust Bank (USD) (LF) Equity - Global Equities Fund", isin: "LU0648401346", ccy: "USD", date: "30/03/2022", price: "1.8087", lastPrice: "1.8154", change: "-0.0067", yield: "-6.86%" },
+    { name: "Cnp Zois (LF) Equity - Global Equities Fund", isin: "LU1923391038", ccy: "EUR", date: "30/03/2022", price: "1.6633", lastPrice: "1.6756", change: "-0.0123", yield: "-4.95%" },
+    { name: "United Cooperate Trust Bank (LF) Equity Greek - Equities Fund", isin: "LU0273962166", ccy: "EUR", date: "30/03/2022", price: "0.2316", lastPrice: "0.2323", change: "-0.0007", yield: "-0.81%" },
+    { name: "United Cooperate Trust Bank I (LF) Equity Greek Equities Fund", isin: "LU0273962083", ccy: "EUR", date: "30/03/2022", price: "0.2663", lastPrice: "0.2670", change: "-0.0007", yield: "-0.37%" },
+    { name: "Private Banking Equity Greek Equities Fund", isin: "LU1102785786", ccy: "EUR", date: "30/03/2022", price: "0.2317", lastPrice: "0.2324", change: "-0.0007", yield: "-0.77%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Best Performers III Fund", isin: "LU1041586410", ccy: "EUR", date: "30/03/2022", price: "12.4794", lastPrice: "12.4878", change: "-0.0084", yield: "-3.19%" },
+    { name: "United Cooperate Trust Bank (LF) Income Plus $ Fund", isin: "LU0273967041", ccy: "USD", date: "30/03/2022", price: "1.2542", lastPrice: "1.2530", change: "0.0012", yield: "-2.74%" },
+    { name: "United Cooperate Trust Bank I (LF) Income Plus $ Fund", isin: "LU0273966746", ccy: "USD", date: "30/03/2022", price: "1.2725", lastPrice: "1.2712", change: "0.0013", yield: "-2.59%" },
+    { name: "Private Banking Class (LF) Income Plus $ Fund", isin: "LU1102786594", ccy: "USD", date: "30/03/2022", price: "1.2542", lastPrice: "1.2530", change: "0.0012", yield: "-2.75%" },
+    { name: "United Cooperate Trust Bank (LF) Absolute Return Fund", isin: "LU0273968015", ccy: "EUR", date: "30/03/2022", price: "1.3736", lastPrice: "1.3730", change: "0.0006", yield: "-2.38%" },
+    { name: "United Cooperate Trust Bank I (LF) Absolute Return Fund", isin: "LU0273967983", ccy: "EUR", date: "30/03/2022", price: "1.4187", lastPrice: "1.4181", change: "0.0006", yield: "-2.29%" },
+    { name: "Interamerican (LF) Absolute Return Fund", isin: "LU2086749863", ccy: "EUR", date: "30/03/2022", price: "1.3632", lastPrice: "1.3627", change: "0.0005", yield: "-2.38%" },
+    { name: "Private Banking Class (LF) Absolute Return Fund", isin: "LU1102786750", ccy: "EUR", date: "30/03/2022", price: "1.3734", lastPrice: "1.3728", change: "0.0006", yield: "-2.38%" },
+    { name: "Postbank (LF) Absolute Return Fund", isin: "LU0273968288", ccy: "EUR", date: "30/03/2022", price: "1.3734", lastPrice: "1.3728", change: "0.0006", yield: "-2.38%" },
+    { name: "United Cooperate Trust Bank (LF) Flexi Allocation USA Fund", isin: "LU0385659072", ccy: "EUR", date: "30/03/2022", price: "1.0512", lastPrice: "1.0502", change: "0.001", yield: "-5.44%" },
+    { name: "Private Banking Class (LF) Flexi Allocation USA Fund", isin: "LU1102785943", ccy: "EUR", date: "30/03/2022", price: "1.0525", lastPrice: "1.0515", change: "0.001", yield: "-5.44%" },
+    { name: "United Cooperate Trust Bank Dis (LF) Flexi Allocation USA Fund", isin: "LU1195533770", ccy: "EUR", date: "30/03/2022", price: "1.0511", lastPrice: "1.0502", change: "0.0009", yield: "-6.00%" },
+    { name: "United Cooperate Trust Bank (LF) Income Plus EUR Fund", isin: "LU0385660161", ccy: "EUR", date: "30/03/2022", price: "1.6395", lastPrice: "1.6364", change: "0.0031", yield: "-3.33%" },
+    { name: "United Cooperate Trust Bank I (LF) Income Plus EUR Fund", isin: "LU0385660245", ccy: "EUR", date: "30/03/2022", price: "1.6887", lastPrice: "1.6854", change: "0.0033", yield: "-3.24%" },
+    { name: "Interamerican (LF) Income Plus € Fund", isin: "LU0989890131", ccy: "EUR", date: "30/03/2022", price: "11.8188", lastPrice: "11.7959", change: "0.0229", yield: "-3.27%" },
+    { name: "Private Banking Class (LF) Income Plus EUR Fund", isin: "LU1102786677", ccy: "EUR", date: "30/03/2022", price: "1.6393", lastPrice: "1.6361", change: "0.0032", yield: "-3.33%" },
+    { name: "United Cooperate Trust Bank (LF) Greek Governement Bond Fund", isin: "LU0420076928", ccy: "EUR", date: "30/03/2022", price: "35.0956", lastPrice: "34.8961", change: "0.1995", yield: "-7.44%" },
+    { name: "United Cooperate Trust Bank I (LF) Greek Governement Bond Fund", isin: "LU0420077579", ccy: "EUR", date: "30/03/2022", price: "39.2115", lastPrice: "38.9875", change: "0.224", yield: "-7.22%" },
+    { name: "Private Banking Class (LF) Greek Government Bond Fund", isin: "LU1102786834", ccy: "EUR", date: "30/03/2022", price: "35.0934", lastPrice: "34.8939", change: "0.1995", yield: "-7.44%" },
+    { name: "Private Banking Class (DIS) (LF) Greek Government Bond Fund", isin: "LU1195533267", ccy: "EUR", date: "30/03/2022", price: "27.2066", lastPrice: "27.0519", change: "0.1547", yield: "-7.44%" },
+    { name: "United Cooperate Trust Bank DIS (LF) Greek Government Bond Fund", isin: "LU1195533184", ccy: "EUR", date: "30/03/2022", price: "34.6057", lastPrice: "34.4088", change: "0.1969", yield: "-7.44%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Best Performers IV Fund", isin: "LU1069522214", ccy: "EUR", date: "30/03/2022", price: "13.0303", lastPrice: "13.0400", change: "-0.0097", yield: "-3.31%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Best Performers V Fund", isin: "LU1109962099", ccy: "EUR", date: "30/03/2022", price: "13.6776", lastPrice: "13.6952", change: "-0.0176", yield: "-3.81%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Best Performers VI Fund", isin: "LU1196268111", ccy: "EUR", date: "30/03/2022", price: "13.0661", lastPrice: "13.0451", change: "0.021", yield: "-1.45%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Equity Formula Index II", isin: "LU1955042293", ccy: "EUR", date: "30/03/2022", price: "11.2909", lastPrice: "11.2985", change: "-0.0076", yield: "-4.61%" },
+    { name: "United Cooperate Trust Bank (LF) Reserve Fund", isin: "LU0670223279", ccy: "EUR", date: "30/03/2022", price: "9.5099", lastPrice: "9.5180", change: "-0.0081", yield: "-1.48%" },
+    { name: "United Cooperate Trust Bank I (LF) Reserve Fund", isin: "LU0670223352", ccy: "EUR", date: "30/03/2022", price: "9.6750", lastPrice: "9.6833", change: "-0.0083", yield: "-1.37%" },
+    { name: "Interamerican (LF) Reserve Fund", isin: "LU0670223782", ccy: "EUR", date: "30/03/2022", price: "9.5383", lastPrice: "9.5465", change: "-0.0082", yield: "-1.48%" },
+    { name: "Private Banking Class (LF) Reserve Fund", isin: "LU1102786917", ccy: "EUR", date: "30/03/2022", price: "9.5124", lastPrice: "9.5206", change: "-0.0082", yield: "-1.47%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Equity Formula Index III", isin: "LU1988903677", ccy: "EUR", date: "30/03/2022", price: "11.0117", lastPrice: "11.0249", change: "-0.0132", yield: "-3.99%" },
+    { name: "United Cooperate Trust Bank (LF) Global Bond", isin: "LU0730413092", ccy: "EUR", date: "30/03/2022", price: "12.5956", lastPrice: "12.6102", change: "-0.0146", yield: "-2.90%" },
+    { name: "United Cooperate Trust Bank I (LF) Global Bond", isin: "LU0730413258", ccy: "EUR", date: "30/03/2022", price: "12.7967", lastPrice: "12.8114", change: "-0.0147", yield: "-2.80%" },
+    { name: "Private Banking Class (LF) Global Bond", isin: "LU1102787055", ccy: "EUR", date: "30/03/2022", price: "12.6134", lastPrice: "12.6280", change: "-0.0146", yield: "-2.90%" },
+    { name: "Cnp Zois (LF) Global Bond Fund", isin: "LU1923391111", ccy: "EUR", date: "30/03/2022", price: "12.7124", lastPrice: "12.7269", change: "-0.0145", yield: "-2.81%" },
+    { name: "United Cooperate Trust Bank (LF) High Yield A List Fund", isin: "LU2047494005", ccy: "EUR", date: "30/03/2022", price: "9.9133", lastPrice: "9.9163", change: "-0.003", yield: "-4.15%" },
+    { name: "United Cooperate Trust Bank I (LF) High Yield A List Fund", isin: "LU2047494187", ccy: "EUR", date: "30/03/2022", price: "10.1595", lastPrice: "10.1623", change: "-0.0028", yield: "-3.90%" },
+    { name: "Private Banking Class (LF) High Yield A List Fund", isin: "LU2047494260", ccy: "EUR", date: "30/03/2022", price: "9.9086", lastPrice: "9.9116", change: "-0.003", yield: "-4.14%" },
+    { name: "Private Banking Class DIS (LF) High Yield A List Fund", isin: "LU2047494344", ccy: "EUR", date: "30/03/2022", price: "9.4919", lastPrice: "9.4948", change: "-0.0029", yield: "-4.14%" },
+    { name: "United Cooperate Trust Bank DIS (LF) High Yield A List Fund", isin: "LU2086743585", ccy: "EUR", date: "30/03/2022", price: "9.9133", lastPrice: "9.9163", change: "-0.003", yield: "-3.86%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Best Performers", isin: "LU0818611450", ccy: "EUR", date: "30/03/2022", price: "13.8377", lastPrice: "13.8334", change: "0.0043", yield: "-1.06%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Equity Formula Index I", isin: "LU1883264399", ccy: "EUR", date: "30/03/2022", price: "11.8912", lastPrice: "11.8896", change: "0.0016", yield: "-4.42%" },
+    { name: "United Cooperate Trust Bank (LF) Greek Corporate Bond Fund", isin: "LU0939092168", ccy: "EUR", date: "30/03/2022", price: "15.4997", lastPrice: "15.4695", change: "0.0302", yield: "-5.49%" },
+    { name: "United Cooperate Trust Bank I (LF) Greek Corporate Bond Fund", isin: "LU0939092325", ccy: "EUR", date: "30/03/2022", price: "16.5476", lastPrice: "16.5150", change: "0.0326", yield: "-5.31%" },
+    { name: "Private Banking Class (LF) Greek Corporate Bond Fund", isin: "LU1102787139", ccy: "EUR", date: "30/03/2022", price: "15.4974", lastPrice: "15.4672", change: "0.0302", yield: "-5.49%" },
+    { name: "Private Banking Class (DIS) (LF) Greek Corporate Bond Fund", isin: "LU1195533697", ccy: "EUR", date: "30/03/2022", price: "12.3072", lastPrice: "12.2833", change: "0.0239", yield: "-5.49%" },
+    { name: "United Cooperate Trust Bank DIS (LF) Greek Corporate Bond Fund", isin: "LU1195533424", ccy: "EUR", date: "30/03/2022", price: "15.0816", lastPrice: "15.0523", change: "0.0293", yield: "-5.49%" },
+    { name: "Interamerican DIS (LF) Greek Corporate Bond Fund", isin: "LU2086750101", ccy: "EUR", date: "30/03/2022", price: "15.0805", lastPrice: "15.0511", change: "0.0294", yield: "-5.50%" },
+    { name: "United Cooperate Trust Bank I (LF) Special Purpose Best Performers II Fund", isin: "LU0983151878", ccy: "EUR", date: "30/03/2022", price: "11.8617", lastPrice: "11.8583", change: "0.0034", yield: "-2.61%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Global Megatrends", isin: "LU1102788962", ccy: "EUR", date: "30/03/2022", price: "12.3322", lastPrice: "12.3393", change: "-0.0071", yield: "-6.20%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Global Megatrends", isin: "LU1102789002", ccy: "EUR", date: "30/03/2022", price: "12.9618", lastPrice: "12.9689", change: "-0.0071", yield: "-5.96%" },
+    { name: "Private Banking Class (LF) Fund of Funds - Global megatrends", isin: "LU1102789184", ccy: "EUR", date: "30/03/2022", price: "12.3324", lastPrice: "12.3395", change: "-0.0071", yield: "-6.20%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds -Equity Blend", isin: "LU0272937516", ccy: "EUR", date: "30/03/2022", price: "2.0426", lastPrice: "2.0466", change: "-0.004", yield: "-5.40%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds -Equity Blend", isin: "LU0272937862", ccy: "EUR", date: "30/03/2022", price: "2.3765", lastPrice: "2.3811", change: "-0.0046", yield: "-5.11%" },
+    { name: "Interamerican (LF) Fund of Funds - Equity Blend", isin: "LU1923391467", ccy: "EUR", date: "30/03/2022", price: "2.0523", lastPrice: "2.0563", change: "-0.004", yield: "-5.36%" },
+    { name: "Private Banking Class (LF) Fund of Funds - Equity Blend", isin: "LU1102787212", ccy: "EUR", date: "30/03/2022", price: "2.0426", lastPrice: "2.0467", change: "-0.0041", yield: "-5.40%" },
+    { name: "United Cooperate Trust Bank (USD) (LF) Fund of Funds - Equity Blend", isin: "LU0647577252", ccy: "USD", date: "30/03/2022", price: "2.2713", lastPrice: "2.2675", change: "0.0038", yield: "-7.07%" },
+    { name: "Private Banking Class (USD) (LF) Fund of Funds - Equity Blend", isin: "LU1102787303", ccy: "USD", date: "30/03/2022", price: "2.2722", lastPrice: "2.2683", change: "0.0039", yield: "-7.07%" },
+    { name: "Postbank (LF) Fund of Funds - Equity Blend", isin: "LU0272939215", ccy: "EUR", date: "30/03/2022", price: "1.9431", lastPrice: "1.9470", change: "-0.0039", yield: "-5.40%" },
+    { name: "Romania (LF) Fund of Funds - Equity Blend", isin: "LU0272939488", ccy: "EUR", date: "30/03/2022", price: "1.9514", lastPrice: "1.9553", change: "-0.0039", yield: "-5.42%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Global Emerging Markets", isin: "LU0316846335", ccy: "EUR", date: "30/03/2022", price: "1.1469", lastPrice: "1.1423", change: "0.0046", yield: "-6.30%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Global Emerging Markets", isin: "LU0316845873", ccy: "EUR", date: "30/03/2022", price: "1.3303", lastPrice: "1.3250", change: "0.0053", yield: "-6.07%" },
+    { name: "Interamerican (LF) Fund of Funds - Global Emerging Markets", isin: "LU0336553804", ccy: "EUR", date: "30/03/2022", price: "1.1470", lastPrice: "1.1424", change: "0.0046", yield: "-6.30%" },
+    { name: "Private Banking Class (LF) Fund of Funds - Global Emerging Markets", isin: "LU1102787485", ccy: "EUR", date: "30/03/2022", price: "1.1474", lastPrice: "1.1429", change: "0.0045", yield: "-6.30%" },
+    { name: "United Cooperate Trust Bank (USD) (LF) Fund of Funds - Global Emerging Markets", isin: "LU0647577500", ccy: "USD", date: "30/03/2022", price: "1.2758", lastPrice: "1.2661", change: "0.0097", yield: "-7.95%" },
+    { name: "Postbank (LF) Fund of Funds - Global Emerging Markets", isin: "LU0316846921", ccy: "EUR", date: "30/03/2022", price: "1.0702", lastPrice: "1.0660", change: "0.0042", yield: "-6.32%" },
+    { name: "Romania (LF) Fund of Funds - Global Emerging Markets", isin: "LU0316847143", ccy: "EUR", date: "30/03/2022", price: "1.0691", lastPrice: "1.0649", change: "0.0042", yield: "-6.44%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Balanced Blend Global", isin: "LU0347746173", ccy: "EUR", date: "30/03/2022", price: "1.6435", lastPrice: "1.6462", change: "-0.0027", yield: "-2.27%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Balanced Blend Global", isin: "LU0347746256", ccy: "EUR", date: "30/03/2022", price: "1.7785", lastPrice: "1.7814", change: "-0.0029", yield: "-2.12%" },
+    { name: "Private banking Class (LF) Fund of Funds - Balanced Blend Global", isin: "LU1102787642", ccy: "EUR", date: "30/03/2022", price: "1.6434", lastPrice: "1.6461", change: "-0.0027", yield: "-2.27%" },
+    { name: "Interamerican (LF) Fund of Funds - Balanced Blend Global", isin: "LU1199652253", ccy: "EUR", date: "30/03/2022", price: "1.6435", lastPrice: "1.6462", change: "-0.0027", yield: "-2.27%" },
+    { name: "United Cooperate Trust Bank (USD) (LF) Fund of Funds - Balanced Blend Global", isin: "LU0647577336", ccy: "USD", date: "30/03/2022", price: "1.8275", lastPrice: "1.8238", change: "0.0037", yield: "-3.99%" },
+    { name: "Postbank (LF) Fund of Funds - Balanced Blend Global", isin: "LU0347745878", ccy: "EUR", date: "30/03/2022", price: "1.5914", lastPrice: "1.5941", change: "-0.0027", yield: "-2.27%" },
+    { name: "Romania (LF) Fund of Funds - Balances Blend Global", isin: "LU0347746090", ccy: "EUR", date: "30/03/2022", price: "1.5821", lastPrice: "1.5848", change: "-0.0027", yield: "-2.33%" },
+    { name: "Private banking Class (USD) (LF) Fund of Funds - Balanced Blend Global", isin: "LU1102787725", ccy: "USD", date: "30/03/2022", price: "1.8278", lastPrice: "1.8240", change: "0.0038", yield: "-3.99%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - ESG Focus", isin: "LU0517847660", ccy: "EUR", date: "30/03/2022", price: "20.3642", lastPrice: "20.4122", change: "-0.048", yield: "-6.58%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - ESG Focus", isin: "LU0517848395", ccy: "EUR", date: "30/03/2022", price: "20.4326", lastPrice: "20.4801", change: "-0.0475", yield: "-6.35%" },
+    { name: "Interamerican (LF) Fund of Funds - ESG Focus", isin: "LU0517850029", ccy: "EUR", date: "30/03/2022", price: "20.7226", lastPrice: "20.7713", change: "-0.0487", yield: "-6.53%" },
+    { name: "Private Banking Class (LF) Fund of Funds - ESG Focus", isin: "LU1102787998", ccy: "EUR", date: "30/03/2022", price: "20.3632", lastPrice: "20.4112", change: "-0.048", yield: "-6.58%" },
+    { name: "Private Banking Class (USD) (LF) Fund of Funds - ESG Focus", isin: "LU1102788020", ccy: "USD", date: "30/03/2022", price: "22.6752", lastPrice: "22.6449", change: "0.0303", yield: "-8.23%" },
+    { name: "Postbank (LF) Fund of Funds - ESG Focus", isin: "LU0517849104", ccy: "EUR", date: "30/03/2022", price: "20.5053", lastPrice: "20.5536", change: "-0.0483", yield: "-6.58%" },
+    { name: "Romania (LF) Fund of Funds - ESG Focus", isin: "LU0517849526", ccy: "EUR", date: "30/03/2022", price: "20.7020", lastPrice: "20.7506", change: "-0.0486", yield: "-6.53%" },
+    { name: "United Cooperate Trust Bank (USD) (LF) Fund of Funds - ESG Focus", isin: "LU0517848049", ccy: "USD", date: "30/03/2022", price: "22.6764", lastPrice: "22.6461", change: "0.0303", yield: "-8.25%" },
+    { name: "Postbank (USD) (LF) Fund of Funds - ESG Focus", isin: "LU0517849369", ccy: "USD", date: "30/03/2022", price: "22.9554", lastPrice: "22.9247", change: "0.0307", yield: "-8.23%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Life Cycle 2037", isin: "LU2086743668", ccy: "EUR", date: "30/03/2022", price: "10.4220", lastPrice: "10.4518", change: "-0.0298", yield: "-3.80%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Life Cycle 2042", isin: "LU1668836957", ccy: "EUR", date: "30/03/2022", price: "1.3886", lastPrice: "1.3929", change: "-0.0043", yield: "-3.62%" },
+    { name: "Group Pension (LF) Fund of Funds - Life Cycle 2042", isin: "LU1668837096", ccy: "EUR", date: "30/03/2022", price: "1.3643", lastPrice: "1.3686", change: "-0.0043", yield: "-3.75%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Global Protect 80", isin: "LU2192430903", ccy: "EUR", date: "30/03/2022", price: "10.0483", lastPrice: "10.0800", change: "-0.0317", yield: "-4.47%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Life Cycle 2052", isin: "LU1668837500", ccy: "EUR", date: "30/03/2022", price: "1.5117", lastPrice: "1.5154", change: "-0.0037", yield: "-2.12%" },
+    { name: "Group Pension (LF) Fund of Funds - Life Cycle 2052", isin: "LU1668837682", ccy: "EUR", date: "30/03/2022", price: "1.4840", lastPrice: "1.4877", change: "-0.0037", yield: "-2.25%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Global Low", isin: "LU0956610256", ccy: "EUR", date: "30/03/2022", price: "10.9002", lastPrice: "10.9002", change: "0", yield: "-2.54%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Global Low", isin: "LU0956610413", ccy: "EUR", date: "30/03/2022", price: "11.1285", lastPrice: "11.1284", change: "0.0001", yield: "-2.42%" },
+    { name: "Interamerican (LF) Fund of Funds - Global Low", isin: "LU1244597024", ccy: "EUR", date: "30/03/2022", price: "10.9002", lastPrice: "10.9002", change: "0", yield: "-2.55%" },
+    { name: "Private Banking Class (LF) Fund of Funds - Global Low", isin: "LU1102788616", ccy: "EUR", date: "30/03/2022", price: "10.8996", lastPrice: "10.8996", change: "0", yield: "-2.55%" },
+    { name: "Private Banking (DIS) (LF) Fund of Funds - Global Low", isin: "LU1195534158", ccy: "EUR", date: "30/03/2022", price: "10.9035", lastPrice: "10.9036", change: "-0.0001", yield: "-2.55%" },
+    { name: "Romania (RON) (LF) Fund of Funds – Global low", isin: "LU0956610769", ccy: "RON", date: "30/03/2022", price: "53.9285", lastPrice: "53.9297", change: "-0.0012", yield: "-2.57%" },
+    { name: "Postbank (BGN) (LF) Fund of Funds - Global Low", isin: "LU1199652337", ccy: "BGN", date: "30/03/2022", price: "21.3170", lastPrice: "21.3171", change: "-0.0001", yield: "-2.55%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Global Medium", isin: "LU0956610843", ccy: "EUR", date: "30/03/2022", price: "13.4725", lastPrice: "13.4835", change: "-0.011", yield: "-3.02%" },
+    { name: "Private Banking Class (LF) Fund of Funds - Global Medium", isin: "LU1102788707", ccy: "EUR", date: "30/03/2022", price: "13.4718", lastPrice: "13.4827", change: "-0.0109", yield: "-3.02%" },
+    { name: "Private Banking Class (DIS) (LF) Fund of Funds - Global Medium", isin: "LU1195534315", ccy: "EUR", date: "30/03/2022", price: "13.4728", lastPrice: "13.4838", change: "-0.011", yield: "-3.02%" },
+    { name: "Romania (RON) (LF) Fund of Funds – Global Medium", isin: "LU0956611148", ccy: "RON", date: "30/03/2022", price: "66.6615", lastPrice: "66.7171", change: "-0.0556", yield: "-3.05%" },
+    { name: "Postbank (BGN) (LF) Fund of Funds - Global Medium", isin: "LU1334637631", ccy: "BGN", date: "30/03/2022", price: "26.3481", lastPrice: "26.3696", change: "-0.0215", yield: "-3.02%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Global High", isin: "LU0956611494", ccy: "EUR", date: "30/03/2022", price: "17.1758", lastPrice: "17.1977", change: "-0.0219", yield: "-3.38%" },
+    { name: "Interamerican (LF) Fund of Funds - Global High", isin: "LU1923391541", ccy: "EUR", date: "30/03/2022", price: "17.1720", lastPrice: "17.1938", change: "-0.0218", yield: "-3.38%" },
+    { name: "Private Banking (LF) Fund of Funds- Global High", isin: "LU1102788889", ccy: "EUR", date: "30/03/2022", price: "17.1763", lastPrice: "17.1982", change: "-0.0219", yield: "-3.38%" },
+    { name: "Romania (RON) (LF) Fund of Funds- Global High", isin: "LU0956611734", ccy: "RON", date: "30/03/2022", price: "85.0676", lastPrice: "85.1777", change: "-0.1101", yield: "-3.41%" },
+    { name: "United Cooperate Trust Bank (LF) Fund of Funds - Balanced Blend USD", isin: "LU1102789267", ccy: "EUR", date: "30/03/2022", price: "15.6701", lastPrice: "15.6972", change: "-0.0271", yield: "-2.90%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Balanced Blend US", isin: "LU1102789341", ccy: "EUR", date: "30/03/2022", price: "16.4396", lastPrice: "16.4677", change: "-0.0281", yield: "-2.74%" },
+    { name: "Private Banking (LF) Fund of Funds - Balanced Blend US", isin: "LU1102789697", ccy: "EUR", date: "30/03/2022", price: "15.6703", lastPrice: "15.6974", change: "-0.0271", yield: "-2.90%" },
+    { name: "United Cooperate Trust Bank (USD) (LF) Fund of Funds - Balanced Blend USD", isin: "LU1102789424", ccy: "USD", date: "30/03/2022", price: "17.4323", lastPrice: "17.3980", change: "0.0343", yield: "-4.61%" },
+    { name: "Private Banking Class (USD) (LF) Fund of Funds - Balanced Blend USD", isin: "LU1102789770", ccy: "USD", date: "30/03/2022", price: "17.4307", lastPrice: "17.3964", change: "0.0343", yield: "-4.62%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Life Cycle 2032", isin: "LU1560846971", ccy: "EUR", date: "30/03/2022", price: "1.2564", lastPrice: "1.2603", change: "-0.0039", yield: "-4.53%" },
+    { name: "Group Pension (LF) Fund of Funds - Life Cycle 2032", isin: "LU1668837922", ccy: "EUR", date: "30/03/2022", price: "1.2556", lastPrice: "1.0013", change: "0.2543", yield: "25.40%" },
+    { name: "United Cooperate Trust Bank I (LF) Fund of Funds - Life Cycle 2047", isin: "LU1560847359", ccy: "EUR", date: "30/03/2022", price: "1.4112", lastPrice: "1.4159", change: "-0.0047", yield: "-3.64%" },
+    { name: "(TLF) Global Blanced Fund - Asset Wise A", isin: "LU1619865428", ccy: "EUR", date: "30/03/2022", price: "1.0711", lastPrice: "1.0763", change: "-0.0052", yield: "-4.19%" },
+    { name: "(TLF) Global Balanced Fund - Asset Wise B", isin: "LU1619865691", ccy: "EUR", date: "30/03/2022", price: "1.1184", lastPrice: "1.1238", change: "-0.0054", yield: "-3.95%" },
+    { name: "Z Acc (LF) FOF - Life Cycle 2042", isin: "LU1827030443", ccy: "EUR", date: "30/03/2022", price: "1.3644", lastPrice: "1.0518", change: "0.3126", yield: "29.72%" },
+    { name: "Z Acc (LF) FOF - Life Cycle 2032", isin: "LU1827038776", ccy: "EUR", date: "30/03/2022", price: "1.2463", lastPrice: "1.0458", change: "0.2005", yield: "19.17%" },
+    { name: "Z Acc (LF) FOF - Life Cycle 2047", isin: "LU1827033389", ccy: "EUR", date: "30/03/2022", price: "1.4023", lastPrice: "1.0524", change: "0.3499", yield: "33.25%" }
+];
 
 export default function NavCentre() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [currencyFilter, setCurrencyFilter] = useState("All Currencies");
+    const [dateFilter, setDateFilter] = useState("2022-03-30");
+    const itemsPerPage = 15;
+    
+    // Format YYYY-MM-DD from the input to DD/MM/YYYY to match our data format
+    const formattedDateFilter = dateFilter 
+        ? `${dateFilter.split('-')[2]}/${dateFilter.split('-')[1]}/${dateFilter.split('-')[0]}` 
+        : "";
+
+    const filteredFunds = funds.filter(fund => {
+        const matchesSearch = fund.name.toLowerCase().includes(searchQuery.toLowerCase()) || fund.isin.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCurrency = currencyFilter === "All Currencies" || fund.ccy === currencyFilter;
+        const matchesDate = !dateFilter || fund.date === formattedDateFilter;
+        return matchesSearch && matchesCurrency && matchesDate;
+    });
+
+    const totalPages = Math.max(1, Math.ceil(filteredFunds.length / itemsPerPage));
+    const currentFunds = filteredFunds.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+    // Handle resetting page when filters change
+    const handleFilterChange = (setter: React.Dispatch<React.SetStateAction<string>>, value: string) => {
+        setter(value);
+        setCurrentPage(1);
+    };
+
     return (
         <PublicLayout>
             <Head title="NAV Centre | United Cooperate Trust Bank" />
@@ -30,19 +192,18 @@ export default function NavCentre() {
                 </div>
             </div>
 
-            {/* Main Content Split */}
+            {/* Main Content - Full Width without Sidebar */}
             <div className="bg-slate-50 min-h-screen">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 flex flex-col lg:flex-row gap-20">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
                     
-                    {/* Left Column - Content */}
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="flex-1"
+                        className="w-full"
                     >
-                        <div className="max-w-[1000px] w-full">
-                            <h2 className="text-3xl font-bold text-brand-navy mb-8">NAV Centre</h2>
+                        <div className="w-full">
+                            <h2 className="text-3xl font-bold text-brand-navy mb-8">NAV Centre Data</h2>
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-12">
                                 <p>
@@ -50,81 +211,143 @@ export default function NavCentre() {
                                 </p>
                             </div>
 
+                            {/* Date Filter (Hero Style) */}
+                            <div className="mb-10">
+                                <label className="block text-xl md:text-2xl font-bold text-black mb-4">Net Asset Value as of:</label>
+                                <div className="max-w-[240px]">
+                                    <input 
+                                        type="date" 
+                                        value={dateFilter}
+                                        onChange={(e) => handleFilterChange(setDateFilter, e.target.value)}
+                                        className="w-full border-0 border-b border-black px-0 py-2 text-2xl md:text-3xl text-slate-700 focus:border-brand-blue focus:ring-0 bg-transparent transition-colors"
+                                    />
+                                </div>
+                            </div>
+
                             {/* Table Controls */}
-                            <div className="flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4 mb-6 bg-white p-4 shadow-sm border border-slate-100">
-                                <div className="w-full sm:w-auto flex gap-4">
+                            <div className="flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4 mb-6 bg-white p-4 shadow-sm border border-slate-100 rounded-sm">
+                                <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
                                     <input 
                                         type="text" 
-                                        placeholder="Search by Fund Name..." 
-                                        className="w-full sm:w-64 border border-slate-200 px-4 py-2 text-sm focus:border-brand-blue focus:ring-0"
+                                        placeholder="Search by Fund Name or ISIN..." 
+                                        value={searchQuery}
+                                        onChange={(e) => handleFilterChange(setSearchQuery, e.target.value)}
+                                        className="w-full sm:w-72 border border-slate-200 px-4 py-2 text-sm focus:border-brand-blue focus:ring-0 rounded-sm"
                                     />
-                                    <select className="border border-slate-200 px-4 py-2 text-sm focus:border-brand-blue focus:ring-0">
-                                        <option>All Currencies</option>
-                                        <option>EUR</option>
-                                        <option>USD</option>
-                                        <option>GBP</option>
+                                    <select 
+                                        value={currencyFilter}
+                                        onChange={(e) => handleFilterChange(setCurrencyFilter, e.target.value)}
+                                        className="border border-slate-200 px-4 py-2 text-sm focus:border-brand-blue focus:ring-0 rounded-sm bg-white"
+                                    >
+                                        <option value="All Currencies">All Currencies</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="USD">USD</option>
+                                        <option value="GBP">GBP</option>
+                                        <option value="RON">RON</option>
+                                        <option value="BGN">BGN</option>
                                     </select>
                                 </div>
-                                <button className="px-6 py-2 bg-brand-navy text-white text-sm font-semibold hover:bg-brand-blue transition-colors">
+                                <button className="px-6 py-2 bg-brand-navy text-white text-sm font-semibold hover:bg-brand-blue transition-colors rounded-sm">
                                     Export CSV
                                 </button>
                             </div>
 
                             {/* Data Table */}
-                            <div className="bg-white border border-slate-200 shadow-xl overflow-x-auto">
-                                <table className="w-full text-left border-collapse min-w-[800px]">
+                            <div className="bg-white border border-slate-200 shadow-xl overflow-x-auto rounded-sm">
+                                <table className="w-full text-left border-collapse min-w-[1000px]">
                                     <thead>
                                         <tr className="bg-brand-navy text-white text-xs uppercase tracking-wider">
-                                            <th className="py-4 px-6 font-semibold">Fund Name</th>
+                                            <th className="py-4 px-6 font-semibold">Name</th>
                                             <th className="py-4 px-6 font-semibold">ISIN</th>
                                             <th className="py-4 px-6 font-semibold">CCY</th>
-                                            <th className="py-4 px-6 font-semibold text-right">NAV</th>
                                             <th className="py-4 px-6 font-semibold text-right">Date</th>
-                                            <th className="py-4 px-6 font-semibold text-right">Change (%)</th>
-                                            <th className="py-4 px-6 font-semibold text-right">YTD (%)</th>
+                                            <th className="py-4 px-6 font-semibold text-right">Price</th>
+                                            <th className="py-4 px-6 font-semibold text-right">Last Price</th>
+                                            <th className="py-4 px-6 font-semibold text-right">Daily Charge</th>
+                                            <th className="py-4 px-6 font-semibold text-right">Yield</th>
                                         </tr>
                                     </thead>
                                     <tbody className="text-sm">
-                                        {[
-                                            { name: "Global Equity Select", isin: "LU1234567890", ccy: "EUR", nav: "145.67", date: "21.04.2026", change: "+0.45", ytd: "+5.20" },
-                                            { name: "Strategic Bond Fund", isin: "LU1234567891", ccy: "USD", nav: "102.34", date: "21.04.2026", change: "-0.12", ytd: "+1.15" },
-                                            { name: "European Real Estate", isin: "LU1234567892", ccy: "EUR", nav: "1,250.00", date: "21.04.2026", change: "+0.00", ytd: "+3.45" },
-                                            { name: "Emerging Markets High Yield", isin: "LU1234567893", ccy: "USD", nav: "89.45", date: "21.04.2026", change: "+1.20", ytd: "+8.90" },
-                                            { name: "Sustainable Future ESG", isin: "LU1234567894", ccy: "EUR", nav: "115.80", date: "21.04.2026", change: "+0.30", ytd: "+6.10" },
-                                            { name: "UK Dividend Aristocrats", isin: "GB00B1234567", ccy: "GBP", nav: "13.45", date: "21.04.2026", change: "-0.50", ytd: "-1.20" },
-                                            { name: "Tech Innovators Fund", isin: "US1234567890", ccy: "USD", nav: "340.12", date: "21.04.2026", change: "+2.15", ytd: "+14.50" },
-                                            { name: "Global Infrastructure", isin: "LU1234567895", ccy: "EUR", nav: "108.90", date: "21.04.2026", change: "+0.10", ytd: "+4.30" },
-                                            { name: "Asian Growth Opportunities", isin: "LU1234567896", ccy: "USD", nav: "175.60", date: "21.04.2026", change: "-0.80", ytd: "+2.10" },
-                                            { name: "Precious Metals & Mining", isin: "LU1234567897", ccy: "USD", nav: "95.20", date: "21.04.2026", change: "+1.80", ytd: "+11.40" },
-                                        ].map((row, i) => (
-                                            <tr key={i} className="border-b border-slate-100 hover:bg-brand-blue/5 transition-colors even:bg-slate-50/50">
-                                                <td className="py-4 px-6 font-semibold text-brand-navy">{row.name}</td>
-                                                <td className="py-4 px-6 text-slate-500 font-mono text-xs">{row.isin}</td>
-                                                <td className="py-4 px-6 text-slate-600">{row.ccy}</td>
-                                                <td className="py-4 px-6 text-right font-mono font-medium text-slate-700">{row.nav}</td>
-                                                <td className="py-4 px-6 text-right text-slate-500">{row.date}</td>
-                                                <td className={`py-4 px-6 text-right font-medium ${row.change.startsWith('+') ? 'text-green-600' : row.change.startsWith('-') ? 'text-red-500' : 'text-slate-600'}`}>
-                                                    {row.change}%
-                                                </td>
-                                                <td className={`py-4 px-6 text-right font-medium ${row.ytd.startsWith('+') ? 'text-green-600' : row.ytd.startsWith('-') ? 'text-red-500' : 'text-slate-600'}`}>
-                                                    {row.ytd}%
+                                        {currentFunds.length > 0 ? (
+                                            currentFunds.map((row, i) => (
+                                                <tr key={i} className="border-b border-slate-100 hover:bg-brand-blue/5 transition-colors even:bg-slate-50/50">
+                                                    <td className="py-4 px-6 font-semibold text-brand-navy">{row.name}</td>
+                                                    <td className="py-4 px-6 text-slate-500 font-mono text-xs">{row.isin}</td>
+                                                    <td className="py-4 px-6 text-slate-600">{row.ccy}</td>
+                                                    <td className="py-4 px-6 text-right text-slate-500">{row.date}</td>
+                                                    <td className="py-4 px-6 text-right font-mono font-medium text-slate-700">{row.price}</td>
+                                                    <td className="py-4 px-6 text-right font-mono text-slate-500">{row.lastPrice}</td>
+                                                    <td className={`py-4 px-6 text-right font-medium ${row.change.startsWith('-') || row.change === '0' ? 'text-red-500' : 'text-green-600'}`}>
+                                                        {row.change}
+                                                    </td>
+                                                    <td className={`py-4 px-6 text-right font-medium ${row.yield.startsWith('-') || row.yield === '0' ? 'text-red-500' : 'text-green-600'}`}>
+                                                        {row.yield}
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={8} className="py-12 px-6 text-center text-slate-500">
+                                                    No funds found matching your current filters.
                                                 </td>
                                             </tr>
-                                        ))}
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
+
+                            {/* Pagination Controls */}
+                            {filteredFunds.length > 0 && (
+                                <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                    <div className="text-sm text-slate-500">
+                                        Showing <span className="font-semibold text-brand-navy">{(currentPage - 1) * itemsPerPage + 1}</span> to <span className="font-semibold text-brand-navy">{Math.min(currentPage * itemsPerPage, filteredFunds.length)}</span> of <span className="font-semibold text-brand-navy">{filteredFunds.length}</span> funds
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <button 
+                                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                            disabled={currentPage === 1}
+                                            className="p-2 border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-sm"
+                                        >
+                                            <ChevronLeft className="w-4 h-4" />
+                                        </button>
+                                        
+                                        {/* Page Numbers */}
+                                        <div className="flex items-center">
+                                            {Array.from({ length: totalPages }).map((_, idx) => {
+                                                const page = idx + 1;
+                                                return (
+                                                    <button
+                                                        key={page}
+                                                        onClick={() => setCurrentPage(page)}
+                                                        className={`px-4 py-2 text-sm font-semibold border-y border-r border-slate-200 first:border-l ${currentPage === page ? 'bg-brand-navy text-white' : 'bg-white text-slate-600 hover:bg-slate-50'}`}
+                                                    >
+                                                        {page}
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+
+                                        <button 
+                                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                            disabled={currentPage === totalPages}
+                                            className="p-2 border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-sm"
+                                        >
+                                            <ChevronRight className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                             
-                            <div className="mt-4 text-xs text-slate-400 italic text-right">
+                            <div className="mt-8 text-xs text-slate-400 italic text-right">
                                 * Data is updated daily. Past performance is not indicative of future results.
                             </div>
                         </div>
 
                     </motion.div>
 
-                    <FundServicesSidebar />
                 </div>
             </div>
         </PublicLayout>
     );
 }
+
