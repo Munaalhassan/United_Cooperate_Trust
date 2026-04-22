@@ -4,8 +4,9 @@ This project is a high-fidelity Banking Application built with **Laravel 13**, *
 It follows the **Laravel Boost** conventions and the **United Cooperate Bank** design system.
 
 ## 🎨 Brand Design Tokens
-- **Theme Color:** `#00ab4e` (Primary Green)
-- **Secondary Color:** `#34495e` (Navy)
+- **Theme Color:** `#005eb8` (Primary Blue)
+- **Secondary Color:** `#ffffff` (White)
+- **Complementary Color:** `#0a2540` (Navy)
 - **Typography:** **Montserrat** (Header/Body)
 - **Backgrounds:** `#ffffff` (Main), `#f4f4f4` (Sidebars)
 

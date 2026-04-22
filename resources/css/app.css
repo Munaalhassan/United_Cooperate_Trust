@@ -63,8 +63,10 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
 
-    --color-brand-green: var(--brand-green);
+    --color-brand-blue: var(--brand-blue);
     --color-brand-navy: var(--brand-navy);
+    --color-brand-green: var(--brand-green);
+    --color-brand-gold: var(--brand-gold);
 }
 
 
@@ -103,8 +105,14 @@
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.87 0 0);
 
-    --brand-green: #00ab4e;
-    --brand-navy: #34495e;
+    --brand-blue: #007AFF;
+    --brand-navy: #0a2540;
+    --brand-green: #008444;
+    --brand-gold: #c5a059;
+}
+
+.logo-recolored {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(63%) saturate(6288%) hue-rotate(200deg) brightness(101%) contrast(106%);
 }
 
 

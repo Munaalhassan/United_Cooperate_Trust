@@ -23,7 +23,7 @@ This skill enables the agent to implement high-performance, accessible, and bull
 - **Strict Typing:** Leverage TypeScript for every component, ensuring prop-types and state are strictly defined.
 
 ## 🎨 Asset & Design Fidelity
-- **Token Adherence:** Always refer to `.agent/instructions.md` for Brand Green (`#00ab4e`) and Montserrat typography.
+- **Token Adherence:** Always refer to `CLAUDE.md` for Brand Blue (`#005eb8`), White (`#ffffff`), and Montserrat typography.
 - **CSS-in-JS / Tailwind:** Use utility-first or modular CSS that respects the brand tokens.
 - **Micro-interactions:** Add subtle hover/active states to increase the premium feel of the bank interface.
 
