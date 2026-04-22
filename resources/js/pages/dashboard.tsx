@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import { dashboard } from '@/routes';
+import { teamDashboard } from '@/routes';
 
 export default function Dashboard() {
     return (
@@ -30,7 +30,7 @@ Dashboard.layout = (props: { currentTeam?: { slug: string } | null }) => ({
     breadcrumbs: [
         {
             title: 'Dashboard',
-            href: props.currentTeam ? dashboard(props.currentTeam.slug) : '/',
+            href: props.currentTeam ? teamDashboard(props.currentTeam.slug) : '/',
         },
     ],
 });
