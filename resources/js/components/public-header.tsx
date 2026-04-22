@@ -183,14 +183,14 @@ export function PublicHeader() {
         <>
             <header className="w-full flex flex-col isolation-auto relative z-50">
                 {/* Top Utility Bar (Logo + Mobile Actions + Utility Links) */}
-                <div className="bg-white border-b border-gray-100 py-0">
+                <div className="bg-white border-b border-gray-100 py-4 md:py-6">
                     <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
                         {/* Logo */}
                         <Link href="/" className="flex items-center -ml-2 py-0 h-auto">
                             <img
                                 src="/images/logo.png"
                                 alt="United Cooperate Bank"
-                                className="h-20 md:h-28 lg:h-32 w-auto drop-shadow-sm transition-transform hover:scale-105 duration-300 block"
+                                className="h-14 md:h-13 lg:h-18 w-auto drop-shadow-sm block"
                             />
                         </Link>
 
@@ -240,7 +240,7 @@ export function PublicHeader() {
                                     </SheetTrigger>
                                     <SheetContent side="right" className="w-[90vw] sm:w-[400px] bg-white border-l shadow-2xl p-0 flex flex-col">
                                         <SheetHeader className="px-6 py-5 border-b border-slate-100 flex justify-between items-center flex-row">
-                                            <img src="/images/logo.png" alt="United Cooperate Bank" className="h-16 w-auto" />
+                                            <img src="/images/logo.png" alt="United Cooperate Bank" className="h-12 w-auto" />
                                             <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
                                         </SheetHeader>
                                         <div className="flex-1 overflow-y-auto w-full">
@@ -329,7 +329,7 @@ export function PublicHeader() {
 
                 {/* Main Navigation (Desktop Only) */}
                 <div className="hidden lg:block bg-white shadow-sm sticky top-0 relative z-40">
-                    <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-[65px]">
+                    <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-[75px]">
                         {/* Desktop Menu */}
                         <div className="flex items-center h-full">
                             <div className="flex h-full items-center gap-1 xl:gap-4">
@@ -406,32 +406,32 @@ export function PublicHeader() {
 
             {/* Fullscreen Search Overlay */}
             {isSearchOpen && (
-                <div className="fixed inset-0 z-[100] bg-brand-navy/90 backdrop-blur-xl flex flex-col pt-[15vh] px-4 animate-in fade-in duration-300">
+                <div className="fixed inset-0 z-[100] bg-brand-navy/90 backdrop-blur-xl flex flex-col pt-[8vh] md:pt-[15vh] px-4 md:px-6 animate-in fade-in duration-300">
                     {/* Background Click to Close */}
                     <div className="absolute inset-0 cursor-pointer" onClick={() => setIsSearchOpen(false)}></div>
 
-                    <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col gap-10 animate-in slide-in-from-top-16 duration-500 ease-out">
+                    <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col gap-6 md:gap-10 animate-in slide-in-from-top-12 md:slide-in-from-top-16 duration-500 ease-out">
 
                         <div className="flex justify-between items-end border-b-2 border-white/20 pb-4">
-                            <h2 className="text-brand-blue font-bold tracking-widest text-sm uppercase">Site Search</h2>
-                            <button onClick={() => setIsSearchOpen(false)} className="text-white/60 hover:text-white transition-colors flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
-                                Close <X className="w-5 h-5" />
+                            <h2 className="text-brand-blue font-bold tracking-widest text-xs md:text-sm uppercase">Site Search</h2>
+                            <button onClick={() => setIsSearchOpen(false)} className="text-white/60 hover:text-white transition-colors flex items-center gap-2 text-xs md:text-sm font-bold tracking-widest uppercase">
+                                Close <X className="w-4 h-4 md:w-5 md:h-5" />
                             </button>
                         </div>
 
-                        <div className="flex items-center gap-6">
-                            <Search className="w-10 h-10 text-white/40" />
+                        <div className="flex items-center gap-4 md:gap-6">
+                            <Search className="w-6 h-6 md:w-10 md:h-10 text-white/40 shrink-0" />
                             <input
                                 autoFocus
                                 type="text"
-                                placeholder="What are you looking for?"
-                                className="w-full bg-transparent border-0 outline-none text-white text-4xl sm:text-5xl md:text-6xl font-light placeholder:text-white/20 px-0"
+                                placeholder="Search..."
+                                className="w-full bg-transparent border-0 outline-none text-white text-2xl sm:text-4xl md:text-6xl font-light placeholder:text-white/20 px-0"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
 
-                        <div className="pt-8 pl-16 max-h-[50vh] overflow-y-auto">
+                        <div className="pt-4 md:pt-8 md:pl-16 max-h-[60vh] md:max-h-[50vh] overflow-y-auto custom-scrollbar">
                             {searchQuery.trim() === '' ? (
                                 <>
                                     <h4 className="text-white/50 font-bold text-xs tracking-widest uppercase mb-6 flex items-center gap-4">
@@ -455,12 +455,12 @@ export function PublicHeader() {
                                             key={i}
                                             href={result.url}
                                             onClick={() => { setIsSearchOpen(false); setSearchQuery(''); }}
-                                            className="group block bg-white/5 hover:bg-white/10 border border-white/10 rounded-sm p-6 transition-all"
+                                            className="group block bg-white/5 hover:bg-white/10 border border-white/10 rounded-sm p-4 md:p-6 transition-all"
                                         >
                                             <div className="flex justify-between items-center">
                                                 <div>
-                                                    <span className="text-brand-blue text-xs font-bold uppercase tracking-widest mb-2 block">{result.category}</span>
-                                                    <h3 className="text-2xl text-white font-light group-hover:text-brand-blue transition-colors">{result.title}</h3>
+                                                    <span className="text-brand-blue text-xs font-bold uppercase tracking-widest mb-1 md:mb-2 block">{result.category}</span>
+                                                    <h3 className="text-lg md:text-2xl text-white font-light group-hover:text-brand-blue transition-colors">{result.title}</h3>
                                                 </div>
                                                 <ChevronRight className="w-6 h-6 text-white/30 group-hover:text-brand-blue group-hover:translate-x-2 transition-all" />
                                             </div>

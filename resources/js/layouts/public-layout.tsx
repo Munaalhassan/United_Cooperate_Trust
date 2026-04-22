@@ -25,7 +25,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
                         <img 
                             src="/images/logo.png" 
                             alt="United Cooperate Bank" 
-                            className="h-20 w-auto mb-16 grayscale brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-500 cursor-pointer" 
+                            className="h-14 w-auto mb-16 grayscale brightness-0 invert opacity-60 cursor-pointer" 
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         />
 

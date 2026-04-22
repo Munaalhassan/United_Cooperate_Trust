@@ -14,11 +14,11 @@ export default function AuthSimpleLayout({
             
             {/* Header Logo */}
             <div className="w-full flex flex-col items-center justify-center mb-8">
-                <Link href={home()} className="flex items-center gap-3 group">
+                <Link href={home()} className="flex items-center gap-3">
                     <img 
                         src="/images/logo.png" 
                         alt="United Cooperate Trust Bank" 
-                        className="h-16 w-auto drop-shadow-sm transition-transform group-hover:scale-105 duration-300" 
+                        className="h-12 w-auto drop-shadow-sm" 
                     />
                 </Link>
                 <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mt-4">
