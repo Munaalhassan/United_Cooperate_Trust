@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import { formatDistanceToNow } from 'date-fns';
+import { timeAgo } from '@/lib/utils';
 
 interface NotificationData {
     title: string;
@@ -151,7 +151,7 @@ export default function NotificationsIndex({ notifications, unreadCount }: Props
                                                 </h3>
                                                 <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1.5 whitespace-nowrap uppercase tracking-wider">
                                                     <Clock className="w-3 h-3" />
-                                                    {formatDistanceToNow(new Date(notification.created_at), { addSuffix: true })}
+                                                    {timeAgo(notification.created_at)}
                                                 </span>
                                             </div>
                                             
