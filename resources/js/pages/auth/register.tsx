@@ -194,21 +194,21 @@ export default function Register() {
                         <InputError message={errors.password_confirmation} className="mt-1" />
                     </div>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-2">
+                    <div className="flex flex-col gap-2 mt-2">
                         <label className="text-sm font-medium text-slate-600">Upload DL Front/Bank</label>
                         <input
                             type="file"
                             onChange={(e) => setData('dl_upload', e.target.files?.[0] || null)}
-                            className="text-sm text-slate-500 file:mr-4 file:py-1 file:px-3 file:border file:border-slate-300 file:text-sm file:font-medium file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 transition-colors w-full sm:w-auto"
+                            className="text-sm text-slate-500 file:mr-4 file:py-1 file:px-3 file:border file:border-slate-300 file:text-sm file:font-medium file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 transition-colors w-full"
                         />
                     </div>
                     <InputError message={errors.dl_upload as string} className="mt-1" />
 
-                    <div className="flex gap-4 mt-6">
+                    <div className="flex flex-col gap-4 mt-6">
                         <button
                             type="submit"
                             disabled={processing}
-                            className="px-6 py-2 border border-slate-400 text-slate-700 font-medium hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
+                            className="w-full px-6 py-3 border border-slate-400 text-slate-700 font-medium hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
                         >
                             {processing && <Spinner />}
                             Submit
@@ -217,7 +217,7 @@ export default function Register() {
                             type="button"
                             onClick={handleReset}
                             disabled={processing}
-                            className="px-6 py-2 border border-slate-400 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
+                            className="w-full px-6 py-3 border border-slate-400 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
                         >
                             Reset
                         </button>
