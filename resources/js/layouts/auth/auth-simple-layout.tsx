@@ -19,7 +19,7 @@ export default function AuthSimpleLayout({
                     className="flex items-center gap-2 text-slate-400 hover:text-brand-navy text-[11px] font-bold uppercase tracking-[0.2em] transition-all group px-4 py-2 bg-white/50 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm"
                 >
                     <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" /> 
-                    Website
+                    <span className="hidden xs:inline">Website</span>
                 </Link>
             </div>
 

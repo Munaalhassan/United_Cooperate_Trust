@@ -86,7 +86,7 @@ export default function HumanResources() {
                                 <p className="text-white/80 mb-8 max-w-xl mx-auto text-sm">
                                     We are always looking for talented and motivated team members. We look forward to hearing from you!
                                 </p>
-                                <Button className="bg-white text-brand-blue hover:bg-white/90 font-bold px-10 py-6 rounded-none uppercase tracking-widest text-xs">
+                                <Button className="bg-white text-brand-blue hover:bg-brand-navy hover:text-white font-bold px-10 py-6 rounded-none uppercase tracking-widest text-xs transition-colors">
                                     View Vacancies
                                 </Button>
                             </div>

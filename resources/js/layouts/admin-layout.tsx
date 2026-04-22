@@ -49,21 +49,21 @@ export default function AdminLayout({ children, title }: Props) {
                 <nav className="flex-1 p-6 space-y-2">
                     <Link 
                         href={dashboard.url()} 
-                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/dashboard') ? 'bg-white/10 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/dashboard') ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/10 hover:text-white'}`}
                     >
                         <LayoutDashboard className={`w-4 h-4 ${isActive('/system-node-mgt/dashboard') ? 'text-brand-blue' : ''}`} /> Dashboard
                     </Link>
                     
                     <Link 
                         href={navIndex.url()} 
-                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/nav-funds') ? 'bg-white/10 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/nav-funds') ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/10 hover:text-white'}`}
                     >
                         <TrendingUp className={`w-4 h-4 ${isActive('/system-node-mgt/nav-funds') ? 'text-brand-blue' : ''}`} /> NAV Centre
                     </Link>
 
                     <Link 
                         href={pubIndex.url()} 
-                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/publications') ? 'bg-white/10 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/publications') ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/10 hover:text-white'}`}
                     >
                         <FileText className={`w-4 h-4 ${isActive('/system-node-mgt/publications') ? 'text-brand-blue' : ''}`} /> Publications
                     </Link>

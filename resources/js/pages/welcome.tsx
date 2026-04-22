@@ -177,13 +177,13 @@ export default function Welcome() {
                             className="flex flex-col sm:flex-row gap-4"
                         >
                             <Link href="/private-banking/investment-services">
-                                <Button className="bg-brand-blue hover:bg-brand-blue/90 text-white font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none flex items-center gap-2 group transition-all shadow-lg shadow-brand-blue/20">
+                                <Button className="bg-brand-blue hover:bg-brand-navy text-white font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none flex items-center gap-2 group transition-all shadow-lg shadow-brand-blue/20">
                                     Discover Private Banking
                                     <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
                                 </Button>
                             </Link>
                             <Link href="/contact">
-                                <Button variant="outline" className="bg-transparent border-2 border-white/80 text-white hover:bg-white hover:text-brand-navy font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none transition-all">
+                                <Button variant="outline" className="bg-transparent border-2 border-white/80 text-white font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none transition-all">
                                     Contact an Advisor
                                 </Button>
                             </Link>
@@ -325,16 +325,16 @@ export default function Welcome() {
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-                    <div className="flex flex-col lg:flex-row items-end justify-between mb-24 gap-12">
+                    <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-16 md:mb-24 gap-8 md:gap-12">
                         <motion.div 
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="max-w-3xl"
+                            className="max-w-4xl"
                         >
-                            <span className="text-brand-blue font-bold tracking-[0.4em] uppercase text-[10px] mb-6 block">Innovation Hub</span>
-                            <h2 className="text-5xl md:text-7xl font-bold text-brand-navy tracking-tight leading-[0.95]">
-                                The Future of <br />
+                            <span className="text-brand-blue font-bold tracking-[0.4em] uppercase text-[10px] mb-4 md:mb-6 block">Innovation Hub</span>
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-brand-navy tracking-tight leading-[1.1] lg:leading-[0.95]">
+                                The Future of <br className="hidden sm:block" />
                                 <span className="text-brand-blue/80 italic font-light">Wealth</span> is Personal.
                             </h2>
                         </motion.div>
@@ -342,9 +342,9 @@ export default function Welcome() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="lg:w-1/3 border-l-2 border-brand-blue/20 pl-8"
+                            className="lg:w-1/3 border-l-2 border-brand-blue/20 pl-6 md:pl-8"
                         >
-                            <p className="text-slate-500 text-lg leading-relaxed">
+                            <p className="text-slate-500 text-base md:text-lg leading-relaxed">
                                 Beyond the balance sheet, our digital tools are designed to provide absolute clarity, security, and control over your global portfolio.
                             </p>
                         </motion.div>
@@ -363,7 +363,7 @@ export default function Welcome() {
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true }}
-                        className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-[240px]"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6"
                     >
                         {/* Main Digital Card */}
                         <motion.div 
@@ -371,14 +371,14 @@ export default function Welcome() {
                                 hidden: { opacity: 0, y: 30 },
                                 show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                             }}
-                            className="lg:col-span-8 lg:row-span-2 group relative overflow-hidden bg-brand-navy"
+                            className="md:col-span-2 lg:col-span-8 lg:row-span-2 group relative overflow-hidden bg-brand-navy min-h-[400px] lg:min-h-0"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy to-brand-blue/30" />
                             {/* Abstract Shape Overlay */}
                             <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[100px] group-hover:bg-brand-blue/20 transition-all duration-1000" />
                             
-                            <div className="relative h-full p-12 md:p-16 flex flex-col justify-end">
-                                <Monitor className="w-12 h-12 text-brand-blue mb-8" />
+                            <div className="relative h-full p-8 md:p-12 lg:p-16 flex flex-col justify-end">
+                                <Monitor className="w-10 h-10 md:w-12 md:h-12 text-brand-blue mb-6 md:mb-8" />
                                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">UCT Online Platform</h3>
                                 <p className="text-slate-400 max-w-md mb-10 text-lg leading-relaxed">
                                     A unified ecosystem for your private, corporate, and investment accounts. Secure, intuitive, and borderless.
@@ -397,7 +397,7 @@ export default function Welcome() {
                                 hidden: { opacity: 0, y: 30 },
                                 show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                             }}
-                            className="lg:col-span-4 lg:row-span-1 p-10 bg-slate-50 border border-slate-100 flex flex-col justify-between hover:bg-white hover:shadow-2xl hover:shadow-brand-blue/5 transition-all group"
+                            className="col-span-1 lg:col-span-4 lg:row-span-1 p-8 md:p-10 bg-slate-50 border border-slate-100 flex flex-col justify-between hover:bg-white hover:shadow-2xl hover:shadow-brand-blue/5 transition-all group min-h-[200px] md:min-h-[240px]"
                         >
                             <div className="flex justify-between items-start">
                                 <ShieldCheck className="w-8 h-8 text-brand-blue" />
@@ -415,7 +415,7 @@ export default function Welcome() {
                                 hidden: { opacity: 0, y: 30 },
                                 show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                             }}
-                            className="lg:col-span-4 lg:row-span-1 p-10 bg-brand-gold text-white flex flex-col justify-between group overflow-hidden relative"
+                            className="col-span-1 lg:col-span-4 lg:row-span-1 p-8 md:p-10 bg-brand-gold text-white flex flex-col justify-between group overflow-hidden relative min-h-[200px] md:min-h-[240px]"
                         >
                             <div className="absolute top-[-50%] right-[-50%] w-[200px] h-[200px] bg-white/10 rounded-full blur-[40px] group-hover:scale-150 transition-transform duration-700" />
                             <CreditCard className="w-8 h-8 mb-4 relative z-10" />

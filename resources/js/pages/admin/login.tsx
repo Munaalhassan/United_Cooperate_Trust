@@ -74,7 +74,7 @@ export default function AdminLogin({ status }: { status?: string }) {
                                     <div className="pt-4">
                                         <Button
                                             type="submit"
-                                            className="w-full py-8 bg-brand-blue hover:bg-white hover:text-brand-navy text-white text-xs uppercase tracking-[0.3em] font-extrabold transition-all rounded-none shadow-2xl"
+                                            className="w-full py-8 bg-brand-blue text-white text-xs uppercase tracking-[0.3em] font-extrabold transition-all rounded-none shadow-2xl"
                                             disabled={processing}
                                         >
                                             {processing ? <Spinner className="w-4 h-4" /> : <ShieldAlert className="w-4 h-4" />}
