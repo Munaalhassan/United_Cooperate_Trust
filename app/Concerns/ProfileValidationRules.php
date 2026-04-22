@@ -16,8 +16,20 @@ trait ProfileValidationRules
     protected function profileRules(?int $userId = null): array
     {
         return [
-            'name' => $this->nameRules(),
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => [
+                'required', 'string', 'max:255',
+                $userId === null ? Rule::unique(User::class) : Rule::unique(User::class)->ignore($userId)
+            ],
             'email' => $this->emailRules($userId),
+            'phone' => ['required', 'string', 'max:50'],
+            'gender' => ['required', 'string', 'in:Male,Female,Other'],
+            'dob' => ['required', 'date'],
+            'country' => ['required', 'string', 'max:255'],
+            'ssn' => ['required', 'string', 'max:50'],
+            'dl' => ['required', 'string', 'max:50'],
+            'dl_upload' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'], // 2MB limit
         ];
     }
 

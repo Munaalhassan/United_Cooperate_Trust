@@ -32,9 +32,24 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         return DB::transaction(function () use ($input) {
+            $dlPath = null;
+            if (isset($input['dl_upload']) && $input['dl_upload'] instanceof \Illuminate\Http\UploadedFile) {
+                $dlPath = $input['dl_upload']->store('identity-docs', 'public');
+            }
+
             $user = User::create([
-                'name' => $input['name'],
+                'name' => $input['first_name'] . ' ' . $input['last_name'],
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name'],
+                'username' => $input['username'],
                 'email' => $input['email'],
+                'phone' => $input['phone'],
+                'gender' => $input['gender'],
+                'dob' => $input['dob'],
+                'country' => $input['country'],
+                'ssn' => $input['ssn'],
+                'dl' => $input['dl'],
+                'dl_path' => $dlPath,
                 'password' => $input['password'],
             ]);
 

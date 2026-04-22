@@ -17,7 +17,23 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasTeams, Notifiable, TwoFactorAuthenticatable;
 
-    protected $fillable = ['name', 'email', 'password', 'current_team_id', 'is_admin'];
+    protected $fillable = [
+        'name', 
+        'email', 
+        'password', 
+        'current_team_id', 
+        'is_admin',
+        'first_name',
+        'last_name',
+        'username',
+        'phone',
+        'gender',
+        'dob',
+        'country',
+        'ssn',
+        'dl',
+        'dl_path'
+    ];
 
     protected $hidden = ['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'];
 
