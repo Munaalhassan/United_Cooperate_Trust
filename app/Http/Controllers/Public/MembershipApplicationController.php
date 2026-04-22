@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\EBankingRegistration;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Admin;
+use App\Notifications\SystemNotification;
 
 class MembershipApplicationController extends Controller
 {
@@ -40,6 +42,14 @@ class MembershipApplicationController extends Controller
         }
 
         EBankingRegistration::create($validated);
+
+        // Notify Admins
+        Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
+            'New Membership Application',
+            "A new application has been submitted by {$validated['first_name']} {$validated['last_name']} ({$validated['email']})",
+            route('system.mgt.memberships.index'),
+            'info'
+        )));
 
         return back()->with('success', 'Your membership application has been submitted successfully. Our team will review it and contact you shortly.');
     }

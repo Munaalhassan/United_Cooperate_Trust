@@ -4,7 +4,6 @@ import { ChevronLeft, Save, User, Mail, Phone, Globe, Briefcase, MapPin, Landmar
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from 'sonner';
 import { store as memStore, index as memIndex } from '@/routes/system/mgt/memberships';
 
 const countries = [
@@ -46,7 +45,6 @@ export default function Create() {
         e.preventDefault();
         post(memStore.url(), {
             onSuccess: () => {
-                toast.success('Member added successfully');
             },
         });
     };

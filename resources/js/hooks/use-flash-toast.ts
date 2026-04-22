@@ -1,19 +1,38 @@
-import { router } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
-import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 import type { FlashToast } from '@/types/ui';
 
 export function useFlashToast(): void {
     useEffect(() => {
-        return router.on('flash', (event) => {
-            const flash = (event as CustomEvent).detail?.flash;
-            const data = flash?.toast as FlashToast | undefined;
+        return router.on('finish', () => {
+            const { flash } = usePage().props as any;
+            
+            let data: { type: 'success' | 'error' | 'info' | 'warning', message: string } | null = null;
 
-            if (!data) {
-                return;
+            if (flash?.toast) {
+                data = flash.toast;
+            } else if (flash?.success) {
+                data = { type: 'success', message: flash.success };
+            } else if (flash?.error) {
+                data = { type: 'error', message: flash.error };
             }
 
-            toast[data.type](data.message);
+            if (!data) return;
+
+            Swal.fire({
+                icon: data.type,
+                title: data.type === 'success' ? 'Success!' : 'Notification',
+                text: data.message,
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+                customClass: {
+                    popup: 'rounded-none border-brand-blue border-l-4',
+                }
+            });
         });
     }, []);
 }

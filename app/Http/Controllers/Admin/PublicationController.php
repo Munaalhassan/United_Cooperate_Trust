@@ -7,6 +7,8 @@ use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use App\Models\Admin;
+use App\Notifications\SystemNotification;
 
 class PublicationController extends Controller
 {
@@ -64,7 +66,16 @@ class PublicationController extends Controller
             $validated['file_size'] = $this->formatBytes($file->getSize());
         }
 
-        Publication::create($validated);
+        $pub = Publication::create($validated);
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
+            'New Publication Uploaded',
+            "{$admin->name} uploaded a new document: {$pub->title}",
+            route('system.mgt.publications.index'),
+            'success'
+        )));
 
         return back()->with('toast', [
             'type' => 'success',
@@ -96,6 +107,15 @@ class PublicationController extends Controller
 
         $publication->update($validated);
 
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'Publication Updated',
+            "{$admin->name} updated the document: {$publication->title}",
+            route('system.mgt.publications.index'),
+            'info'
+        )));
+
         return back()->with('toast', [
             'type' => 'success',
             'message' => 'Publication updated successfully.'
@@ -109,6 +129,15 @@ class PublicationController extends Controller
         }
 
         $publication->delete();
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'Publication Deleted',
+            "{$admin->name} deleted a publication.",
+            route('system.mgt.publications.index'),
+            'warning'
+        )));
 
         return back()->with('toast', [
             'type' => 'success',

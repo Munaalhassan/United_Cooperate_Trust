@@ -18,7 +18,7 @@ import {
     Share2
 } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
-import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 
 interface PostImage {
     id: number;
@@ -291,9 +291,33 @@ export default function NewsDetail({ post }: Props) {
         const textToCopy = `Title: ${post.title}\nLink: ${shareUrl}${post.image_url ? `\nImage: ${post.image_url}` : ''}`;
         
         navigator.clipboard.writeText(textToCopy).then(() => {
-            toast.success('Link and metadata copied to clipboard!');
+            Swal.fire({
+                icon: 'success',
+                title: 'Copied!',
+                text: 'Link and metadata copied to clipboard.',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                customClass: {
+                    popup: 'rounded-none border-brand-blue border-l-4',
+                }
+            });
         }).catch(() => {
-            toast.error('Failed to copy link.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Failed to copy link.',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                customClass: {
+                    popup: 'rounded-none border-red-500 border-l-4',
+                }
+            });
         });
     };
 

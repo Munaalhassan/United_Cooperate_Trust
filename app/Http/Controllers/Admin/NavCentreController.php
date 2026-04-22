@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\NavFund;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Admin;
+use App\Notifications\SystemNotification;
 
 class NavCentreController extends Controller
 {
@@ -74,7 +76,16 @@ class NavCentreController extends Controller
             'yield' => 'required|numeric',
         ]);
 
-        NavFund::create($validated);
+        $fund = NavFund::create($validated);
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
+            'New Fund Entry',
+            "{$admin->name} added a new fund: {$fund->name}",
+            route('system.mgt.nav-funds.index'),
+            'success'
+        )));
 
         return back()->with('toast', [
             'type' => 'success',
@@ -97,6 +108,15 @@ class NavCentreController extends Controller
 
         $navFund->update($validated);
 
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'Fund Entry Updated',
+            "{$admin->name} updated fund: {$navFund->name}",
+            route('system.mgt.nav-funds.index'),
+            'info'
+        )));
+
         return back()->with('toast', [
             'type' => 'success',
             'message' => 'Fund entry updated successfully.'
@@ -106,6 +126,15 @@ class NavCentreController extends Controller
     public function destroy(NavFund $navFund)
     {
         $navFund->delete();
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'Fund Entry Deleted',
+            "{$admin->name} deleted a fund record.",
+            route('system.mgt.nav-funds.index'),
+            'warning'
+        )));
 
         return back()->with('toast', [
             'type' => 'success',

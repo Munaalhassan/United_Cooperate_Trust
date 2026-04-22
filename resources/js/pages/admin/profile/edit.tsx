@@ -16,7 +16,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { edit as profileEdit, update as profileUpdate } from '@/routes/system/mgt/profile';
 import { update as passwordUpdate } from '@/routes/system/mgt/password';
-import { toast } from 'sonner';
 
 interface Admin {
     id: number;
@@ -46,7 +45,6 @@ export default function ProfileEdit({ admin }: Props) {
         e.preventDefault();
         profileForm.patch(profileUpdate.url(), {
             preserveScroll: true,
-            onSuccess: () => toast.success('Profile updated successfully'),
         });
     };
 
@@ -56,7 +54,6 @@ export default function ProfileEdit({ admin }: Props) {
             preserveScroll: true,
             onSuccess: () => {
                 passwordForm.reset();
-                toast.success('Password updated successfully');
             },
         });
     };

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\EBankingRegistration;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Admin;
+use App\Notifications\SystemNotification;
 
 class MembershipManagementController extends Controller
 {
@@ -48,6 +50,15 @@ class MembershipManagementController extends Controller
 
         EBankingRegistration::create($validated);
 
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
+            'Manual Membership Added',
+            "{$admin->name} manually added a new member: {$validated['first_name']} {$validated['last_name']}",
+            route('system.mgt.memberships.index'),
+            'success'
+        )));
+
         return redirect()->route('system.mgt.memberships.index')->with('success', 'Member added successfully.');
     }
 
@@ -60,12 +71,30 @@ class MembershipManagementController extends Controller
 
         $registration->update($validated);
 
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'Membership Status Updated',
+            "{$admin->name} updated membership for {$registration->first_name} to " . strtoupper($validated['status']),
+            route('system.mgt.memberships.index'),
+            'info'
+        )));
+
         return back()->with('success', 'Membership updated successfully.');
     }
 
     public function destroy(EBankingRegistration $registration)
     {
         $registration->delete();
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'Membership Deleted',
+            "{$admin->name} deleted a membership record.",
+            route('system.mgt.memberships.index'),
+            'warning'
+        )));
 
         return back()->with('success', 'Membership deleted successfully.');
     }

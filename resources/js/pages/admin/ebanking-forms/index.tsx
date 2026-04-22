@@ -14,6 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { store, update, destroy } from '@/routes/system/mgt/ebanking-forms';
+import Swal from 'sweetalert2';
 
 interface EBankingForm {
     id: number;
@@ -89,9 +90,41 @@ export default function EBankingFormsIndex({ forms }: Props) {
     };
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this form?')) {
-            router.delete(destroy.url(id));
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This form will be permanently removed!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#002855',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel',
+            customClass: {
+                popup: 'rounded-none',
+                confirmButton: 'rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs',
+                cancelButton: 'rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(destroy.url(id), {
+                    onSuccess: () => {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'The form has been deleted.',
+                            icon: 'success',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            customClass: {
+                                popup: 'rounded-none border-brand-blue border-l-4',
+                            }
+                        });
+                    }
+                });
+            }
+        });
     };
 
     return (

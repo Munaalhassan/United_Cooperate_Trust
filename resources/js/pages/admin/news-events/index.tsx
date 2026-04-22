@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AdminLayout from '@/layouts/admin-layout';
 import { useForm, Link, router } from '@inertiajs/react';
-import { 
-    Plus, 
-    Pencil, 
-    Trash2, 
-    X, 
+import {
+    Plus,
+    Pencil,
+    Trash2,
+    X,
     Search,
     Calendar,
     Filter,
@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { index, store, update, destroy as remove } from '@/routes/system/mgt/news-events';
+import Swal from 'sweetalert2';
 
 interface NewsEventImage {
     id: number;
@@ -61,13 +62,13 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
     useEffect(() => {
         const timer = setTimeout(() => {
             if (searchQuery !== (filters?.search || "") || typeFilter !== (filters?.type || "ALL")) {
-                router.get(index.url(), { 
+                router.get(index.url(), {
                     search: searchQuery,
                     type: typeFilter
-                }, { 
-                    preserveState: true, 
+                }, {
+                    preserveState: true,
                     replace: true,
-                    preserveScroll: true 
+                    preserveScroll: true
                 });
             }
         }, 500);
@@ -129,9 +130,41 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
     };
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this item?')) {
-            router.delete(remove.url(id));
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This news/event will be permanently deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#002855',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel',
+            customClass: {
+                popup: 'rounded-none',
+                confirmButton: 'rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs',
+                cancelButton: 'rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(remove.url(id), {
+                    onSuccess: () => {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'The item has been deleted.',
+                            icon: 'success',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            customClass: {
+                                popup: 'rounded-none border-brand-blue border-l-4',
+                            }
+                        });
+                    }
+                });
+            }
+        });
     };
 
     return (
@@ -144,12 +177,12 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                             <h2 className="text-lg font-bold text-brand-navy">News & Events</h2>
                             <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Manage corporate news and upcoming events</p>
                         </div>
-                        
+
                         {/* Search & Filter */}
                         <div className="flex flex-col sm:flex-row items-center gap-4 flex-1 max-w-2xl w-full">
                             <div className="relative flex-1 w-full">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                <input 
+                                <input
                                     type="text"
                                     placeholder="Search news..."
                                     value={searchQuery}
@@ -159,7 +192,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                             </div>
                             <div className="relative w-full sm:w-48">
                                 <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                <select 
+                                <select
                                     value={typeFilter}
                                     onChange={(e) => setTypeFilter(e.target.value)}
                                     className="w-full pl-10 pr-4 py-2 bg-slate-50 border-slate-200 focus:bg-white focus:border-brand-blue focus:ring-0 text-sm rounded-sm transition-all appearance-none"
@@ -174,7 +207,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
 
                     <div className="flex items-center gap-3 w-full lg:w-auto justify-end">
                         {!isAdding && !isEditing && (
-                            <Button 
+                            <Button
                                 onClick={() => setIsAdding(true)}
                                 className="bg-brand-blue hover:bg-brand-navy text-white rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs transition-all flex items-center gap-2"
                             >
@@ -186,18 +219,18 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
 
                 {/* Form Section */}
                 {(isAdding || isEditing) && (
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="bg-white p-8 border border-brand-blue shadow-lg rounded-sm relative"
                     >
-                        <button 
+                        <button
                             onClick={handleCancel}
                             className="absolute top-4 right-4 text-slate-400 hover:text-red-500 transition-colors"
                         >
                             <X className="w-5 h-5" />
                         </button>
-                        
+
                         <h3 className="text-xl font-bold text-brand-navy mb-8 flex items-center gap-3">
                             {isEditing ? <Pencil className="w-5 h-5 text-brand-blue" /> : <Plus className="w-5 h-5 text-brand-blue" />}
                             {isEditing ? 'Update News/Event' : 'Add New News/Event'}
@@ -207,8 +240,8 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div className="lg:col-span-2 space-y-2">
                                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Title</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         value={data.title}
                                         onChange={e => setData('title', e.target.value)}
                                         className="w-full border-slate-200 focus:border-brand-blue focus:ring-0 text-sm p-3 rounded-sm"
@@ -219,7 +252,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
 
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Type</label>
-                                    <select 
+                                    <select
                                         value={data.type}
                                         onChange={e => setData('type', e.target.value as 'News' | 'Event')}
                                         className="w-full border-slate-200 focus:border-brand-blue focus:ring-0 text-sm p-3 rounded-sm"
@@ -234,8 +267,8 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Date</label>
                                     <div className="relative">
                                         <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                        <input 
-                                            type="date" 
+                                        <input
+                                            type="date"
                                             value={data.date}
                                             onChange={e => setData('date', e.target.value)}
                                             className="w-full border-slate-200 focus:border-brand-blue focus:ring-0 text-sm pl-10 p-3 rounded-sm"
@@ -249,9 +282,9 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                     <div className="flex flex-col gap-3">
                                         {isEditing && !data.image && newsEvents.data.find(n => n.id === isEditing)?.image_url && (
                                             <div className="relative w-full aspect-video rounded-sm overflow-hidden border border-slate-200 bg-slate-50 group/current">
-                                                <img 
-                                                    src={newsEvents.data.find(n => n.id === isEditing)?.image_url || ''} 
-                                                    alt="Current" 
+                                                <img
+                                                    src={newsEvents.data.find(n => n.id === isEditing)?.image_url || ''}
+                                                    alt="Current"
                                                     className="w-full h-full object-cover opacity-60 group-hover/current:opacity-100 transition-opacity"
                                                 />
                                                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -261,8 +294,8 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                         )}
                                         <div className="relative">
                                             <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                            <input 
-                                                type="file" 
+                                            <input
+                                                type="file"
                                                 onChange={e => setData('image', e.target.files?.[0] || null)}
                                                 className="w-full border-slate-200 focus:border-brand-blue focus:ring-0 text-sm pl-10 p-2.5 rounded-sm file:hidden cursor-pointer bg-slate-50"
                                                 accept="image/*"
@@ -279,7 +312,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</label>
                                     <div className="flex items-center gap-4 p-3 bg-slate-50 border border-slate-200 rounded-sm">
                                         <label className="flex items-center gap-2 cursor-pointer">
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 checked={data.is_published}
                                                 onChange={e => setData('is_published', e.target.checked)}
@@ -293,7 +326,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
 
                             <div className="space-y-2">
                                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Excerpt (Brief Summary)</label>
-                                <textarea 
+                                <textarea
                                     value={data.excerpt}
                                     onChange={e => setData('excerpt', e.target.value)}
                                     rows={2}
@@ -305,7 +338,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
 
                             <div className="space-y-2">
                                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Full Content</label>
-                                <textarea 
+                                <textarea
                                     value={data.content}
                                     onChange={e => setData('content', e.target.value)}
                                     rows={10}
@@ -332,14 +365,14 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                                 <div className="aspect-video mb-3 overflow-hidden rounded-sm border border-slate-200">
                                                     <img src={img.image_url} alt="" className="w-full h-full object-cover" />
                                                 </div>
-                                                <input 
+                                                <input
                                                     type="text"
                                                     placeholder="Add caption..."
                                                     value={data.existing_gallery_captions[img.id] || ''}
                                                     onChange={e => setData('existing_gallery_captions', { ...data.existing_gallery_captions, [img.id]: e.target.value })}
                                                     className="w-full text-[11px] font-medium border-slate-200 focus:border-brand-blue focus:ring-0 p-2 rounded-sm bg-white"
                                                 />
-                                                <button 
+                                                <button
                                                     type="button"
                                                     onClick={() => setData('deleted_gallery_ids', [...data.deleted_gallery_ids, img.id])}
                                                     className="absolute top-4 right-4 bg-red-500 text-white p-1.5 rounded-sm opacity-0 group-hover/img:opacity-100 transition-opacity shadow-lg"
@@ -356,7 +389,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                             <div className="aspect-video mb-3 bg-white flex items-center justify-center rounded-sm border border-slate-100 overflow-hidden">
                                                 <img src={URL.createObjectURL(file)} alt="" className="w-full h-full object-cover" />
                                             </div>
-                                            <input 
+                                            <input
                                                 type="text"
                                                 placeholder="Add caption..."
                                                 value={data.gallery_captions[idx] || ''}
@@ -367,7 +400,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                                 }}
                                                 className="w-full text-[11px] font-medium border-slate-200 focus:border-brand-blue focus:ring-0 p-2 rounded-sm bg-white"
                                             />
-                                            <button 
+                                            <button
                                                 type="button"
                                                 onClick={() => {
                                                     const newGallery = data.gallery.filter((_, i) => i !== idx);
@@ -383,8 +416,8 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
 
                                     {/* Add Button */}
                                     <div className="relative border-2 border-dashed border-slate-200 hover:border-brand-blue transition-colors rounded-sm flex flex-col items-center justify-center p-8 cursor-pointer group min-h-[160px]">
-                                        <input 
-                                            type="file" 
+                                        <input
+                                            type="file"
                                             multiple
                                             onChange={e => {
                                                 const files = Array.from(e.target.files || []);
@@ -404,16 +437,16 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                             </div>
 
                             <div className="flex justify-end gap-4 pt-4 border-t border-slate-100">
-                                <Button 
-                                    type="button" 
-                                    variant="ghost" 
+                                <Button
+                                    type="button"
+                                    variant="ghost"
                                     onClick={handleCancel}
                                     className="rounded-none font-bold uppercase tracking-widest text-xs"
                                 >
                                     Cancel
                                 </Button>
-                                <Button 
-                                    type="submit" 
+                                <Button
+                                    type="submit"
                                     disabled={processing}
                                     className="bg-brand-blue hover:bg-brand-navy text-white rounded-none px-10 py-2 font-bold uppercase tracking-widest text-xs transition-all flex items-center gap-2"
                                 >
@@ -475,13 +508,13 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                         </td>
                                         <td className="py-4 px-6">
                                             <div className="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button 
+                                                <button
                                                     onClick={() => handleEdit(item)}
                                                     className="p-2 text-slate-400 hover:text-brand-blue hover:bg-brand-blue/5 rounded-sm transition-all"
                                                 >
                                                     <Pencil className="w-4 h-4" />
                                                 </button>
-                                                <button 
+                                                <button
                                                     onClick={() => handleDelete(item.id)}
                                                     className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-sm transition-all"
                                                 >

@@ -45,7 +45,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 import { update as memUpdate, destroy as memDestroy, create as memCreate } from '@/routes/system/mgt/memberships';
 
 interface Membership {
@@ -98,17 +98,46 @@ export default function MembershipsIndex({ registrations }: Props) {
         put(memUpdate.url(selectedReg.id), {
             onSuccess: () => {
                 setIsViewOpen(false);
-                toast.success('Membership updated successfully');
             },
         });
     };
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this registration?')) {
-            destroy(memDestroy.url(id), {
-                onSuccess: () => toast.success('Membership deleted successfully'),
-            });
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#002855',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel',
+            customClass: {
+                popup: 'rounded-none',
+                confirmButton: 'rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs',
+                cancelButton: 'rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                destroy(memDestroy.url(id), {
+                    onSuccess: () => {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Record has been deleted.',
+                            icon: 'success',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            customClass: {
+                                popup: 'rounded-none border-brand-blue border-l-4',
+                            }
+                        });
+                    }
+                });
+            }
+        });
     };
 
     const getStatusBadge = (status: string) => {

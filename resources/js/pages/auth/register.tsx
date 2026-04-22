@@ -4,7 +4,7 @@ import { ChevronLeft, ShieldCheck, User, Mail, Phone, Globe, Briefcase, MapPin, 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from 'sonner';
+import Swal from 'sweetalert2';
 import { signup, store } from '@/routes/membership';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { home } from '@/routes';
@@ -50,7 +50,16 @@ export default function Register() {
         post(store.url(), {
             onSuccess: () => {
                 reset();
-                toast.success('Membership application submitted successfully!');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Application Submitted!',
+                    text: 'Your membership application has been submitted successfully. Our team will review it and get back to you soon.',
+                    confirmButtonColor: '#002855',
+                    customClass: {
+                        popup: 'rounded-xl',
+                        confirmButton: 'rounded-lg px-8 py-3 font-bold uppercase tracking-widest text-xs'
+                    }
+                });
             },
         });
     };

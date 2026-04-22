@@ -7,6 +7,8 @@ use App\Models\EBankingForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use App\Models\Admin;
+use App\Notifications\SystemNotification;
 
 class EBankingFormController extends Controller
 {
@@ -31,7 +33,16 @@ class EBankingFormController extends Controller
             $validated['file_path'] = Storage::url($path);
         }
 
-        EBankingForm::create($validated);
+        $form = EBankingForm::create($validated);
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
+            'New E-Banking Form Uploaded',
+            "{$admin->name} added a new form: {$form->title}",
+            route('system.mgt.ebanking-forms.index'),
+            'success'
+        )));
 
         return back()->with('success', 'Form uploaded successfully.');
     }
@@ -56,6 +67,15 @@ class EBankingFormController extends Controller
 
         $ebanking_form->update($validated);
 
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'E-Banking Form Updated',
+            "{$admin->name} updated the form: {$ebanking_form->title}",
+            route('system.mgt.ebanking-forms.index'),
+            'info'
+        )));
+
         return back()->with('success', 'Form updated successfully.');
     }
 
@@ -65,6 +85,15 @@ class EBankingFormController extends Controller
         Storage::disk('public')->delete($oldPath);
         
         $ebanking_form->delete();
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'E-Banking Form Deleted',
+            "{$admin->name} deleted a form.",
+            route('system.mgt.ebanking-forms.index'),
+            'warning'
+        )));
 
         return back()->with('success', 'Form deleted successfully.');
     }

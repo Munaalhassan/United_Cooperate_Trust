@@ -16,7 +16,6 @@ import { index as pubIndex } from '@/routes/system/mgt/publications';
 import { index as memIndex } from '@/routes/system/mgt/memberships';
 import { index as ebankingIndex } from '@/routes/system/mgt/ebanking-forms';
 import { index as newsIndex } from '@/routes/system/mgt/news-events';
-import { Toaster } from '@/components/ui/sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
 import { useAsset } from '@/hooks/use-asset';
 import { edit as profileEdit } from '@/routes/system/mgt/profile';
@@ -96,6 +95,20 @@ export default function AdminLayout({ children, title }: Props) {
                     >
                         <Bell className={`w-4 h-4 ${isActive('/system-node-mgt/news-events') ? 'text-brand-blue' : ''}`} /> News & Events
                     </Link>
+
+                    <Link 
+                        href="/system-node-mgt/notifications" 
+                        className={`flex items-center justify-between px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/notifications') ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/10 hover:text-white'}`}
+                    >
+                        <div className="flex items-center gap-3">
+                            <Bell className={`w-4 h-4 ${isActive('/system-node-mgt/notifications') ? 'text-brand-blue' : ''}`} /> Notifications
+                        </div>
+                        {(usePage().props as any).auth?.unreadNotificationsCount > 0 && (
+                            <span className="bg-brand-blue text-white text-[10px] font-black px-1.5 py-0.5 rounded-sm">
+                                {(usePage().props as any).auth.unreadNotificationsCount > 9 ? '9+' : (usePage().props as any).auth.unreadNotificationsCount}
+                            </span>
+                        )}
+                    </Link>
                 </nav>
 
                 <div className="p-6 border-t border-white/5 space-y-1">
@@ -129,10 +142,17 @@ export default function AdminLayout({ children, title }: Props) {
                 <header className="h-20 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-30">
                     <h1 className="text-xl font-bold text-brand-navy">{title}</h1>
                     <div className="flex items-center gap-6">
-                        <button className="relative p-2 text-slate-400 hover:text-brand-navy transition-colors">
-                            <Bell className="w-5 h-5" />
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-brand-blue rounded-full border-2 border-white"></span>
-                        </button>
+                        <Link 
+                            href="/system-node-mgt/notifications"
+                            className="relative p-2 text-slate-400 hover:text-brand-navy transition-colors group"
+                        >
+                            <Bell className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                            {(usePage().props as any).auth?.unreadNotificationsCount > 0 && (
+                                <span className="absolute top-1.5 right-1.5 min-w-[14px] h-3.5 px-0.5 bg-brand-blue text-white text-[8px] font-black flex items-center justify-center rounded-full border border-white">
+                                    {(usePage().props as any).auth.unreadNotificationsCount > 9 ? '9+' : (usePage().props as any).auth.unreadNotificationsCount}
+                                </span>
+                            )}
+                        </Link>
                         <Link 
                             href={profileEdit.url()}
                             className="flex items-center gap-3 pl-6 border-l border-slate-200 group"
@@ -154,7 +174,6 @@ export default function AdminLayout({ children, title }: Props) {
                     {children}
                 </div>
             </main>
-            <Toaster />
         </div>
     );
 }

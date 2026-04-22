@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use App\Models\Admin;
+use App\Notifications\SystemNotification;
 
 class NewsEventController extends Controller
 {
@@ -76,6 +78,15 @@ class NewsEventController extends Controller
             }
         }
 
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
+            'New News/Event Created',
+            "{$admin->name} created a new {$newsEvent->type}: {$newsEvent->title}",
+            route('system.mgt.news-events.index'),
+            'success'
+        )));
+
         return back()->with('toast', [
             'type' => 'success',
             'message' => 'News/Event created successfully.'
@@ -143,6 +154,16 @@ class NewsEventController extends Controller
             }
         }
 
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'News/Event Updated',
+            "{$admin->name} updated the {$newsEvent->type}: {$newsEvent->title}",
+            route('system.mgt.news-events.index'),
+            'info'
+        )));
+
         return back()->with('toast', [
             'type' => 'success',
             'message' => 'News/Event updated successfully.'
@@ -156,6 +177,15 @@ class NewsEventController extends Controller
         }
 
         $newsEvent->delete();
+
+        // Notify Admins
+        $admin = auth('admin')->user();
+        Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
+            'News/Event Deleted',
+            "{$admin->name} deleted a news/event item.",
+            route('system.mgt.news-events.index'),
+            'warning'
+        )));
 
         return back()->with('toast', [
             'type' => 'success',
