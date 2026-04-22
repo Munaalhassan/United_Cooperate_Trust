@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('e_banking_registrations', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('nationality');
+            $table->string('account_type');
+            $table->string('occupation');
+            $table->string('address');
+            $table->string('status')->default('pending'); // pending, approved, rejected
+            $table->text('admin_notes')->nullable();
             $table->timestamps();
         });
     }

@@ -26,6 +26,13 @@ Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->gr
     Route::post('publications/{publication}', [\App\Http\Controllers\Admin\PublicationController::class, 'update'])->name('publications.update');
     Route::delete('publications/{publication}', [\App\Http\Controllers\Admin\PublicationController::class, 'destroy'])->name('publications.destroy');
 
+    // Memberships Management
+    Route::get('memberships', [\App\Http\Controllers\Management\MembershipManagementController::class, 'index'])->name('memberships.index');
+    Route::get('memberships/create', [\App\Http\Controllers\Management\MembershipManagementController::class, 'create'])->name('memberships.create');
+    Route::post('memberships', [\App\Http\Controllers\Management\MembershipManagementController::class, 'store'])->name('memberships.store');
+    Route::put('memberships/{registration}', [\App\Http\Controllers\Management\MembershipManagementController::class, 'update'])->name('memberships.update');
+    Route::delete('memberships/{registration}', [\App\Http\Controllers\Management\MembershipManagementController::class, 'destroy'])->name('memberships.destroy');
+
     // Profile Management
     Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
@@ -83,7 +90,8 @@ Route::prefix('fund-services')->group(function () {
 });
 
 Route::prefix('quick-services')->group(function () {
-    Route::inertia('e-banking-registration', 'quick-services/e-banking')->name('quick.ebanking');
+    Route::inertia('e-banking-registration', 'quick-services/e-banking-registration')->name('quick.ebanking');
+
     Route::inertia('credit-cards', 'quick-services/credit-cards')->name('quick.cards');
     Route::inertia('security-awareness', 'quick-services/security')->name('quick.security');
     Route::inertia('third-party-payments', 'quick-services/third-party')->name('quick.third-party');
@@ -103,6 +111,11 @@ Route::prefix('legal')->group(function () {
 });
 
 Route::inertia('contact', 'contact')->name('contact');
+
+// Overriding default registration to be Membership Application
+Route::get('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('register');
+Route::post('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'store']);
+Route::get('membership-signup', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('membership.signup');
 
 // Admin and settings routes handled above
 
