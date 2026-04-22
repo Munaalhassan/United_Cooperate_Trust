@@ -15,6 +15,7 @@ import { index as navIndex } from '@/routes/system/mgt/nav-funds';
 import { index as pubIndex } from '@/routes/system/mgt/publications';
 import { index as memIndex } from '@/routes/system/mgt/memberships';
 import { index as ebankingIndex } from '@/routes/system/mgt/ebanking-forms';
+import { index as newsIndex } from '@/routes/system/mgt/news-events';
 import { Toaster } from '@/components/ui/sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
 import { useAsset } from '@/hooks/use-asset';
@@ -87,6 +88,13 @@ export default function AdminLayout({ children, title }: Props) {
                         className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/ebanking-forms') ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/10 hover:text-white'}`}
                     >
                         <ShieldCheck className={`w-4 h-4 ${isActive('/system-node-mgt/ebanking-forms') ? 'text-brand-blue' : ''}`} /> E-Banking Forms
+                    </Link>
+
+                    <Link 
+                        href={newsIndex.url()} 
+                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/news-events') ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/10 hover:text-white'}`}
+                    >
+                        <Bell className={`w-4 h-4 ${isActive('/system-node-mgt/news-events') ? 'text-brand-blue' : ''}`} /> News & Events
                     </Link>
                 </nav>
 

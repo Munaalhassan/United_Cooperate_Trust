@@ -39,6 +39,12 @@ Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->gr
     Route::put('ebanking-forms/{ebanking_form}', [\App\Http\Controllers\Admin\EBankingFormController::class, 'update'])->name('ebanking-forms.update');
     Route::delete('ebanking-forms/{ebanking_form}', [\App\Http\Controllers\Admin\EBankingFormController::class, 'destroy'])->name('ebanking-forms.destroy');
 
+    // News & Events Management
+    Route::get('news-events', [\App\Http\Controllers\Admin\NewsEventController::class, 'index'])->name('news-events.index');
+    Route::post('news-events', [\App\Http\Controllers\Admin\NewsEventController::class, 'store'])->name('news-events.store');
+    Route::post('news-events/{news_event}', [\App\Http\Controllers\Admin\NewsEventController::class, 'update'])->name('news-events.update');
+    Route::delete('news-events/{news_event}', [\App\Http\Controllers\Admin\NewsEventController::class, 'destroy'])->name('news-events.destroy');
+
     // Profile Management
     Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
@@ -104,8 +110,8 @@ Route::prefix('quick-services')->group(function () {
 });
 
 Route::prefix('media')->group(function () {
-    Route::inertia('news-events', 'media/news-events')->name('media.news-events');
-    Route::inertia('news-events/london-thought-leadership', 'media/news-detail')->name('media.news-detail');
+    Route::get('news-events', [\App\Http\Controllers\Public\NewsEventController::class, 'index'])->name('media.news-events');
+    Route::get('news-events/{slug}', [\App\Http\Controllers\Public\NewsEventController::class, 'show'])->name('media.news-detail');
     Route::get('publications', [\App\Http\Controllers\Public\PublicationController::class, 'index'])->name('media.publications');
 });
 

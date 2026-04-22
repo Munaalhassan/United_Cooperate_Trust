@@ -4,10 +4,25 @@ import { motion } from 'framer-motion';
 import { ChevronRight, Calendar, ArrowLeft, Twitter, Linkedin, Facebook } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
-export default function NewsDetail() {
+interface Post {
+    id: number;
+    type: string;
+    date: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    image_url: string | null;
+}
+
+interface Props {
+    post: Post;
+}
+
+export default function NewsDetail({ post }: Props) {
     return (
         <PublicLayout>
-            <Head title="London Thought Leadership | United Cooperate Trust Bank" />
+            <Head title={`${post.title} | United Cooperate Trust Bank`} />
 
             {/* Breadcrumbs & Simple Header */}
             <div className="bg-white">
@@ -30,16 +45,20 @@ export default function NewsDetail() {
                         animate={{ opacity: 1, y: 0 }}
                         className="relative w-full aspect-[21/9] bg-slate-100 overflow-hidden"
                     >
-                        {/* Placeholder Image with Tag */}
-                        <OptimizedImage 
-                            src="/images/hero/slide-1.jpg" 
-                            alt="London Thought Leadership" 
-                            width={1200}
-                            height={500}
-                            className="w-full h-full object-cover"
-                        />
+                        {/* Featured Image */}
+                        {post.image_url ? (
+                            <img 
+                                src={post.image_url} 
+                                alt={post.title} 
+                                className="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <div className="w-full h-full bg-brand-navy flex items-center justify-center text-white/10 font-bold text-6xl uppercase tracking-tighter">
+                                {post.type}
+                            </div>
+                        )}
                         <div className="absolute top-0 left-0 bg-brand-navy text-white text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3">
-                            Event
+                            {post.type}
                         </div>
                     </motion.div>
 
@@ -51,7 +70,7 @@ export default function NewsDetail() {
                             className="flex items-center gap-3 text-brand-blue font-bold text-[11px] uppercase tracking-[0.2em] mb-6"
                         >
                             <Calendar className="w-4 h-4" />
-                            20 September 2018
+                            {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                         </motion.div>
 
                         <motion.h1 
@@ -60,7 +79,7 @@ export default function NewsDetail() {
                             transition={{ delay: 0.3 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy leading-tight mb-8"
                         >
-                            London Thought <br /> Leadership
+                            {post.title}
                         </motion.h1>
 
                         {/* Social Share Bar */}
@@ -96,27 +115,13 @@ export default function NewsDetail() {
                         transition={{ delay: 0.5 }}
                         className="prose prose-slate prose-lg max-w-none prose-headings:text-brand-navy prose-p:text-slate-600 prose-p:leading-[1.8] prose-p:font-light"
                     >
-                        <p className="text-xl font-medium text-slate-700 mb-12 leading-relaxed">
-                            On the occasion of United Cooperate Trust Bank sponsorship of the Greek Pavilion, featuring Studio INI's installation "Disobedience" by Mrs. Nassia Inglessis at the London Biennale 2018, the Bank hosted the London Thought Leadership Series event.
+                        <p className="text-xl font-medium text-slate-700 mb-12 leading-relaxed whitespace-pre-wrap">
+                            {post.excerpt}
                         </p>
                         
-                        <p>
-                            The event, held at the prestigious Somerset House, brought together industry leaders, creative visionaries, and financial experts to discuss "The future of London: Challenges and opportunities ahead." 
-                        </p>
-                        
-                        <p>
-                            As a global financial institution with a deep-rooted commitment to cultural and intellectual progress, United Cooperate Trust Bank continues to foster environments where innovation and strategy intersect. The London Biennale provides a unique backdrop for these discussions, emphasizing the role of design and architecture in shaping modern urban landscapes.
-                        </p>
-
-                        <div className="my-16 p-8 bg-slate-50 border-l-4 border-brand-blue">
-                            <p className="text-xl italic font-light text-brand-navy m-0">
-                                "Our commitment to London extends beyond the financial sector; we are investors in the city's intellectual and creative capital."
-                            </p>
+                        <div className="whitespace-pre-wrap">
+                            {post.content}
                         </div>
-
-                        <p>
-                            The series aims to spark meaningful dialogue on how global centers like London can adapt to shifting geopolitical climates while maintaining their status as hubs of excellence. Participants explored topics ranging from digital transformation in banking to the impact of artistic installations on community engagement.
-                        </p>
                     </motion.div>
 
                     {/* Navigation Footer */}
