@@ -10,7 +10,6 @@ import {
     ShieldCheck, 
     Share2, 
     Globe, 
-    PhoneCall, 
     Mail, 
     MapPin
 } from 'lucide-react';
@@ -475,16 +474,16 @@ export default function Welcome() {
                             <div className="group cursor-pointer">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-1 h-8 bg-brand-blue group-hover:h-12 transition-all duration-500" />
-                                    <h4 className="text-xl font-bold">New York HQ</h4>
+                                    <h4 className="text-xl font-bold">Main Office</h4>
                                 </div>
-                                <p className="text-slate-400 text-sm max-w-sm ml-5">Our strategic center bridging American financial strength with global markets.</p>
+                                <p className="text-slate-400 text-sm max-w-sm ml-5">1256 - Butantã, São Paulo - SP, 05503-000, Germany</p>
                             </div>
                             <div className="group cursor-pointer">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-1 h-8 bg-brand-gold group-hover:h-12 transition-all duration-500" />
-                                    <h4 className="text-xl font-bold">London & Poland</h4>
+                                    <h4 className="text-xl font-bold">Regulated by CSSF</h4>
                                 </div>
-                                <p className="text-slate-400 text-sm max-w-sm ml-5">Specialized services for the European corridor and emerging markets.</p>
+                                <p className="text-slate-400 text-sm max-w-sm ml-5">Supervised by the Commission de Surveillance du Secteur Financier — 283 Route d'Arlon, L-1150 USA.</p>
                             </div>
                         </div>
                     </div>
@@ -504,17 +503,26 @@ export default function Welcome() {
                                     <Mail className="w-5 h-5 text-brand-blue group-hover:text-white" />
                                 </div>
                                 <div>
-                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Email Inquiry</div>
-                                    <p className="text-lg font-medium">contact@unitedcooperatetrust.com</p>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">General Inquiries</div>
+                                    <p className="text-base font-medium">info@unitedcooperatetrust.com</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-6 group">
+                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-blue transition-all">
+                                    <Mail className="w-5 h-5 text-brand-blue group-hover:text-white" />
+                                </div>
+                                <div>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Customer Service</div>
+                                    <p className="text-base font-medium">customerservice@unitedcooperatetrust.com</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-6 group">
                                 <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-gold transition-all">
-                                    <PhoneCall className="w-5 h-5 text-brand-gold group-hover:text-white" />
+                                    <Mail className="w-5 h-5 text-brand-gold group-hover:text-white" />
                                 </div>
                                 <div>
-                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Global Support</div>
-                                    <p className="text-lg font-medium">+1 (555) UCT-BANK</p>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Loan Inquiries</div>
+                                    <p className="text-base font-medium">loan@unitedcooperatetrust.com</p>
                                 </div>
                             </div>
                             <Button className="w-full bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none py-8 font-bold uppercase tracking-[0.2em] transition-all duration-500 text-xs mt-6">

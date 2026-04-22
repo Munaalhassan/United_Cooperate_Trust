@@ -2,6 +2,7 @@ import { PublicHeader } from '@/components/public-header';
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
+import { CookieBanner } from '@/components/cookie-banner';
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
     return (
@@ -45,6 +46,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
                     </motion.div>
                 </div>
             </footer>
+            <CookieBanner />
         </div>
     );
 }
