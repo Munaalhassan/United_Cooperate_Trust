@@ -182,24 +182,25 @@ export function PublicHeader() {
     return (
         <>
             <header className="w-full flex flex-col isolation-auto relative z-50">
-                {/* Top Utility Bar (Logo + Utility Links) */}
-                <div className="bg-white border-b border-gray-100 py-4">
-                    <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-                        {/* Logo moved to top */}
-                        <Link href="/" className="flex items-center -ml-2">
+                {/* Top Utility Bar (Logo + Mobile Actions + Utility Links) */}
+                <div className="bg-white border-b border-gray-100 py-0">
+                    <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center -ml-2 py-0 h-auto">
                             <img
                                 src="/images/logo.png"
                                 alt="United Cooperate Bank"
-                                className="h-16 md:h-20 w-auto drop-shadow-sm transition-transform hover:scale-105 duration-300"
+                                className="h-20 md:h-28 lg:h-32 w-auto drop-shadow-sm transition-transform hover:scale-105 duration-300 block"
                             />
                         </Link>
 
-                        {/* Utility Links (Right Side) */}
-                        <div className="flex items-center gap-6 text-slate-600">
-                            {/* Language Selector */}
+                        {/* Actions & Utility */}
+                        <div className="flex items-center gap-3 md:gap-6 text-slate-600">
+                            {/* Language Selector (Visible on all screens) */}
                             <div className="relative group/lang flex items-center gap-1 cursor-pointer hover:text-brand-blue text-[13px] font-bold h-full py-2">
-                                <Globe className="w-4 h-4 mr-1 text-slate-400" />
-                                <span>{selectedLanguage}</span>
+                                <Globe className="w-5 h-5 md:w-4 md:h-4 text-slate-400" />
+                                <span className="hidden sm:inline">{selectedLanguage}</span>
+                                <span className="sm:hidden text-xs">{selectedLanguage.substring(0, 2).toUpperCase()}</span>
                                 <ChevronDown className="w-3.5 h-3.5 group-hover/lang:-rotate-180 transition-transform duration-300" />
                                 
                                 <div className="absolute top-full right-0 min-w-[140px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 -translate-y-2 group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:scale-100 group-hover/lang:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
@@ -221,46 +222,116 @@ export function PublicHeader() {
                                 </div>
                             </div>
 
-                            <div className="h-4 w-px bg-slate-200" />
+                            {/* Search Icon (Visible on mobile top bar) */}
+                            <button 
+                                onClick={() => setIsSearchOpen(true)}
+                                className="md:hidden p-2 hover:bg-slate-50 rounded-full transition-colors group"
+                            >
+                                <Search className="w-5 h-5 text-slate-600" />
+                            </button>
 
-                            {/* Quick Services */}
-                            <div className="relative group/qs h-full flex items-center">
-                                <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-bold cursor-pointer h-full py-2">
-                                    Quick Services <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover/qs:-rotate-180 transition-transform duration-300" />
-                                </span>
-                                <div className="absolute top-full right-0 min-w-[230px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/qs:opacity-100 group-hover/qs:visible group-hover/qs:scale-100 group-hover/qs:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md ring-1 ring-black/5">
-                                    <Link href="/quick-services/e-banking-registration" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">E-Banking Registration</Link>
-                                    <Link href="/quick-services/credit-cards" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Credit Cards</Link>
-                                    <Link href="/quick-services/security-awareness" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Security Awareness</Link>
-                                    <Link href="/quick-services/third-party-payments" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Third-Party Payment Services</Link>
-                                </div>
+                            {/* Mobile Menu Toggle (Sheet) */}
+                            <div className="lg:hidden">
+                                <Sheet>
+                                    <SheetTrigger asChild>
+                                        <Button variant="ghost" size="icon" className="text-slate-800 hover:text-brand-blue p-0 h-auto w-auto">
+                                            <Menu className="w-8 h-8 md:w-9 md:h-9" />
+                                        </Button>
+                                    </SheetTrigger>
+                                    <SheetContent side="right" className="w-[90vw] sm:w-[400px] bg-white border-l shadow-2xl p-0 flex flex-col">
+                                        <SheetHeader className="px-6 py-5 border-b border-slate-100 flex justify-between items-center flex-row">
+                                            <img src="/images/logo.png" alt="United Cooperate Bank" className="h-16 w-auto" />
+                                            <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
+                                        </SheetHeader>
+                                        <div className="flex-1 overflow-y-auto w-full">
+                                            <div className="flex flex-col gap-0 py-2">
+                                                {/* Main Navigation Data */}
+                                                {navigationData.map((item, index) => (
+                                                    <MobileMenuItem key={index} item={item} />
+                                                ))}
+
+                                                {/* Utility Sections for Mobile */}
+                                                <div className="mt-6 px-6 flex flex-col gap-1 pb-8">
+                                                    {/* Quick Services Accordion for Mobile */}
+                                                    <div className="py-2 border-b border-slate-50">
+                                                        <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Quick Services</h4>
+                                                        <div className="flex flex-col gap-3">
+                                                            <Link href="/quick-services/e-banking-registration" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">E-Banking Registration</Link>
+                                                            <Link href="/quick-services/credit-cards" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">Credit Cards</Link>
+                                                            <Link href="/quick-services/security-awareness" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">Security Awareness</Link>
+                                                            <Link href="/quick-services/third-party-payments" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">Third-Party Payments</Link>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Media Accordion for Mobile */}
+                                                    <div className="py-4 border-b border-slate-50">
+                                                        <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Media & News</h4>
+                                                        <div className="flex flex-col gap-3">
+                                                            <Link href="/media/news-events" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">News and Events</Link>
+                                                            <Link href="/media/publications" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">Publications</Link>
+                                                        </div>
+                                                    </div>
+
+                                                    <Link href="/contact" className="py-4 text-sm font-bold text-brand-navy flex items-center justify-between group">
+                                                        Contact Us <ChevronRight className="w-4 h-4 text-brand-blue group-hover:translate-x-1 transition-transform" />
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="p-6 border-t border-slate-100 bg-slate-50">
+                                            <Link href="/login" className="block w-full">
+                                                <Button className="w-full bg-[#2D434A] hover:bg-slate-800 text-white font-bold py-7 rounded-md transition-all text-sm tracking-widest shadow-lg">
+                                                    E-BANKING SECURE LOGIN
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </SheetContent>
+                                </Sheet>
                             </div>
 
-                            <div className="h-4 w-px bg-slate-200" />
-
-                            {/* Media */}
-                            <div className="relative group/media h-full flex items-center">
-                                <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-bold cursor-pointer h-full py-2">
-                                    Media <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover/media:-rotate-180 transition-transform duration-300" />
-                                </span>
-                                <div className="absolute top-full right-0 min-w-[200px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/media:opacity-100 group-hover/media:visible group-hover/media:scale-100 group-hover/media:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md ring-1 ring-black/5">
-                                    <Link href="/media/news-events" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">News and Events</Link>
-                                    <Link href="/media/publications" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Publications</Link>
+                            {/* Desktop-only Utility Links */}
+                            <div className="hidden lg:flex items-center gap-6">
+                                <div className="h-6 w-px bg-slate-200" />
+                                
+                                {/* Quick Services */}
+                                <div className="relative group/qs h-full flex items-center">
+                                    <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-bold cursor-pointer h-full py-2">
+                                        Quick Services <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover/qs:-rotate-180 transition-transform duration-300" />
+                                    </span>
+                                    <div className="absolute top-full right-0 min-w-[230px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/qs:opacity-100 group-hover/qs:visible group-hover/qs:scale-100 group-hover/qs:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md ring-1 ring-black/5">
+                                        <Link href="/quick-services/e-banking-registration" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">E-Banking Registration</Link>
+                                        <Link href="/quick-services/credit-cards" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Credit Cards</Link>
+                                        <Link href="/quick-services/security-awareness" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Security Awareness</Link>
+                                        <Link href="/quick-services/third-party-payments" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Third-Party Payment Services</Link>
+                                    </div>
                                 </div>
+
+                                <div className="h-4 w-px bg-slate-200" />
+
+                                {/* Media */}
+                                <div className="relative group/media h-full flex items-center">
+                                    <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-bold cursor-pointer h-full py-2">
+                                        Media <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover/media:-rotate-180 transition-transform duration-300" />
+                                    </span>
+                                    <div className="absolute top-full right-0 min-w-[200px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/media:opacity-100 group-hover/media:visible group-hover/media:scale-100 group-hover/media:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md ring-1 ring-black/5">
+                                        <Link href="/media/news-events" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">News and Events</Link>
+                                        <Link href="/media/publications" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Publications</Link>
+                                    </div>
+                                </div>
+
+                                <div className="h-4 w-px bg-slate-200" />
+
+                                <Link href="/contact" className="hover:text-brand-blue transition-colors font-bold text-[13px]">Contact us</Link>
                             </div>
-
-                            <div className="h-4 w-px bg-slate-200" />
-
-                            <Link href="/contact" className="hover:text-brand-blue transition-colors font-bold text-[13px]">Contact us</Link>
                         </div>
                     </div>
                 </div>
 
-                {/* Main Navigation (Mega Menu + E-Banking) */}
-                <div className="bg-white shadow-sm sticky top-0 relative z-40">
+                {/* Main Navigation (Desktop Only) */}
+                <div className="hidden lg:block bg-white shadow-sm sticky top-0 relative z-40">
                     <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-[65px]">
                         {/* Desktop Menu */}
-                        <div className="hidden lg:flex items-center h-full">
+                        <div className="flex items-center h-full">
                             <div className="flex h-full items-center gap-1 xl:gap-4">
                                 {navigationData.map((item, index) => (
                                     <div key={index} className="relative group/nav h-full flex items-center">
@@ -328,46 +399,6 @@ export function PublicHeader() {
                                     E-BANKING
                                 </Button>
                             </Link>
-
-                            {/* Mobile Menu Toggle */}
-                            <div className="lg:hidden">
-                                <Sheet>
-                                    <SheetTrigger asChild>
-                                        <Button variant="ghost" size="icon" className="text-slate-800 hover:text-brand-blue">
-                                            <Menu className="w-8 h-8" />
-                                        </Button>
-                                    </SheetTrigger>
-                                    <SheetContent side="right" className="w-[85vw] sm:w-[400px] bg-white border-l shadow-2xl p-0 flex flex-col">
-                                        <SheetHeader className="px-6 py-5 border-b border-slate-100 flex justify-between items-center flex-row">
-                                            <img src="/images/logo.png" alt="United Cooperate Bank" className="h-8 w-auto" />
-                                            <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
-                                        </SheetHeader>
-                                        <div className="flex-1 overflow-y-auto w-full">
-                                            <div className="flex flex-col gap-0 py-2">
-                                                {navigationData.map((item, index) => (
-                                                    <MobileMenuItem key={index} item={item} />
-                                                ))}
-
-                                                <div className="mt-8 px-6 flex flex-col gap-3 pb-8">
-                                                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Utility Links</h4>
-                                                    <Link href="#" className="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors flex items-center justify-between">Quick Services <ChevronRight className="w-4 h-4 opacity-50" /></Link>
-                                                    <div className="h-px bg-slate-100 w-full my-1"></div>
-                                                    <Link href="#" className="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors flex items-center justify-between">Media <ChevronRight className="w-4 h-4 opacity-50" /></Link>
-                                                    <div className="h-px bg-slate-100 w-full my-1"></div>
-                                                    <Link href="/contact" className="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors flex items-center justify-between">Contact Us <ChevronRight className="w-4 h-4 opacity-50" /></Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="p-6 border-t border-slate-100 bg-slate-50">
-                                            <Link href="/login" className="block w-full">
-                                                <Button className="w-full bg-brand-navy hover:bg-slate-800 text-white font-bold py-6 rounded-md transition-all text-sm tracking-widest">
-                                                    E-BANKING SECURE LOGIN
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    </SheetContent>
-                                </Sheet>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -439,7 +470,7 @@ export function PublicHeader() {
                             ) : (
                                 <div className="text-left py-12">
                                     <h3 className="text-2xl text-white font-light mb-2">No results found</h3>
-                                    <p className="text-white/50">We couldn't find anything matching "{searchQuery}". Try different keywords.</p>
+                                    <p className="text-white/50">We couldn't find anything matching \"{searchQuery}\". Try different keywords.</p>
                                     <button onClick={() => setSearchQuery('')} className="mt-8 px-6 py-2 border border-white/20 text-white/70 hover:bg-white/10 rounded-full transition-colors text-sm font-medium">
                                         Clear Search
                                     </button>
