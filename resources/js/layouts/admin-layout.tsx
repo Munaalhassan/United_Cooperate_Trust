@@ -6,14 +6,16 @@ import {
     ShieldCheck, 
     LogOut,
     Bell,
-    TrendingUp
+    TrendingUp,
+    User
 } from 'lucide-react';
-import { dashboard } from '@/routes/system/mgt';
+import { dashboard, logout } from '@/routes/system/mgt';
 import { index as navIndex } from '@/routes/system/mgt/nav-funds';
 import { index as pubIndex } from '@/routes/system/mgt/publications';
 import { Toaster } from '@/components/ui/sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
 import { useAsset } from '@/hooks/use-asset';
+import { edit as profileEdit } from '@/routes/system/mgt/profile';
 
 interface Props {
     children: ReactNode;
@@ -67,10 +69,28 @@ export default function AdminLayout({ children, title }: Props) {
                     </Link>
                 </nav>
 
-                <div className="p-6 border-t border-white/5">
-                    <Link href="/" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-all text-sm font-medium">
-                        <LogOut className="w-4 h-4" /> Back to Website
+                <div className="p-6 border-t border-white/5 space-y-1">
+                    <Link 
+                        href={profileEdit.url()} 
+                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/profile') ? 'bg-white/10 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+                    >
+                        <User className={`w-4 h-4 ${isActive('/system-node-mgt/profile') ? 'text-brand-blue' : ''}`} /> My Profile
                     </Link>
+
+                    <Link 
+                        href={logout.url()} 
+                        method="post" 
+                        as="button" 
+                        className="w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-red-400 transition-all text-sm font-medium group"
+                    >
+                        <LogOut className="w-4 h-4 group-hover:rotate-12 transition-transform" /> Sign Out
+                    </Link>
+
+                    <div className="pt-4 mt-4 border-t border-white/5">
+                        <Link href="/" className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-white transition-all text-[11px] font-bold uppercase tracking-widest">
+                            <ShieldCheck className="w-3 h-3" /> Public Site
+                        </Link>
+                    </div>
                 </div>
             </aside>
 
@@ -84,15 +104,20 @@ export default function AdminLayout({ children, title }: Props) {
                             <Bell className="w-5 h-5" />
                             <span className="absolute top-2 right-2 w-2 h-2 bg-brand-blue rounded-full border-2 border-white"></span>
                         </button>
-                        <div className="flex items-center gap-3 pl-6 border-l border-slate-200">
+                        <Link 
+                            href={profileEdit.url()}
+                            className="flex items-center gap-3 pl-6 border-l border-slate-200 group"
+                        >
                             <div className="text-right">
-                                <div className="text-sm font-bold text-brand-navy">Admin User</div>
+                                <div className="text-sm font-bold text-brand-navy group-hover:text-brand-blue transition-colors">
+                                    {(usePage().props as any).auth?.admin?.name || 'Admin User'}
+                                </div>
                                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Master Access</div>
                             </div>
-                            <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-bold">
-                                AU
+                            <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-brand-blue/10 group-hover:scale-105 transition-transform">
+                                {((usePage().props as any).auth?.admin?.name?.charAt(0) || 'A').toUpperCase()}
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </header>
 

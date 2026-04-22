@@ -9,6 +9,7 @@ require __DIR__.'/settings.php';
 
 Route::get('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'show'])->name('system.mgt.login');
 Route::post('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'store'])->name('system.mgt.login.store');
+Route::post('system-node-mgt/logout', [\App\Http\Controllers\Admin\LoginController::class, 'destroy'])->name('system.mgt.logout');
 
 Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
@@ -24,6 +25,11 @@ Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->gr
     Route::post('publications', [\App\Http\Controllers\Admin\PublicationController::class, 'store'])->name('publications.store');
     Route::post('publications/{publication}', [\App\Http\Controllers\Admin\PublicationController::class, 'update'])->name('publications.update');
     Route::delete('publications/{publication}', [\App\Http\Controllers\Admin\PublicationController::class, 'destroy'])->name('publications.destroy');
+
+    // Profile Management
+    Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
+    Route::put('password', [\App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('password.update');
 });
 
 Route::inertia('/', 'welcome', [
