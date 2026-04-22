@@ -506,14 +506,14 @@ export default function Welcome() {
 
             {/* Global Reach / Contact Section - Refined Split */}
             <section className="relative bg-brand-navy text-white overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-32 flex flex-col lg:flex-row gap-24">
-                    <div className="flex-1">
-                        <span className="text-brand-gold font-bold tracking-[0.4em] uppercase text-[10px] mb-8 block">Global Reach</span>
-                        <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-[0.9]">
-                            Expertise <br /> Without <br /> <span className="text-brand-blue">Borders.</span>
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-32 flex flex-col lg:flex-row gap-16 lg:gap-24">
+                    <div className="flex-1 text-center lg:text-left">
+                        <span className="text-brand-gold font-bold tracking-[0.4em] uppercase text-[10px] mb-6 md:mb-8 block">Global Reach</span>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-10 md:mb-12 tracking-tight leading-[1.1] lg:leading-[0.9]">
+                            Expertise <br className="hidden sm:block" /> Without <br className="hidden sm:block" /> <span className="text-brand-blue">Borders.</span>
                         </h2>
                         
-                        <div className="space-y-12">
+                        <div className="space-y-10 md:space-y-12 text-left max-w-md mx-auto lg:mx-0">
                             <div className="group cursor-pointer">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-1 h-8 bg-brand-blue group-hover:h-12 transition-all duration-500" />
@@ -536,44 +536,44 @@ export default function Welcome() {
                     </div>
 
                     <motion.div 
-                        className="flex-1 bg-[#152e4d] p-12 md:p-16 rounded-3xl relative overflow-hidden"
+                        className="flex-1 bg-[#152e4d] p-8 md:p-12 lg:p-16 rounded-3xl relative overflow-hidden"
                         initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                     >
                         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl" />
-                        <h3 className="text-2xl font-bold mb-12">Start a conversation.</h3>
+                        <h3 className="text-2xl font-bold mb-8 md:mb-12 text-center lg:text-left">Start a conversation.</h3>
                         
-                        <div className="space-y-10">
-                            <div className="flex items-center gap-6 group">
-                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-blue transition-all">
+                        <div className="space-y-8 md:space-y-10">
+                            <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-4 sm:gap-6 group">
+                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-blue transition-all shrink-0">
                                     <Mail className="w-5 h-5 text-brand-blue group-hover:text-white" />
                                 </div>
-                                <div>
+                                <div className="text-center sm:text-left">
                                     <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">General Inquiries</div>
-                                    <p className="text-base font-medium">info@unitedcooperatetrust.com</p>
+                                    <p className="text-sm md:text-base font-medium break-all">info@unitedcooperatetrust.com</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-6 group">
-                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-blue transition-all">
+                            <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-4 sm:gap-6 group">
+                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-blue transition-all shrink-0">
                                     <Mail className="w-5 h-5 text-brand-blue group-hover:text-white" />
                                 </div>
-                                <div>
+                                <div className="text-center sm:text-left">
                                     <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Customer Service</div>
-                                    <p className="text-base font-medium">customerservice@unitedcooperatetrust.com</p>
+                                    <p className="text-sm md:text-base font-medium break-all">customerservice@unitedcooperatetrust.com</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-6 group">
-                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-gold transition-all">
+                            <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-4 sm:gap-6 group">
+                                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full group-hover:bg-brand-gold transition-all shrink-0">
                                     <Mail className="w-5 h-5 text-brand-gold group-hover:text-white" />
                                 </div>
-                                <div>
+                                <div className="text-center sm:text-left">
                                     <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Loan Inquiries</div>
-                                    <p className="text-base font-medium">loan@unitedcooperatetrust.com</p>
+                                    <p className="text-sm md:text-base font-medium break-all">loan@unitedcooperatetrust.com</p>
                                 </div>
                             </div>
                             <Link href="/contact" className="block mt-6">
-                                <Button className="w-full bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none py-8 font-bold uppercase tracking-[0.2em] transition-all duration-500 text-xs">
+                                <Button className="w-full bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none py-6 md:py-8 font-bold uppercase tracking-[0.2em] transition-all duration-500 text-xs">
                                     Request a Call Back
                                 </Button>
                             </Link>

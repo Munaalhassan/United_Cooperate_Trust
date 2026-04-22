@@ -8,9 +8,9 @@ use Laravel\Fortify\Features;
 require __DIR__.'/settings.php';
 
 Route::get('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'show'])->name('system.mgt.login');
-Route::post('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'store'])->name('system.mgt.login.post');
+Route::post('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'store'])->name('system.mgt.login.store');
 
-Route::middleware(['auth', 'admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
+Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 });
 

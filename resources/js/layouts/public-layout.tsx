@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import { CookieBanner } from '@/components/cookie-banner';
+import { BackToTop } from '@/components/back-to-top';
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
     return (
@@ -125,6 +126,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
                 </div>
             </footer>
             <CookieBanner />
+            <BackToTop />
         </div>
     );
 }

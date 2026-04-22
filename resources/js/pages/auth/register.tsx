@@ -79,6 +79,13 @@ export default function Register() {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Client-side file size check (2MB limit to match common PHP defaults)
+        if (data.dl_upload && data.dl_upload.size > 2 * 1024 * 1024) {
+            alert('The uploaded file is too large. Please ensure it is under 2MB.');
+            return;
+        }
+
         post('/register', {
             onSuccess: () => reset('password', 'password_confirmation'),
         });

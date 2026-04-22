@@ -281,7 +281,7 @@ export function PublicHeader() {
                                             </div>
                                         </div>
                                         <div className="p-6 border-t border-slate-100 bg-slate-50">
-                                        <Link href={auth?.admin ? "/system-node-mgt/dashboard" : (auth?.user ? "/dashboard" : "/login")} className="block w-full">
+                                        <Link href={auth?.user ? "/dashboard" : "/login"} className="block w-full">
                                             <motion.div 
                                                 className="relative bg-[#0a2540] text-white px-8 py-5 w-full flex items-center justify-center rounded-md overflow-hidden shadow-lg cursor-pointer"
                                                 whileHover="hover"
@@ -289,7 +289,7 @@ export function PublicHeader() {
                                                 initial="initial"
                                             >
                                                 <span className="relative z-10 text-[12px] font-extrabold tracking-[0.2em]">
-                                                    { (auth?.admin || auth?.user) ? 'ACCESS DASHBOARD' : 'E-BANKING SECURE LOGIN'}
+                                                    E-BANKING SECURE LOGIN
                                                 </span>
                                                 <motion.div 
                                                     className="absolute inset-0 bg-[#007AFF]"
@@ -412,14 +412,14 @@ export function PublicHeader() {
                                 <Search className="w-5 h-5 text-slate-600 group-hover:text-brand-blue" />
                             </button>
 
-                            <Link href={auth?.admin ? "/system-node-mgt/dashboard" : (auth?.user ? "/dashboard" : "/login")} className="hidden sm:block group">
+                            <Link href={auth?.user ? "/dashboard" : "/login"} className="hidden sm:block group">
                                 <motion.div 
                                     className="relative bg-[#0a2540] text-white px-8 py-4 overflow-hidden cursor-pointer h-full flex items-center justify-center"
                                     whileHover="hover"
                                     initial="initial"
                                 >
                                     <span className="relative z-10 text-[13px] font-extrabold tracking-[0.2em]">
-                                        { (auth?.admin || auth?.user) ? 'DASHBOARD' : 'E-BANKING'}
+                                        E-BANKING
                                     </span>
                                     <motion.div 
                                         className="absolute inset-0 bg-[#007AFF]"

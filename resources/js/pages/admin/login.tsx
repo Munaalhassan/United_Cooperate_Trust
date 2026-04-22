@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-import { login as store } from '@/routes/system/mgt';
+import { store } from '@/routes/system/mgt/login';
 import AuthSimpleLayout from '@/layouts/auth/auth-simple-layout';
 
 export default function AdminLogin({ status }: { status?: string }) {
@@ -16,10 +16,10 @@ export default function AdminLogin({ status }: { status?: string }) {
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="flex justify-center mb-10">
-                    <img 
-                        src="/images/logo.png" 
-                        className="h-12 w-auto brightness-0 invert" 
-                        alt="UCT Bank Admin" 
+                    <img
+                        src="/images/logo.png"
+                        className="h-12 w-auto brightness-0 invert"
+                        alt="UCT Bank Admin"
                     />
                 </div>
                 <h2 className="text-center text-2xl font-extrabold text-white tracking-tight uppercase">
@@ -33,7 +33,8 @@ export default function AdminLogin({ status }: { status?: string }) {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md px-6">
                 <div className="bg-white/5 backdrop-blur-xl py-12 px-10 border border-white/10 shadow-2xl">
                     <Form
-                        {...store.post().form()}
+                        action={store.url()}
+                        method="post"
                         resetOnSuccess={['password']}
                         className="space-y-8"
                     >
@@ -50,7 +51,7 @@ export default function AdminLogin({ status }: { status?: string }) {
                                             name="email"
                                             required
                                             autoFocus
-                                            placeholder="master.admin@uctbank.com"
+                                            placeholder=" "
                                             className="h-14 bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:bg-white/10 focus:border-brand-blue focus:ring-0 rounded-none px-4 transition-all"
                                         />
                                         <InputError message={errors.email} />
