@@ -19,6 +19,11 @@ Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->gr
     Route::post('nav-funds', [\App\Http\Controllers\Admin\NavCentreController::class, 'store'])->name('nav-funds.store');
     Route::put('nav-funds/{nav_fund}', [\App\Http\Controllers\Admin\NavCentreController::class, 'update'])->name('nav-funds.update');
     Route::delete('nav-funds/{nav_fund}', [\App\Http\Controllers\Admin\NavCentreController::class, 'destroy'])->name('nav-funds.destroy');
+    // Publications Management
+    Route::get('publications', [\App\Http\Controllers\Admin\PublicationController::class, 'index'])->name('publications.index');
+    Route::post('publications', [\App\Http\Controllers\Admin\PublicationController::class, 'store'])->name('publications.store');
+    Route::post('publications/{publication}', [\App\Http\Controllers\Admin\PublicationController::class, 'update'])->name('publications.update');
+    Route::delete('publications/{publication}', [\App\Http\Controllers\Admin\PublicationController::class, 'destroy'])->name('publications.destroy');
 });
 
 Route::inertia('/', 'welcome', [
@@ -81,7 +86,7 @@ Route::prefix('quick-services')->group(function () {
 Route::prefix('media')->group(function () {
     Route::inertia('news-events', 'media/news-events')->name('media.news-events');
     Route::inertia('news-events/london-thought-leadership', 'media/news-detail')->name('media.news-detail');
-    Route::inertia('publications', 'media/publications')->name('media.publications');
+    Route::get('publications', [\App\Http\Controllers\Public\PublicationController::class, 'index'])->name('media.publications');
 });
 
 Route::prefix('legal')->group(function () {

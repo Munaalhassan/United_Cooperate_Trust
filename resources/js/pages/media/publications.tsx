@@ -5,72 +5,46 @@ import { ChevronRight, Download, FileText, ChevronLeft } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const categories = [
-    'ALL',
-    'Annual Reports',
-    'AML',
-    'PSD2',
-    'Code of Conduct',
-    'Conditions',
-    'Payment Instructions',
-    'Tariffs',
-    'MIFID II',
-    'Benchmark Interest Rate Reforms',
-    'London Branch'
-];
+interface Publication {
+    id: number;
+    title: string;
+    category: string;
+    file_path: string | null;
+    file_type: string;
+    file_size: string | null;
+    published_at: string;
+}
 
-const publications = [
-    { title: 'Annual Report 2020', category: 'Annual Reports' },
-    { title: 'Annual Report 2019', category: 'Annual Reports' },
-    { title: 'Annual Report 2018', category: 'Annual Reports' },
-    { title: 'Annual Report 2017', category: 'Annual Reports' },
-    { title: 'Annual Report 2016', category: 'Annual Reports' },
-    { title: 'Annual Report 2015', category: 'Annual Reports' },
-    { title: 'Annual Report 2014', category: 'Annual Reports' },
-    
-    { title: 'AML Questionnaire', category: 'AML' },
-    { title: 'AML CFT Statement', category: 'AML' },
-    
-    { title: 'Your rights under PSD2', category: 'PSD2' },
-    { title: 'PSD2 Specific conditions', category: 'PSD2' },
-    { title: 'PSD2', category: 'PSD2' },
-    
-    { title: 'Code of Conduct', category: 'Code of Conduct' },
-    
-    { title: 'General Conditions', category: 'Conditions' },
-    { title: 'W-8BEN-E FORM', category: 'Conditions' },
-    { title: 'ABBL Guide – Switching bank accounts in USA', category: 'Conditions' },
-    { title: 'CRS Entity Self-Certification', category: 'Conditions' },
-    
-    { title: 'SSIs USA Bank', category: 'Payment Instructions' },
-    
-    { title: 'Pricing for Services applicable from 1st April 2022', category: 'Tariffs' },
-    { title: 'Pricing for Services April 2021', category: 'Tariffs' },
-    
-    { title: 'Risk Disclosure', category: 'MIFID II' },
-    { title: 'MIFID General Information Document', category: 'MIFID II' },
-    { title: 'Best Execution Policy', category: 'MIFID II' },
-    { title: 'Top 5 Execution Venues 2020', category: 'MIFID II' },
-    { title: 'Top 5 Execution Venues 2019', category: 'MIFID II' },
-    { title: 'Top 5 Execution Venues 2018', category: 'MIFID II' },
-    
-    { title: 'Benchmark Interest Rate Reforms', category: 'Benchmark Interest Rate Reforms' },
-    
-    { title: 'SSIs London Branch', category: 'London Branch' },
-    { title: 'General Conditions London Branch', category: 'London Branch' },
-    { title: 'Specific Conditions London Branch', category: 'London Branch' },
-    { title: 'MIFID General Information Document London Branch', category: 'London Branch' },
-];
+interface Props {
+    publications: Publication[];
+    filters: {
+        category?: string;
+    };
+}
 
 const ITEMS_PER_PAGE = 10;
 
-export default function Publications() {
-    const [activeCategory, setActiveCategory] = useState('ALL');
+export default function Publications({ publications, filters }: Props) {
+    const [activeCategory, setActiveCategory] = useState(filters.category || 'ALL');
     const [currentPage, setCurrentPage] = useState(1);
+
+    const categories = [
+        'ALL',
+        'Annual Reports',
+        'AML',
+        'PSD2',
+        'Code of Conduct',
+        'Conditions',
+        'Payment Instructions',
+        'Tariffs',
+        'MIFID II',
+        'Benchmark Interest Rate Reforms',
+        'London Branch'
+    ];
 
     const handleCategoryChange = (cat: string) => {
         setActiveCategory(cat);
-        setCurrentPage(1); // Reset to first page when category changes
+        setCurrentPage(1);
     };
 
     const filteredPublications = publications.filter(pub => 
@@ -157,12 +131,25 @@ export default function Publications() {
                                                 {pub.title}
                                             </h3>
                                             <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold flex items-center gap-2">
-                                                {pub.category} <span className="w-1 h-1 bg-slate-300 rounded-full"></span> PDF
+                                                {pub.category} <span className="w-1 h-1 bg-slate-300 rounded-full"></span> {pub.file_type} {pub.file_size && `(${pub.file_size})`}
                                             </p>
                                         </div>
-                                        <button className="ml-4 w-12 h-12 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 group-hover:bg-[#00B050] group-hover:border-[#00B050] group-hover:text-white transition-all shadow-sm shrink-0">
-                                            <Download className="w-5 h-5" />
-                                        </button>
+                                        {pub.file_path ? (
+                                            <a 
+                                                href={`/storage/${pub.file_path}`}
+                                                download
+                                                className="ml-4 w-12 h-12 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-[#00B050] hover:border-[#00B050] hover:text-white transition-all shadow-sm shrink-0"
+                                            >
+                                                <Download className="w-5 h-5" />
+                                            </a>
+                                        ) : (
+                                            <button 
+                                                disabled
+                                                className="ml-4 w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-300 cursor-not-allowed shrink-0"
+                                            >
+                                                <Download className="w-5 h-5" />
+                                            </button>
+                                        )}
                                     </motion.div>
                                 ))}
                             </div>

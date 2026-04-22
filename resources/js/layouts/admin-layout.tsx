@@ -2,16 +2,15 @@ import React, { ReactNode } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { 
     LayoutDashboard, 
-    Users, 
     FileText, 
-    Settings, 
     ShieldCheck, 
     LogOut,
     Bell,
     TrendingUp
 } from 'lucide-react';
 import { dashboard } from '@/routes/system/mgt';
-import { index } from '@/routes/system/mgt/nav-funds';
+import { index as navIndex } from '@/routes/system/mgt/nav-funds';
+import { index as pubIndex } from '@/routes/system/mgt/publications';
 import { Toaster } from '@/components/ui/sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
 
@@ -52,31 +51,17 @@ export default function AdminLayout({ children, title }: Props) {
                     </Link>
                     
                     <Link 
-                        href={index.url()} 
+                        href={navIndex.url()} 
                         className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/nav-funds') ? 'bg-white/10 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
                     >
                         <TrendingUp className={`w-4 h-4 ${isActive('/system-node-mgt/nav-funds') ? 'text-brand-blue' : ''}`} /> NAV Centre
                     </Link>
 
                     <Link 
-                        href="#" 
-                        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 hover:text-white rounded-sm font-medium text-sm transition-all group"
+                        href={pubIndex.url()} 
+                        className={`flex items-center gap-3 px-4 py-3 rounded-sm font-medium text-sm transition-all group ${isActive('/system-node-mgt/publications') ? 'bg-white/10 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
                     >
-                        <Users className="w-4 h-4" /> User Management
-                    </Link>
-
-                    <Link 
-                        href="#" 
-                        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 hover:text-white rounded-sm font-medium text-sm transition-all group"
-                    >
-                        <FileText className="w-4 h-4" /> Content Management
-                    </Link>
-
-                    <Link 
-                        href="#" 
-                        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 hover:text-white rounded-sm font-medium text-sm transition-all group"
-                    >
-                        <Settings className="w-4 h-4" /> Global Settings
+                        <FileText className={`w-4 h-4 ${isActive('/system-node-mgt/publications') ? 'text-brand-blue' : ''}`} /> Publications
                     </Link>
                 </nav>
 

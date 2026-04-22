@@ -11,6 +11,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return Inertia::render('admin/dashboard');
+        return Inertia::render('admin/dashboard', [
+            'stats' => [
+                'funds_count' => \App\Models\NavFund::distinct('isin')->count(),
+                'publications_count' => \App\Models\Publication::count(),
+                'latest_update' => \App\Models\NavFund::max('date'),
+            ]
+        ]);
     }
 }
