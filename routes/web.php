@@ -70,6 +70,8 @@ Route::inertia('contact', 'contact')->name('contact');
 
 require __DIR__.'/settings.php';
 
+Route::get('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'show'])->name('system.mgt.login');
+
 Route::middleware(['auth', 'admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 });

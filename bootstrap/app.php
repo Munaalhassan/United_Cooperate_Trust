@@ -19,6 +19,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
 
+        $middleware->redirectGuestsTo(fn (\Illuminate\Http\Request $request) => 
+            $request->is('system-node-mgt/*') ? '/system-node-mgt/login' : '/login'
+        );
+
+        $middleware->trustProxies(at: '*');
+
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
         $middleware->web(append: [
