@@ -33,7 +33,10 @@ class NavCentreController extends Controller
 
         NavFund::create($validated);
 
-        return back()->with('status', 'Fund entry created successfully.');
+        return back()->with('toast', [
+            'type' => 'success',
+            'message' => 'Fund entry created successfully.'
+        ]);
     }
 
     public function update(Request $request, NavFund $navFund)
@@ -51,13 +54,19 @@ class NavCentreController extends Controller
 
         $navFund->update($validated);
 
-        return back()->with('status', 'Fund entry updated successfully.');
+        return back()->with('toast', [
+            'type' => 'success',
+            'message' => 'Fund entry updated successfully.'
+        ]);
     }
 
     public function destroy(NavFund $navFund)
     {
         $navFund->delete();
 
-        return back()->with('status', 'Fund entry deleted successfully.');
+        return back()->with('toast', [
+            'type' => 'success',
+            'message' => 'Fund entry deleted successfully.'
+        ]);
     }
 }

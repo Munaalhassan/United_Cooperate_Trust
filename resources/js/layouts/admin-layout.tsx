@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import { dashboard } from '@/routes/system/mgt';
 import { index } from '@/routes/system/mgt/nav-funds';
+import { Toaster } from '@/components/ui/sonner';
+import { useFlashToast } from '@/hooks/use-flash-toast';
 
 interface Props {
     children: ReactNode;
@@ -20,8 +22,9 @@ interface Props {
 
 export default function AdminLayout({ children, title }: Props) {
     const { url } = usePage();
+    useFlashToast();
 
-    const isActive = (path: string) => url.startsWith(path);
+    const isActive = (path: string) => url === path || url.startsWith(path + '/');
 
     return (
         <div className="min-h-screen bg-[#f8fafc] flex font-sans">
@@ -110,6 +113,7 @@ export default function AdminLayout({ children, title }: Props) {
                     {children}
                 </div>
             </main>
+            <Toaster />
         </div>
     );
 }
