@@ -17,6 +17,12 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { index, store, update, destroy as remove } from '@/routes/system/mgt/news-events';
 
+interface NewsEventImage {
+    id: number;
+    image_url: string;
+    caption: string | null;
+}
+
 interface NewsEvent {
     id: number;
     title: string;
@@ -28,6 +34,7 @@ interface NewsEvent {
     image_path: string | null;
     image_url: string | null;
     is_published: boolean;
+    images: NewsEventImage[];
 }
 
 interface Props {
@@ -75,6 +82,10 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
         content: '',
         image: null as File | null,
         is_published: true,
+        gallery: [] as File[],
+        gallery_captions: [] as string[],
+        existing_gallery_captions: {} as Record<number, string>,
+        deleted_gallery_ids: [] as number[],
         _method: 'POST' // For update
     });
 
@@ -87,6 +98,10 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
             content: item.content,
             image: null,
             is_published: !!item.is_published,
+            gallery: [],
+            gallery_captions: [],
+            existing_gallery_captions: item.images.reduce((acc, img) => ({ ...acc, [img.id]: img.caption || '' }), {}),
+            deleted_gallery_ids: [],
             _method: 'POST'
         });
         setIsEditing(item.id);
@@ -231,8 +246,20 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
 
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Featured Image</label>
-                                    <div className="flex items-center gap-4">
-                                        <div className="flex-1 relative">
+                                    <div className="flex flex-col gap-3">
+                                        {isEditing && !data.image && newsEvents.data.find(n => n.id === isEditing)?.image_url && (
+                                            <div className="relative w-full aspect-video rounded-sm overflow-hidden border border-slate-200 bg-slate-50 group/current">
+                                                <img 
+                                                    src={newsEvents.data.find(n => n.id === isEditing)?.image_url || ''} 
+                                                    alt="Current" 
+                                                    className="w-full h-full object-cover opacity-60 group-hover/current:opacity-100 transition-opacity"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                                    <span className="bg-brand-navy/80 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest backdrop-blur-sm">Current Image</span>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="relative">
                                             <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                             <input 
                                                 type="file" 
@@ -241,7 +268,7 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                                 accept="image/*"
                                             />
                                             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-400">
-                                                {data.image ? data.image.name : 'NO FILE SELECTED'}
+                                                {data.image ? data.image.name : (isEditing ? 'REPLACE CURRENT IMAGE' : 'NO FILE SELECTED')}
                                             </div>
                                         </div>
                                     </div>
@@ -286,6 +313,94 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
                                     placeholder="Enter the full article content..."
                                 />
                                 {errors.content && <div className="text-red-500 text-[10px] font-bold uppercase">{errors.content}</div>}
+                            </div>
+
+                            {/* Gallery Section */}
+                            <div className="space-y-6 pt-6 border-t border-slate-100">
+                                <div>
+                                    <h4 className="text-sm font-bold text-brand-navy flex items-center gap-2 uppercase tracking-widest">
+                                        <ImageIcon className="w-4 h-4 text-brand-blue" /> Blog Gallery
+                                    </h4>
+                                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Add supporting images to your blog post</p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {/* Existing Images */}
+                                    {isEditing && newsEvents.data.find(n => n.id === isEditing)?.images.map((img) => (
+                                        !data.deleted_gallery_ids.includes(img.id) && (
+                                            <div key={img.id} className="relative group/img bg-slate-50 p-3 border border-slate-200 rounded-sm">
+                                                <div className="aspect-video mb-3 overflow-hidden rounded-sm border border-slate-200">
+                                                    <img src={img.image_url} alt="" className="w-full h-full object-cover" />
+                                                </div>
+                                                <input 
+                                                    type="text"
+                                                    placeholder="Add caption..."
+                                                    value={data.existing_gallery_captions[img.id] || ''}
+                                                    onChange={e => setData('existing_gallery_captions', { ...data.existing_gallery_captions, [img.id]: e.target.value })}
+                                                    className="w-full text-[11px] font-medium border-slate-200 focus:border-brand-blue focus:ring-0 p-2 rounded-sm bg-white"
+                                                />
+                                                <button 
+                                                    type="button"
+                                                    onClick={() => setData('deleted_gallery_ids', [...data.deleted_gallery_ids, img.id])}
+                                                    className="absolute top-4 right-4 bg-red-500 text-white p-1.5 rounded-sm opacity-0 group-hover/img:opacity-100 transition-opacity shadow-lg"
+                                                >
+                                                    <Trash2 className="w-3.5 h-3.5" />
+                                                </button>
+                                            </div>
+                                        )
+                                    ))}
+
+                                    {/* New Images */}
+                                    {data.gallery.map((file, idx) => (
+                                        <div key={idx} className="bg-brand-blue/5 p-3 border border-brand-blue/20 rounded-sm relative">
+                                            <div className="aspect-video mb-3 bg-white flex items-center justify-center rounded-sm border border-slate-100 overflow-hidden">
+                                                <img src={URL.createObjectURL(file)} alt="" className="w-full h-full object-cover" />
+                                            </div>
+                                            <input 
+                                                type="text"
+                                                placeholder="Add caption..."
+                                                value={data.gallery_captions[idx] || ''}
+                                                onChange={e => {
+                                                    const newCaptions = [...data.gallery_captions];
+                                                    newCaptions[idx] = e.target.value;
+                                                    setData('gallery_captions', newCaptions);
+                                                }}
+                                                className="w-full text-[11px] font-medium border-slate-200 focus:border-brand-blue focus:ring-0 p-2 rounded-sm bg-white"
+                                            />
+                                            <button 
+                                                type="button"
+                                                onClick={() => {
+                                                    const newGallery = data.gallery.filter((_, i) => i !== idx);
+                                                    const newCaptions = data.gallery_captions.filter((_, i) => i !== idx);
+                                                    setData({ ...data, gallery: newGallery, gallery_captions: newCaptions });
+                                                }}
+                                                className="absolute top-4 right-4 bg-slate-800 text-white p-1.5 rounded-sm shadow-lg hover:bg-red-500 transition-colors"
+                                            >
+                                                <X className="w-3.5 h-3.5" />
+                                            </button>
+                                        </div>
+                                    ))}
+
+                                    {/* Add Button */}
+                                    <div className="relative border-2 border-dashed border-slate-200 hover:border-brand-blue transition-colors rounded-sm flex flex-col items-center justify-center p-8 cursor-pointer group min-h-[160px]">
+                                        <input 
+                                            type="file" 
+                                            multiple
+                                            onChange={e => {
+                                                const files = Array.from(e.target.files || []);
+                                                setData({
+                                                    ...data,
+                                                    gallery: [...data.gallery, ...files],
+                                                    gallery_captions: [...data.gallery_captions, ...files.map(() => '')]
+                                                });
+                                            }}
+                                            className="absolute inset-0 opacity-0 cursor-pointer"
+                                            accept="image/*"
+                                        />
+                                        <Plus className="w-8 h-8 text-slate-300 group-hover:text-brand-blue mb-2 transition-colors" />
+                                        <span className="text-[10px] font-bold text-slate-400 group-hover:text-brand-blue uppercase tracking-widest transition-colors">Add Gallery Images</span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="flex justify-end gap-4 pt-4 border-t border-slate-100">

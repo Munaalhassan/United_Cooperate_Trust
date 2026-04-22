@@ -22,7 +22,7 @@ class NewsEventController extends Controller
 
     public function show($slug)
     {
-        $post = NewsEvent::where('slug', $slug)
+        $post = NewsEvent::with('images')->where('slug', $slug)
             ->where('is_published', true)
             ->firstOrFail();
 

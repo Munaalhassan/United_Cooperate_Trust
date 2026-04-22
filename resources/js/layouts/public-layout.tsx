@@ -5,6 +5,7 @@ import { Link } from '@inertiajs/react';
 import { CookieBanner } from '@/components/cookie-banner';
 import { BackToTop } from '@/components/back-to-top';
 import { OptimizedImage } from '@/components/ui/optimized-image';
+import { Toaster } from 'sonner';
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
     return (
@@ -130,6 +131,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             </footer>
             <CookieBanner />
             <BackToTop />
+            <Toaster position="top-center" richColors />
         </div>
     );
 }

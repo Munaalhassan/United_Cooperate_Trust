@@ -27,7 +27,7 @@ class NewsEventController extends Controller
             $query->where('type', $request->type);
         }
 
-        $newsEvents = $query->latest('date')->paginate(20)->withQueryString();
+        $newsEvents = $query->with('images')->latest('date')->paginate(20)->withQueryString();
         
         return Inertia::render('admin/news-events/index', [
             'newsEvents' => $newsEvents,
@@ -62,7 +62,19 @@ class NewsEventController extends Controller
             $validated['image_path'] = $path;
         }
 
-        NewsEvent::create($validated);
+        $newsEvent = NewsEvent::create($validated);
+
+        // Handle Gallery Images
+        if ($request->has('gallery')) {
+            foreach ($request->file('gallery', []) as $index => $file) {
+                $path = $file->store('news-events/gallery', 'public');
+                $newsEvent->images()->create([
+                    'image_path' => $path,
+                    'caption' => $request->input("gallery_captions.{$index}"),
+                    'sort_order' => $index
+                ]);
+            }
+        }
 
         return back()->with('toast', [
             'type' => 'success',
@@ -100,6 +112,36 @@ class NewsEventController extends Controller
         }
 
         $newsEvent->update($validated);
+
+        // Handle Gallery Deletions
+        if ($request->has('deleted_gallery_ids')) {
+            $deletedIds = $request->input('deleted_gallery_ids');
+            $imagesToDelete = $newsEvent->images()->whereIn('id', $deletedIds)->get();
+            foreach ($imagesToDelete as $image) {
+                Storage::disk('public')->delete($image->image_path);
+                $image->delete();
+            }
+        }
+
+        // Handle New Gallery Images
+        if ($request->has('gallery')) {
+            $currentMaxOrder = $newsEvent->images()->max('sort_order') ?? -1;
+            foreach ($request->file('gallery', []) as $index => $file) {
+                $path = $file->store('news-events/gallery', 'public');
+                $newsEvent->images()->create([
+                    'image_path' => $path,
+                    'caption' => $request->input("gallery_captions.{$index}"),
+                    'sort_order' => $currentMaxOrder + $index + 1
+                ]);
+            }
+        }
+
+        // Handle Existing Gallery Captions Update
+        if ($request->has('existing_gallery_captions')) {
+            foreach ($request->input('existing_gallery_captions') as $id => $caption) {
+                $newsEvent->images()->where('id', $id)->update(['caption' => $caption]);
+            }
+        }
 
         return back()->with('toast', [
             'type' => 'success',

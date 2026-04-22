@@ -23,4 +23,9 @@ class NewsEvent extends Model
     {
         return $this->image_path ? asset('storage/' . $this->image_path) : null;
     }
+
+    public function images()
+    {
+        return $this->hasMany(NewsEventImage::class)->orderBy('sort_order');
+    }
 }
