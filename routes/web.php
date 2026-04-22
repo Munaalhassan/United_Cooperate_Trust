@@ -114,8 +114,9 @@ Route::inertia('contact', 'contact')->name('contact');
 
 // Overriding default registration to be Membership Application
 Route::get('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('register');
-Route::post('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'store']);
+Route::post('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'store'])->name('membership.store');
 Route::get('membership-signup', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('membership.signup');
+Route::get('quick-services/e-banking-registration', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('quick.ebanking.registration');
 
 // Admin and settings routes handled above
 

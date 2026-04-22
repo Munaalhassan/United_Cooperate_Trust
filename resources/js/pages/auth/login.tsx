@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { register } from '@/routes';
+import { signup } from '@/routes/membership';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 
@@ -114,7 +115,7 @@ export default function Login({
                             <div className="text-center text-sm text-slate-500 mt-10 pt-8 border-t border-slate-100 flex flex-col gap-4">
                                 <p>Don't have a membership yet?</p>
                                 <Link 
-                                    href={register.url()} 
+                                    href={signup.url()} 
                                     className="inline-flex items-center justify-center px-6 py-3 border-2 border-brand-blue text-brand-blue font-bold text-xs uppercase tracking-widest hover:bg-brand-blue hover:text-white transition-all duration-300"
                                 >
                                     UCT Bank Member

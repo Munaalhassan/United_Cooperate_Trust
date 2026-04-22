@@ -1,4 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
+import { signup } from '@/routes/membership';
 import PublicLayout from '@/layouts/public-layout';
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
@@ -49,10 +50,10 @@ const services = [
         reverse: false
     },
     {
-        title: "United Cooperate Trust Bank embraces Open Banking",
-        description: "Get to know what PSD2 brings you!",
-        linkText: "Find out more!",
-        href: "/quick-services/e-banking-registration",
+        title: "Official UCT Bank Membership Enrollment",
+        description: "Join our global community of elite banking clients and access unparalleled financial stability.",
+        linkText: "Join Now!",
+        href: signup.url(),
         image: "/images/service-4.jpg",
         reverse: true
     }
@@ -60,11 +61,11 @@ const services = [
 
 const quickServices = [
     {
-        title: "E-Banking Registration",
+        title: "UCT Bank Member",
         description: "Secure, real-time access to your wealth from any device, anywhere in the world.",
         icon: Monitor,
-        linkText: "Register Now",
-        href: "/quick-services/e-banking-registration"
+        linkText: "Apply Now",
+        href: signup.url()
     },
     {
         title: "Credit Cards",
@@ -391,7 +392,7 @@ export default function Welcome() {
                                 <p className="text-slate-400 max-w-md mb-10 text-lg leading-relaxed">
                                     A unified ecosystem for your private, corporate, and investment accounts. Secure, intuitive, and borderless.
                                 </p>
-                                <Link href="/quick-services/e-banking-registration">
+                                <Link href={signup.url()}>
                                     <Button className="w-fit bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-10 py-7 font-bold uppercase tracking-widest transition-all">
                                         Enter Portal
                                     </Button>

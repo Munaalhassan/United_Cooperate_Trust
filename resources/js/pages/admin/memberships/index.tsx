@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/layouts/admin-layout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
 import { 
     Users, 
     User,
@@ -17,7 +17,8 @@ import {
     MapPin,
     Briefcase,
     Globe,
-    Landmark
+    Landmark,
+    Plus
 } from 'lucide-react';
 import { 
     Table, 
@@ -45,7 +46,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-import { update as memUpdate, destroy as memDestroy } from '@/routes/system/mgt/memberships';
+import { update as memUpdate, destroy as memDestroy, create as memCreate } from '@/routes/system/mgt/memberships';
 
 interface Membership {
     id: number;
@@ -126,6 +127,19 @@ export default function MembershipsIndex({ registrations }: Props) {
             <Head title="E-Banking Memberships | Admin" />
 
             <div className="space-y-8">
+                <div className="flex justify-between items-center mb-2">
+                    <div>
+                        <h1 className="text-2xl font-bold text-brand-navy uppercase tracking-tight">Memberships</h1>
+                        <p className="text-slate-500 text-sm font-light">Review and manage global bank membership applications.</p>
+                    </div>
+                    <Link 
+                        href={memCreate.url()}
+                        className="inline-flex items-center gap-2 px-8 py-3 bg-brand-blue text-white font-bold text-[10px] uppercase tracking-widest hover:bg-brand-navy transition-all shadow-lg"
+                    >
+                        <Plus className="w-4 h-4" /> Create Member
+                    </Link>
+                </div>
+
                 {/* Header Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="bg-white p-6 border border-slate-200 shadow-sm flex items-center justify-between">

@@ -2,9 +2,10 @@ import { Link, usePage } from '@inertiajs/react';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { signup } from '@/routes/membership';
 
 const sidebarLinks = [
-    { name: 'E-Banking Registration', href: '/quick-services/e-banking-registration' },
+    { name: 'UCT Bank Member', href: signup.url() },
     { name: 'Credit Cards', href: '/quick-services/credit-cards' },
     { name: 'Security Awareness', href: '/quick-services/security-awareness' },
     { name: 'Third-Party Payments', href: '/quick-services/third-party-payments' },

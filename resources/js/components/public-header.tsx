@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
+import { signup } from '@/routes/membership';
 
 // Extracted Navigation Data
 const navigationData = [
@@ -167,7 +168,7 @@ export function PublicHeader() {
         { title: 'Upcoming Events', url: '/media/news-events', category: 'Media' },
         { title: 'Publications', url: '/media/publications', category: 'Media' },
         { title: 'Annual Reports', url: '/media/publications', category: 'Publications' },
-        { title: 'E-Banking Registration', url: '/quick-services/e-banking-registration', category: 'Quick Services' },
+        { title: 'UCT Bank Member', url: signup.url(), category: 'Quick Services' },
         { title: 'Credit Cards', url: '/quick-services/credit-cards', category: 'Quick Services' },
         { title: 'Security Awareness', url: '/quick-services/security-awareness', category: 'Quick Services' },
         { title: 'Third-Party Payment Services', url: '/quick-services/third-party-payments', category: 'Quick Services' },
@@ -264,7 +265,7 @@ export function PublicHeader() {
                                                     <div className="py-2 border-b border-slate-50">
                                                         <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Quick Services</h4>
                                                         <div className="flex flex-col gap-3">
-                                                            <Link href="/quick-services/e-banking-registration" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">E-Banking Registration</Link>
+                                                            <Link href={signup.url()} className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">UCT Bank Member</Link>
                                                             <Link href="/quick-services/credit-cards" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">Credit Cards</Link>
                                                             <Link href="/quick-services/security-awareness" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">Security Awareness</Link>
                                                             <Link href="/quick-services/third-party-payments" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">Third-Party Payments</Link>
@@ -323,7 +324,7 @@ export function PublicHeader() {
                                         Quick Services <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover/qs:-rotate-180 transition-transform duration-300" />
                                     </span>
                                     <div className="absolute top-full right-0 min-w-[230px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/qs:opacity-100 group-hover/qs:visible group-hover/qs:scale-100 group-hover/qs:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md ring-1 ring-black/5">
-                                        <Link href="/quick-services/e-banking-registration" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">E-Banking Registration</Link>
+                                        <Link href={signup.url()} className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">UCT Bank Member</Link>
                                         <Link href="/quick-services/credit-cards" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Credit Cards</Link>
                                         <Link href="/quick-services/security-awareness" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Security Awareness</Link>
                                         <Link href="/quick-services/third-party-payments" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Third-Party Payment Services</Link>
