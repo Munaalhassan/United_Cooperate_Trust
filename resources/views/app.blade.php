@@ -59,7 +59,59 @@
         </style>
 
         <x-inertia::head>
-            <title>{{ config('app.name', 'Laravel') }}</title>
+            <title inertia>{{ config('app.name', 'United Cooperate Trust Bank') }}</title>
+            <meta name="description" content="United Cooperate Trust Bank offers secure online banking, personal and corporate accounts, investment services, and global financing solutions. Experience premium banking with local trust and global reach.">
+            <meta name="keywords" content="United Cooperate Trust Bank, secure online banking, corporate banking USA, personal investment services, global trade finance, private banking, digital banking solutions">
+            <meta name="author" content="United Cooperate Trust Bank">
+            <meta name="robots" content="index, follow">
+            <link rel="canonical" href="{{ url()->current() }}">
+
+            <!-- Open Graph / Facebook -->
+            <meta property="og:type" content="website">
+            <meta property="og:url" content="{{ url()->current() }}">
+            <meta property="og:title" content="United Cooperate Trust Bank | Secure & Innovative Banking">
+            <meta property="og:description" content="Manage your wealth with confidence. Join United Cooperate Trust Bank for premium personal and business financial services.">
+            <meta property="og:image" content="{{ asset('images/og-image.jpg') }}">
+
+            <!-- Twitter -->
+            <meta property="twitter:card" content="summary_large_image">
+            <meta property="twitter:url" content="{{ url()->current() }}">
+            <meta property="twitter:title" content="United Cooperate Trust Bank | Global Financial Excellence">
+            <meta property="twitter:description" content="Secure, reliable, and forward-thinking banking services for individuals and corporations worldwide.">
+            <meta property="twitter:image" content="{{ asset('images/og-image.jpg') }}">
+
+            <!-- Structured Data (JSON-LD) for GEO/AI Search -->
+            <script type="application/ld+json">
+            {
+                "@@context": "https://schema.org",
+                "@@type": "BankOrCreditUnion",
+                "name": "United Cooperate Trust Bank",
+                "alternateName": "UCT Bank",
+                "url": "{{ url('/') }}",
+                "logo": "{{ asset('images/logo.png') }}",
+                "description": "United Cooperate Trust Bank is a leading financial institution providing innovative banking solutions, secure online management, and global investment strategies.",
+                "address": {
+                    "@@type": "PostalAddress",
+                    "streetAddress": "Global Financial District",
+                    "addressLocality": "Financial Center",
+                    "addressRegion": "USA",
+                    "postalCode": "10005",
+                    "addressCountry": "US"
+                },
+                "contactPoint": {
+                    "@@type": "ContactPoint",
+                    "telephone": "+1-555-UCT-BANK",
+                    "contactType": "customer service",
+                    "areaServed": "Worldwide",
+                    "availableLanguage": ["English", "Spanish", "German", "French"]
+                },
+                "sameAs": [
+                    "https://www.facebook.com/unitedcooperatetrust",
+                    "https://twitter.com/uctbank",
+                    "https://www.linkedin.com/company/united-cooperate-trust-bank"
+                ]
+            }
+            </script>
         </x-inertia::head>
     </head>
     <body class="font-sans antialiased">

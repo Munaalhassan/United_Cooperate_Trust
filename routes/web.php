@@ -55,6 +55,7 @@ Route::prefix('quick-services')->group(function () {
 
 Route::prefix('media')->group(function () {
     Route::inertia('news-events', 'media/news-events')->name('media.news-events');
+    Route::inertia('news-events/london-thought-leadership', 'media/news-detail')->name('media.news-detail');
     Route::inertia('publications', 'media/publications')->name('media.publications');
 });
 
@@ -68,3 +69,28 @@ Route::prefix('legal')->group(function () {
 Route::inertia('contact', 'contact')->name('contact');
 
 require __DIR__.'/settings.php';
+
+Route::get('sitemap.xml', function () {
+    $urls = [
+        ['loc' => url('/'), 'priority' => '1.0'],
+        ['loc' => url('/about-us/our-bank'), 'priority' => '0.8'],
+        ['loc' => url('/about-us/ceo-welcome'), 'priority' => '0.7'],
+        ['loc' => url('/private-banking/investment-services'), 'priority' => '0.9'],
+        ['loc' => url('/corporate-banking/payment-fx'), 'priority' => '0.9'],
+        ['loc' => url('/contact'), 'priority' => '0.8'],
+    ];
+
+    $content = '<?xml version="1.0" encoding="UTF-8"?>';
+    $content .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    foreach ($urls as $url) {
+        $content .= '<url>';
+        $content .= '<loc>' . $url['loc'] . '</loc>';
+        $content .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
+        $content .= '<changefreq>weekly</changefreq>';
+        $content .= '<priority>' . $url['priority'] . '</priority>';
+        $content .= '</url>';
+    }
+    $content .= '</urlset>';
+
+    return response($content)->header('Content-Type', 'text/xml');
+});

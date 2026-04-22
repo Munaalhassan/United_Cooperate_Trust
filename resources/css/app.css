@@ -160,3 +160,14 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Custom Progress Bar Styling */
+#nprogress .bar {
+    background: #0a2540 !important;
+    height: 3px !important;
+    box-shadow: none !important;
+}
+
+#nprogress .peg {
+    box-shadow: none !important;
+}

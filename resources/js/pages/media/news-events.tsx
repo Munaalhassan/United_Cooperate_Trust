@@ -105,7 +105,7 @@ export default function NewsEvents() {
                                     <p className="text-slate-600 text-sm leading-relaxed mb-8 flex-1">
                                         {post.excerpt}
                                     </p>
-                                    <Link href="#" className="inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-blue transition-colors uppercase tracking-widest mt-auto">
+                                    <Link href={post.title === 'London Thought Leadership' ? '/media/news-events/london-thought-leadership' : '#'} className="inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-blue transition-colors uppercase tracking-widest mt-auto">
                                         Read More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
