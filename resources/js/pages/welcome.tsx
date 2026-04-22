@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/layouts/public-layout';
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
@@ -27,6 +27,7 @@ const services = [
         title: "Private Banking",
         description: "A lifelong relationship based on personal attention, trust and leading expertise.",
         linkText: "Find out more",
+        href: "/private-banking/investment-services",
         image: "/images/service-1.jpg",
         reverse: false
     },
@@ -34,6 +35,7 @@ const services = [
         title: "Corporate Banking",
         description: "Targeted products and services, expertly tailored to support your business plans.",
         linkText: "Explore",
+        href: "/corporate-banking/payment-fx",
         image: "/images/service-2.jpg",
         reverse: true
     },
@@ -41,6 +43,7 @@ const services = [
         title: "Fund Services",
         description: "Our focus is on providing a customized and superior quality service to our clients based on long term relationships and a team with extensive experience and expertise.",
         linkText: "Read more",
+        href: "/fund-services/fund-business",
         image: "/images/service-3.jpg",
         reverse: false
     },
@@ -48,6 +51,7 @@ const services = [
         title: "United Cooperate Trust Bank embraces Open Banking",
         description: "Get to know what PSD2 brings you!",
         linkText: "Find out more!",
+        href: "/quick-services/e-banking-registration",
         image: "/images/service-4.jpg",
         reverse: true
     }
@@ -58,25 +62,29 @@ const quickServices = [
         title: "E-Banking Registration",
         description: "Secure, real-time access to your wealth from any device, anywhere in the world.",
         icon: Monitor,
-        linkText: "Register Now"
+        linkText: "Register Now",
+        href: "/quick-services/e-banking-registration"
     },
     {
         title: "Credit Cards",
         description: "Experience premium rewards and global recognition with our tailored card solutions.",
         icon: CreditCard,
-        linkText: "Explore Cards"
+        linkText: "Explore Cards",
+        href: "/quick-services/credit-cards"
     },
     {
         title: "Security Awareness",
         description: "Your security is our priority. Learn about our advanced protection measures.",
         icon: ShieldCheck,
-        linkText: "Stay Protected"
+        linkText: "Stay Protected",
+        href: "/quick-services/security-awareness"
     },
     {
         title: "Digital Integration",
         description: "Seamlessly connect with third-party payment services through secure API integration.",
         icon: Share2,
-        linkText: "Learn More"
+        linkText: "Learn More",
+        href: "/quick-services/third-party-payments"
     }
 ];
 
@@ -167,13 +175,17 @@ export default function Welcome() {
                             transition={{ duration: 0.8, delay: 1.3 }}
                             className="flex flex-col sm:flex-row gap-4"
                         >
-                            <Button className="bg-brand-blue hover:bg-brand-blue/90 text-white font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none flex items-center gap-2 group transition-all shadow-lg shadow-brand-blue/20">
-                                Discover Private Banking
-                                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
-                            </Button>
-                            <Button variant="outline" className="bg-transparent border-2 border-white/80 text-white hover:bg-white hover:text-brand-navy font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none transition-all">
-                                Contact an Advisor
-                            </Button>
+                            <Link href="/private-banking/investment-services">
+                                <Button className="bg-brand-blue hover:bg-brand-blue/90 text-white font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none flex items-center gap-2 group transition-all shadow-lg shadow-brand-blue/20">
+                                    Discover Private Banking
+                                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
+                                </Button>
+                            </Link>
+                            <Link href="/contact">
+                                <Button variant="outline" className="bg-transparent border-2 border-white/80 text-white hover:bg-white hover:text-brand-navy font-bold text-sm uppercase tracking-wider px-8 py-6 rounded-none transition-all">
+                                    Contact an Advisor
+                                </Button>
+                            </Link>
                         </motion.div>
                     </motion.div>
                 </div>
@@ -241,9 +253,11 @@ export default function Welcome() {
                                             <p className="text-slate-200 text-lg mb-8 leading-relaxed max-w-sm">
                                                 {service.description}
                                             </p>
-                                            <Button className="bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-8 py-6 font-bold uppercase tracking-widest transition-all duration-500">
-                                                {service.linkText}
-                                            </Button>
+                                            <Link href={service.href}>
+                                                <Button className="bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-8 py-6 font-bold uppercase tracking-widest transition-all duration-500">
+                                                    {service.linkText}
+                                                </Button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -289,10 +303,12 @@ export default function Welcome() {
                             <p className="text-slate-300 text-xl mb-12 leading-relaxed font-light">
                                 Discover the benefits of the world's premier financial hub and a global center of excellence. Our New York headquarters serves as the bridge between international markets and absolute financial stability.
                             </p>
-                            <Button className="bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-10 py-7 font-bold uppercase tracking-widest transition-all duration-500 shadow-2xl shadow-brand-blue/20">
-                                Explore the Hub
-                                <ArrowRight className="w-5 h-5 ml-3" />
-                            </Button>
+                            <Link href="/about-us/why-usa">
+                                <Button className="bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-10 py-7 font-bold uppercase tracking-widest transition-all duration-500 shadow-2xl shadow-brand-blue/20">
+                                    Explore the Hub
+                                    <ArrowRight className="w-5 h-5 ml-3" />
+                                </Button>
+                            </Link>
                         </motion.div>
                     </div>
                 </div>
@@ -366,9 +382,11 @@ export default function Welcome() {
                                 <p className="text-slate-400 max-w-md mb-10 text-lg leading-relaxed">
                                     A unified ecosystem for your private, corporate, and investment accounts. Secure, intuitive, and borderless.
                                 </p>
-                                <Button className="w-fit bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-10 py-7 font-bold uppercase tracking-widest transition-all">
-                                    Enter Portal
-                                </Button>
+                                <Link href="/quick-services/e-banking-registration">
+                                    <Button className="w-fit bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none px-10 py-7 font-bold uppercase tracking-widest transition-all">
+                                        Enter Portal
+                                    </Button>
+                                </Link>
                             </div>
                         </motion.div>
 
@@ -403,7 +421,9 @@ export default function Welcome() {
                             <div className="relative z-10">
                                 <h4 className="text-xl font-bold mb-2">Infinite Cards</h4>
                                 <p className="text-white/80 text-sm mb-4">Request your bespoke UCT card with global limits.</p>
-                                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+                                <Link href="/quick-services/credit-cards">
+                                    <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+                                </Link>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -525,9 +545,11 @@ export default function Welcome() {
                                     <p className="text-base font-medium">loan@unitedcooperatetrust.com</p>
                                 </div>
                             </div>
-                            <Button className="w-full bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none py-8 font-bold uppercase tracking-[0.2em] transition-all duration-500 text-xs mt-6">
-                                Request a Call Back
-                            </Button>
+                            <Link href="/contact" className="block mt-6">
+                                <Button className="w-full bg-brand-blue hover:bg-white hover:text-brand-navy text-white rounded-none py-8 font-bold uppercase tracking-[0.2em] transition-all duration-500 text-xs">
+                                    Request a Call Back
+                                </Button>
+                            </Link>
                         </div>
                     </motion.div>
                 </div>
