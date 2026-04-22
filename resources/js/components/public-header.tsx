@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Mail, MapPin, Phone, Search, Globe, ChevronRight, Menu, ChevronDown, ArrowRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -102,6 +102,7 @@ const MobileMenuItem = ({ item }: { item: any }) => {
 };
 
 export function PublicHeader() {
+    const { auth } = usePage().props as any;
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState('English');
@@ -280,25 +281,27 @@ export function PublicHeader() {
                                             </div>
                                         </div>
                                         <div className="p-6 border-t border-slate-100 bg-slate-50">
-                                            <Link href="/login" className="block w-full">
+                                        <Link href={auth?.user ? (auth.user.is_admin ? "/system-node-mgt/dashboard" : "/dashboard") : "/login"} className="block w-full">
+                                            <motion.div 
+                                                className="relative bg-[#0a2540] text-white px-8 py-5 w-full flex items-center justify-center rounded-md overflow-hidden shadow-lg cursor-pointer"
+                                                whileHover="hover"
+                                                whileTap="tap"
+                                                initial="initial"
+                                            >
+                                                <span className="relative z-10 text-[12px] font-extrabold tracking-[0.2em]">
+                                                    {auth?.user ? 'ACCESS DASHBOARD' : 'E-BANKING SECURE LOGIN'}
+                                                </span>
                                                 <motion.div 
-                                                    className="relative bg-[#0a2540] text-white px-8 py-5 w-full flex items-center justify-center rounded-md overflow-hidden shadow-lg cursor-pointer"
-                                                    whileHover="hover"
-                                                    whileTap="tap"
-                                                    initial="initial"
-                                                >
-                                                    <span className="relative z-10 text-[12px] font-extrabold tracking-[0.2em]">E-BANKING SECURE LOGIN</span>
-                                                    <motion.div 
-                                                        className="absolute inset-0 bg-[#007AFF]"
-                                                        variants={{
-                                                            initial: { y: '100%' },
-                                                            hover: { y: 0 },
-                                                            tap: { scale: 0.95 }
-                                                        }}
-                                                        transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-                                                    />
-                                                </motion.div>
-                                            </Link>
+                                                    className="absolute inset-0 bg-[#007AFF]"
+                                                    variants={{
+                                                        initial: { y: '100%' },
+                                                        hover: { y: 0 },
+                                                        tap: { scale: 0.95 }
+                                                    }}
+                                                    transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+                                                />
+                                            </motion.div>
+                                        </Link>
                                         </div>
                                     </SheetContent>
                                 </Sheet>
@@ -409,13 +412,15 @@ export function PublicHeader() {
                                 <Search className="w-5 h-5 text-slate-600 group-hover:text-brand-blue" />
                             </button>
 
-                            <Link href="/login" className="hidden sm:block group">
+                            <Link href={auth?.user ? (auth.user.is_admin ? "/system-node-mgt/dashboard" : "/dashboard") : "/login"} className="hidden sm:block group">
                                 <motion.div 
                                     className="relative bg-[#0a2540] text-white px-8 py-4 overflow-hidden cursor-pointer h-full flex items-center justify-center"
                                     whileHover="hover"
                                     initial="initial"
                                 >
-                                    <span className="relative z-10 text-[13px] font-extrabold tracking-[0.2em]">E-BANKING</span>
+                                    <span className="relative z-10 text-[13px] font-extrabold tracking-[0.2em]">
+                                        {auth?.user ? 'DASHBOARD' : 'E-BANKING'}
+                                    </span>
                                     <motion.div 
                                         className="absolute inset-0 bg-[#007AFF]"
                                         variants={{

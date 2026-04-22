@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! auth()->check() || ! auth()->user()->is_admin) {
+        if (! auth('admin')->check()) {
             return redirect('/system-node-mgt/login')->with('error', 'Unauthorized access.');
         }
 

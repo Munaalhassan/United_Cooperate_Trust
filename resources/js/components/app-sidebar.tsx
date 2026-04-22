@@ -14,13 +14,13 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { internalDashboard as teamDashboard } from '@/routes/team';
 import type { NavItem } from '@/types';
 
 export function AppSidebar() {
     const page = usePage();
     const dashboardUrl = page.props.currentTeam
-        ? dashboard(page.props.currentTeam.slug)
+        ? teamDashboard(page.props.currentTeam.slug)
         : '/';
 
     const mainNavItems: NavItem[] = [

@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import { teamDashboard } from '@/routes';
+import { internalDashboard as teamDashboard } from '@/routes/team';
 
 export default function Dashboard() {
     return (

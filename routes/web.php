@@ -5,6 +5,14 @@ use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
+require __DIR__.'/settings.php';
+
+Route::get('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'show'])->name('system.mgt.login');
+
+Route::middleware(['auth', 'admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+});
+
 Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
@@ -15,14 +23,15 @@ Route::get('dashboard', function () {
         return redirect()->route('system.mgt.dashboard');
     }
     return $user->currentTeam 
-        ? redirect()->route('team.dashboard', ['current_team' => $user->currentTeam->slug]) 
+        ? redirect()->route('team.internal-dashboard', ['current_team' => $user->currentTeam->slug]) 
         : redirect('/');
 })->middleware(['auth'])->name('dashboard');
 
 Route::prefix('{current_team}')
+    ->name('team.')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
     ->group(function () {
-        Route::inertia('dashboard', 'dashboard')->name('team.dashboard');
+        Route::inertia('dashboard', 'dashboard')->name('internal-dashboard');
     });
 
 Route::middleware(['auth'])->group(function () {
@@ -78,13 +87,7 @@ Route::prefix('legal')->group(function () {
 
 Route::inertia('contact', 'contact')->name('contact');
 
-require __DIR__.'/settings.php';
-
-Route::get('system-node-mgt/login', [\App\Http\Controllers\Admin\LoginController::class, 'show'])->name('system.mgt.login');
-
-Route::middleware(['auth', 'admin'])->prefix('system-node-mgt')->name('system.mgt.')->group(function () {
-    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-});
+// Admin and settings routes handled above
 
 Route::get('sitemap.xml', function () {
     $urls = [
