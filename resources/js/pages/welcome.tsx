@@ -230,27 +230,27 @@ export default function Welcome() {
                                 <div className="absolute inset-0 z-0">
                                     <motion.img 
                                         src={service.image} 
-                                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                                        className="w-full h-full object-cover grayscale-0 lg:grayscale lg:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
                                     />
                                     {/* Overlays */}
-                                    <div className="absolute inset-0 bg-slate-100/90 group-hover:bg-brand-navy/60 transition-colors duration-700" />
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-t from-brand-navy via-transparent to-transparent transition-opacity duration-700" />
+                                    <div className="absolute inset-0 bg-brand-navy/60 lg:bg-slate-100/90 lg:group-hover:bg-brand-navy/60 transition-colors duration-700" />
+                                    <div className="absolute inset-0 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 bg-gradient-to-t from-brand-navy via-transparent to-transparent transition-opacity duration-700" />
                                 </div>
 
                                 {/* Content */}
                                 <div className="relative z-10 h-full p-10 md:p-14 flex flex-col justify-between">
                                     <div className="flex flex-col">
-                                        <span className="text-brand-blue font-bold text-2xl mb-8 group-hover:text-white transition-colors duration-500">
+                                        <span className="text-white lg:text-brand-blue font-bold text-2xl mb-8 lg:group-hover:text-white transition-colors duration-500">
                                             0{index + 1}
                                         </span>
-                                        <h3 className="text-2xl md:text-3xl font-bold text-brand-navy group-hover:text-white transition-colors duration-500 max-w-[200px] leading-tight">
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white lg:text-brand-navy lg:group-hover:text-white transition-colors duration-500 max-w-[200px] leading-tight">
                                             {service.title}
                                         </h3>
                                     </div>
 
                                     {/* Expanded Content */}
                                     <div className="mt-auto overflow-hidden">
-                                        <div className="transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                                        <div className="transform translate-y-0 opacity-100 lg:translate-y-12 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 transition-all duration-700 delay-100">
                                             <p className="text-slate-200 text-lg mb-8 leading-relaxed max-w-sm">
                                                 {service.description}
                                             </p>
