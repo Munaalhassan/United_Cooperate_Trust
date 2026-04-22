@@ -1,4 +1,5 @@
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, Link } from '@inertiajs/react';
+import { Mail, Lock, ShieldCheck } from 'lucide-react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
 import TextLink from '@/components/text-link';
@@ -29,77 +30,95 @@ export default function Login({
             <Form
                 {...store.form()}
                 resetOnSuccess={['password']}
-                className="flex flex-col gap-6"
+                className="space-y-6"
             >
                 {({ processing, errors }) => (
                     <>
-                        <div className="grid gap-6">
-                            <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    required
-                                    autoFocus
-                                    tabIndex={1}
-                                    autoComplete="email"
-                                    placeholder="email@example.com"
-                                />
+                        <div className="space-y-5">
+                            {/* Email Field */}
+                            <div className="group space-y-2">
+                                <Label htmlFor="email" className="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                                    <Mail className="w-3.5 h-3.5" /> Email Address
+                                </Label>
+                                <div className="relative">
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        required
+                                        autoFocus
+                                        tabIndex={1}
+                                        autoComplete="email"
+                                        placeholder="Enter your email"
+                                        className="h-14 bg-slate-50 border-slate-200 focus:bg-white focus:border-brand-blue focus:ring-0 rounded-none px-4 transition-all"
+                                    />
+                                </div>
                                 <InputError message={errors.email} />
                             </div>
 
-                            <div className="grid gap-2">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                            {/* Password Field */}
+                            <div className="group space-y-2">
+                                <div className="flex items-center justify-between">
+                                    <Label htmlFor="password" className="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                                        <Lock className="w-3.5 h-3.5" /> Password
+                                    </Label>
                                     {canResetPassword && (
                                         <TextLink
                                             href={request()}
-                                            className="ml-auto text-sm"
+                                            className="text-xs font-bold text-brand-blue hover:text-brand-navy transition-colors"
                                             tabIndex={5}
                                         >
                                             Forgot password?
                                         </TextLink>
                                     )}
                                 </div>
-                                <PasswordInput
-                                    id="password"
-                                    name="password"
-                                    required
-                                    tabIndex={2}
-                                    autoComplete="current-password"
-                                    placeholder="Password"
-                                />
+                                <div className="relative">
+                                    <PasswordInput
+                                        id="password"
+                                        name="password"
+                                        required
+                                        tabIndex={2}
+                                        autoComplete="current-password"
+                                        placeholder="Enter your password"
+                                        className="h-14 bg-slate-50 border-slate-200 focus:bg-white focus:border-brand-blue focus:ring-0 rounded-none px-4 transition-all"
+                                    />
+                                </div>
                                 <InputError message={errors.password} />
                             </div>
 
-                            <div className="flex items-center space-x-3">
-                                <Checkbox
-                                    id="remember"
-                                    name="remember"
-                                    tabIndex={3}
-                                />
-                                <Label htmlFor="remember">Remember me</Label>
+                            <div className="flex items-center justify-between py-2">
+                                <div className="flex items-center space-x-3">
+                                    <Checkbox
+                                        id="remember"
+                                        name="remember"
+                                        tabIndex={3}
+                                        className="rounded-none border-slate-300 text-brand-blue focus:ring-brand-blue"
+                                    />
+                                    <Label htmlFor="remember" className="text-sm text-slate-500 font-medium cursor-pointer">Remember my device</Label>
+                                </div>
                             </div>
 
                             <Button
                                 type="submit"
-                                className="mt-6 w-full bg-brand-navy hover:bg-brand-blue text-white py-6 text-sm uppercase tracking-widest font-bold transition-all shadow-md"
+                                className="w-full py-8 text-xs uppercase tracking-[0.2em] font-extrabold transition-all shadow-xl rounded-none"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
                             >
-                                {processing && <Spinner />}
-                                Secure Log in
+                                {processing ? <Spinner className="w-4 h-4" /> : <ShieldCheck className="w-4 h-4" />}
+                                {processing ? 'Authorizing...' : 'SECURE ACCESS'}
                             </Button>
                         </div>
 
                         {canRegister && (
-                            <div className="text-center text-sm text-slate-500 mt-6 pt-6 border-t border-slate-100">
-                                Don't have an online banking account?{' '}
-                                <TextLink href={register()} tabIndex={5} className="text-brand-blue font-bold hover:text-brand-navy">
+                            <div className="text-center text-sm text-slate-500 mt-10 pt-8 border-t border-slate-100 flex flex-col gap-4">
+                                <p>Don't have an online banking account?</p>
+                                <Link 
+                                    href={register()} 
+                                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-brand-blue text-brand-blue font-bold text-xs uppercase tracking-widest hover:bg-brand-blue hover:text-white transition-all duration-300"
+                                >
                                     Register now
-                                </TextLink>
+                                </Link>
                             </div>
                         )}
                     </>

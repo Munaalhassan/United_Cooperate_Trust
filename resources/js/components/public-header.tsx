@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone, Search, Globe, ChevronRight, Menu, ChevronDown, Ar
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 
 // Extracted Navigation Data
@@ -280,9 +281,23 @@ export function PublicHeader() {
                                         </div>
                                         <div className="p-6 border-t border-slate-100 bg-slate-50">
                                             <Link href="/login" className="block w-full">
-                                                <Button className="w-full bg-[#2D434A] hover:bg-slate-800 text-white font-bold py-7 rounded-md transition-all text-sm tracking-widest shadow-lg">
-                                                    E-BANKING SECURE LOGIN
-                                                </Button>
+                                                <motion.div 
+                                                    className="relative bg-[#0a2540] text-white px-8 py-5 w-full flex items-center justify-center rounded-md overflow-hidden shadow-lg cursor-pointer"
+                                                    whileHover="hover"
+                                                    whileTap="tap"
+                                                    initial="initial"
+                                                >
+                                                    <span className="relative z-10 text-[12px] font-extrabold tracking-[0.2em]">E-BANKING SECURE LOGIN</span>
+                                                    <motion.div 
+                                                        className="absolute inset-0 bg-[#007AFF]"
+                                                        variants={{
+                                                            initial: { y: '100%' },
+                                                            hover: { y: 0 },
+                                                            tap: { scale: 0.95 }
+                                                        }}
+                                                        transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+                                                    />
+                                                </motion.div>
                                             </Link>
                                         </div>
                                     </SheetContent>
@@ -394,10 +409,22 @@ export function PublicHeader() {
                                 <Search className="w-5 h-5 text-slate-600 group-hover:text-brand-blue" />
                             </button>
 
-                            <Link href="/login" className="hidden sm:block">
-                                <Button className="bg-[#2D434A] hover:bg-[#1E2D32] text-white rounded-none px-7 py-5 h-auto text-[14px] font-bold tracking-widest transition-all">
-                                    E-BANKING
-                                </Button>
+                            <Link href="/login" className="hidden sm:block group">
+                                <motion.div 
+                                    className="relative bg-[#0a2540] text-white px-8 py-4 overflow-hidden cursor-pointer h-full flex items-center justify-center"
+                                    whileHover="hover"
+                                    initial="initial"
+                                >
+                                    <span className="relative z-10 text-[13px] font-extrabold tracking-[0.2em]">E-BANKING</span>
+                                    <motion.div 
+                                        className="absolute inset-0 bg-[#007AFF]"
+                                        variants={{
+                                            initial: { y: '100%' },
+                                            hover: { y: 0 }
+                                        }}
+                                        transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+                                    />
+                                </motion.div>
                             </Link>
                         </div>
                     </div>
