@@ -39,26 +39,27 @@
 
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+        
+        <!-- Google Translate -->
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'pl,fr,de,es,ar,zh-CN,ja,ru,en',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <style>
+            .goog-te-banner-frame.skiptranslate { display: none !important; }
+            body { top: 0px !important; }
+            #google_translate_element { display: none; }
+        </style>
+
         <x-inertia::head>
             <title>{{ config('app.name', 'Laravel') }}</title>
-            
-            <!-- Google Translate -->
-            <script type="text/javascript">
-                function googleTranslateElementInit() {
-                    new google.translate.TranslateElement({
-                        pageLanguage: 'en',
-                        includedLanguages: 'pl,fr,de,es,ar,zh-CN,ja,ru,en',
-                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                        autoDisplay: false
-                    }, 'google_translate_element');
-                }
-            </script>
-            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            <style>
-                .goog-te-banner-frame.skiptranslate { display: none !important; }
-                body { top: 0px !important; }
-                #google_translate_element { display: none; }
-            </style>
         </x-inertia::head>
     </head>
     <body class="font-sans antialiased">

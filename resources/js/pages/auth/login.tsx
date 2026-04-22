@@ -84,21 +84,21 @@ export default function Login({
 
                             <Button
                                 type="submit"
-                                className="mt-4 w-full"
+                                className="mt-6 w-full bg-brand-navy hover:bg-brand-blue text-white py-6 text-sm uppercase tracking-widest font-bold transition-all shadow-md"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
                             >
                                 {processing && <Spinner />}
-                                Log in
+                                Secure Log in
                             </Button>
                         </div>
 
                         {canRegister && (
-                            <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
-                                <TextLink href={register()} tabIndex={5}>
-                                    Sign up
+                            <div className="text-center text-sm text-slate-500 mt-6 pt-6 border-t border-slate-100">
+                                Don't have an online banking account?{' '}
+                                <TextLink href={register()} tabIndex={5} className="text-brand-blue font-bold hover:text-brand-navy">
+                                    Register now
                                 </TextLink>
                             </div>
                         )}
@@ -107,7 +107,7 @@ export default function Login({
             </Form>
 
             {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
+                <div className="mt-4 p-4 text-center text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-sm">
                     {status}
                 </div>
             )}

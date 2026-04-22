@@ -102,6 +102,7 @@ const MobileMenuItem = ({ item }: { item: any }) => {
 
 export function PublicHeader() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState('English');
     
     const languages = [
@@ -116,14 +117,27 @@ export function PublicHeader() {
         { code: 'RU', name: 'Russian' }
     ];
 
-    const handleLanguageChange = (langName: string) => {
-        setSelectedLanguage(langName);
-        // Google Translate logic
-        const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-        if (select) {
-            select.value = langName;
-            select.dispatchEvent(new Event('change'));
+    useEffect(() => {
+        const match = document.cookie.match(/googtrans=\/en\/([a-zA-Z-]+)/i);
+        if (match) {
+            let code = match[1].toUpperCase();
+            if (code === 'ZH-CN') code = 'ZH';
+            const lang = languages.find(l => l.code === code);
+            if (lang) {
+                setSelectedLanguage(lang.name);
+            }
         }
+    }, []);
+
+    const handleLanguageChange = (lang: { code: string, name: string }) => {
+        setSelectedLanguage(lang.name);
+        
+        let code = lang.code.toLowerCase();
+        if (code === 'zh') code = 'zh-CN';
+        
+        document.cookie = `googtrans=/en/${code}; path=/;`;
+        document.cookie = `googtrans=/en/${code}; path=/; domain=${window.location.hostname};`;
+        window.location.reload();
     };
 
     useEffect(() => {
@@ -142,6 +156,29 @@ export function PublicHeader() {
         };
     }, [isSearchOpen]);
 
+    const searchIndex = [
+        { title: 'Home', url: '/', category: 'Page' },
+        { title: 'Corporate News', url: '/media/news-events', category: 'Media' },
+        { title: 'Upcoming Events', url: '/media/news-events', category: 'Media' },
+        { title: 'Publications', url: '/media/publications', category: 'Media' },
+        { title: 'Annual Reports', url: '/media/publications', category: 'Publications' },
+        { title: 'E-Banking Registration', url: '/quick-services/e-banking-registration', category: 'Quick Services' },
+        { title: 'Credit Cards', url: '/quick-services/credit-cards', category: 'Quick Services' },
+        { title: 'Security Awareness', url: '/quick-services/security-awareness', category: 'Quick Services' },
+        { title: 'Third-Party Payment Services', url: '/quick-services/third-party-payments', category: 'Quick Services' },
+        { title: 'Contact Us', url: '/contact', category: 'Page' },
+        { title: 'Customer Service', url: '/contact', category: 'Support' },
+        { title: 'Loan Services', url: '/contact', category: 'Services' },
+        { title: 'Private Banking', url: '/', category: 'Services' },
+    ];
+
+    const searchResults = searchQuery.trim() === '' 
+        ? [] 
+        : searchIndex.filter(item => 
+            item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+            item.category.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
     return (
         <>
             <header className="w-full flex flex-col isolation-auto relative z-50">
@@ -157,7 +194,7 @@ export function PublicHeader() {
                             {languages.map((lang) => (
                                 <button 
                                     key={lang.code}
-                                    onClick={() => handleLanguageChange(lang.name)}
+                                    onClick={() => handleLanguageChange(lang)}
                                     className={cn(
                                         "w-full text-left px-5 py-2.5 text-sm transition-colors flex items-center justify-between",
                                         selectedLanguage === lang.name 
@@ -353,20 +390,56 @@ export function PublicHeader() {
                                 type="text"
                                 placeholder="What are you looking for?"
                                 className="w-full bg-transparent border-0 outline-none text-white text-4xl sm:text-5xl md:text-6xl font-light placeholder:text-white/20 px-0"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
 
-                        <div className="pt-8 pl-16">
-                            <h4 className="text-white/50 font-bold text-xs tracking-widest uppercase mb-6 flex items-center gap-4">
-                                <span className="w-8 h-px bg-white/20 block"></span> Quick Links
-                            </h4>
-                            <div className="flex flex-wrap gap-4">
-                                {['Open an Account', 'Current Interest Rates', 'Corporate Loans', 'Internet Banking Setup', 'Wealth Management', 'Contact Support'].map((term, i) => (
-                                    <button key={i} className="px-6 py-2.5 bg-white/5 hover:bg-brand-blue border border-white/10 hover:border-brand-blue text-slate-200 text-sm font-medium rounded-full transition-all cursor-pointer drop-shadow-md">
-                                        {term}
+                        <div className="pt-8 pl-16 max-h-[50vh] overflow-y-auto">
+                            {searchQuery.trim() === '' ? (
+                                <>
+                                    <h4 className="text-white/50 font-bold text-xs tracking-widest uppercase mb-6 flex items-center gap-4">
+                                        <span className="w-8 h-px bg-white/20 block"></span> Quick Links
+                                    </h4>
+                                    <div className="flex flex-wrap gap-4">
+                                        {['Contact Us', 'Corporate News', 'Publications', 'E-Banking Registration', 'Credit Cards'].map((term, i) => (
+                                            <button key={i} onClick={() => setSearchQuery(term)} className="px-6 py-2.5 bg-white/5 hover:bg-brand-blue border border-white/10 hover:border-brand-blue text-slate-200 text-sm font-medium rounded-full transition-all cursor-pointer drop-shadow-md">
+                                                {term}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : searchResults.length > 0 ? (
+                                <div className="space-y-4 pr-4">
+                                    <h4 className="text-white/50 font-bold text-xs tracking-widest uppercase mb-6 flex items-center gap-4">
+                                        <span className="w-8 h-px bg-white/20 block"></span> Search Results ({searchResults.length})
+                                    </h4>
+                                    {searchResults.map((result, i) => (
+                                        <Link 
+                                            key={i} 
+                                            href={result.url}
+                                            onClick={() => { setIsSearchOpen(false); setSearchQuery(''); }}
+                                            className="group block bg-white/5 hover:bg-white/10 border border-white/10 rounded-sm p-6 transition-all"
+                                        >
+                                            <div className="flex justify-between items-center">
+                                                <div>
+                                                    <span className="text-brand-blue text-xs font-bold uppercase tracking-widest mb-2 block">{result.category}</span>
+                                                    <h3 className="text-2xl text-white font-light group-hover:text-brand-blue transition-colors">{result.title}</h3>
+                                                </div>
+                                                <ChevronRight className="w-6 h-6 text-white/30 group-hover:text-brand-blue group-hover:translate-x-2 transition-all" />
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="text-left py-12">
+                                    <h3 className="text-2xl text-white font-light mb-2">No results found</h3>
+                                    <p className="text-white/50">We couldn't find anything matching "{searchQuery}". Try different keywords.</p>
+                                    <button onClick={() => setSearchQuery('')} className="mt-8 px-6 py-2 border border-white/20 text-white/70 hover:bg-white/10 rounded-full transition-colors text-sm font-medium">
+                                        Clear Search
                                     </button>
-                                ))}
-                            </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
