@@ -9,6 +9,16 @@ Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
+Route::get('dashboard', function () {
+    $user = auth()->user();
+    if ($user->is_admin) {
+        return redirect()->route('system.mgt.dashboard');
+    }
+    return $user->currentTeam 
+        ? redirect()->route('dashboard', ['current_team' => $user->currentTeam->slug]) 
+        : redirect('/');
+})->middleware(['auth'])->name('dashboard.bridge');
+
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
     ->group(function () {
