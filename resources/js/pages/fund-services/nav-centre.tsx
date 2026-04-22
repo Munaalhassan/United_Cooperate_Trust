@@ -203,13 +203,13 @@ export default function NavCentre() {
                         className="w-full"
                     >
                         <div className="w-full">
-                            <h2 className="text-3xl font-bold text-brand-navy mb-8">NAV Centre Data</h2>
+                            {/* <h2 className="text-3xl font-bold text-brand-navy mb-8">NAV Centre Data</h2>
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-12">
                                 <p>
                                     Welcome to the NAV Centre. Here you can find the most recent Net Asset Value (NAV) calculations and performance metrics for our monitored funds.
                                 </p>
-                            </div>
+                            </div> */}
 
                             {/* Date Filter (Hero Style) */}
                             <div className="mb-10">
