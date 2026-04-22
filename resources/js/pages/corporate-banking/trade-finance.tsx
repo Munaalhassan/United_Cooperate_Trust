@@ -52,17 +52,39 @@ export default function TradeFinance() {
                         </div>
 
                         <div className="max-w-3xl">
-                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Empowering International Trade</h2>
+                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Trade Finance Services</h2>
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-16">
                                 <p>
-                                    Our Trade Finance solutions provide the security and credit enhancement your business needs to expand into new markets. From Letters of Credit to Documentary Collections, we act as a bridge of trust between you and your international partners.
+                                    We leverage our Group's global network supported by experienced specialist teams with a long track record of reliable client service. We provide financial guarantees in a wide variety of situations, including payment guarantees for your business partners, performance bonds, refund guarantees on advance payments and customs guarantees.
+                                </p>
+                                <p>
+                                    Our specialists have extensive experience in local and cross-border frameworks, meeting a full spectrum of import and export requirements and helping your business to grow internationally.
                                 </p>
                             </div>
 
-                            {/* Placeholder for incoming text */}
-                            <div className="p-12 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center text-slate-400 italic">
-                                Content update pending...
+                            {/* Service Offerings */}
+                            <div className="mb-20">
+                                <h3 className="text-2xl font-bold text-brand-navy mb-10 flex items-center gap-4">
+                                    <span className="w-12 h-px bg-brand-blue" />
+                                    We Offer
+                                </h3>
+                                
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    {[
+                                        { title: "Letters of Guarantee", desc: "Secure your domestic and international contractual obligations." },
+                                        { title: "Letters of Credit", desc: "Facilitate global trade with trusted payment mechanisms." },
+                                        { title: "Collection Services", desc: "Efficient handling of your import and export documentation." }
+                                    ].map((service, i) => (
+                                        <div key={i} className="bg-white border border-slate-100 p-8 shadow-sm hover:shadow-md transition-all group">
+                                            <div className="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center mb-6 group-hover:bg-brand-blue group-hover:scale-110 transition-all">
+                                                <div className="w-2 h-2 bg-brand-blue rounded-full group-hover:bg-white transition-colors" />
+                                            </div>
+                                            <h4 className="text-base font-bold text-brand-navy mb-3">{service.title}</h4>
+                                            <p className="text-sm text-slate-500 leading-relaxed">{service.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </motion.div>

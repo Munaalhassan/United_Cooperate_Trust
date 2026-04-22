@@ -52,17 +52,54 @@ export default function PaymentFX() {
                         </div>
 
                         <div className="max-w-3xl">
-                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Global Liquidity Management</h2>
+                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Payment and FX Services</h2>
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-16">
                                 <p>
-                                    Our Payment and FX services are designed to provide your business with the agility needed in a globalized economy. We offer sophisticated solutions for cross-border transactions and currency risk management, ensuring your corporate liquidity is always optimized.
+                                    Our corporate payment services are designed to streamline processes, minimise your workload and save time and costs for your business. They include a specially designed payments system incorporating numerous monitoring, approval and security mechanisms. Our officers are always there for you, to give you the dedicated attention you would expect from a boutique bank.
+                                </p>
+                                <p>
+                                    Our fast and secure FX services encompass transactions in spot, forward, options, and other treasury products involving currencies. They provide your business with liquidity, currency risk mitigation and access to international markets.
                                 </p>
                             </div>
 
-                            {/* Placeholder for incoming text */}
-                            <div className="p-12 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center text-slate-400 italic">
-                                Content update pending...
+                            {/* Service Highlights */}
+                            <div className="grid md:grid-cols-2 gap-8 mb-16">
+                                <div className="p-8 bg-white border border-slate-100 shadow-sm border-t-4 border-t-brand-blue">
+                                    <h3 className="text-xl font-bold text-brand-navy mb-4">Corporate Payments</h3>
+                                    <ul className="space-y-3 text-sm text-slate-600">
+                                        <li className="flex items-start gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-1.5 flex-shrink-0" />
+                                            <span>Streamlined processes to minimise workload</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-1.5 flex-shrink-0" />
+                                            <span>Advanced monitoring and approval systems</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-1.5 flex-shrink-0" />
+                                            <span>Enhanced security mechanisms</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="p-8 bg-white border border-slate-100 shadow-sm border-t-4 border-t-brand-blue">
+                                    <h3 className="text-xl font-bold text-brand-navy mb-4">FX & Treasury</h3>
+                                    <ul className="space-y-3 text-sm text-slate-600">
+                                        <li className="flex items-start gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-1.5 flex-shrink-0" />
+                                            <span>Spot, forward, and options transactions</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-1.5 flex-shrink-0" />
+                                            <span>Currency risk mitigation</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-1.5 flex-shrink-0" />
+                                            <span>Access to international markets liquidity</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </motion.div>
