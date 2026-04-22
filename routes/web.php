@@ -15,6 +15,7 @@ Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->gr
     
     // NAV Centre Management
     Route::get('nav-funds', [\App\Http\Controllers\Admin\NavCentreController::class, 'index'])->name('nav-funds.index');
+    Route::get('nav-funds/export', [\App\Http\Controllers\Admin\NavCentreController::class, 'export'])->name('nav-funds.export');
     Route::post('nav-funds', [\App\Http\Controllers\Admin\NavCentreController::class, 'store'])->name('nav-funds.store');
     Route::put('nav-funds/{nav_fund}', [\App\Http\Controllers\Admin\NavCentreController::class, 'update'])->name('nav-funds.update');
     Route::delete('nav-funds/{nav_fund}', [\App\Http\Controllers\Admin\NavCentreController::class, 'destroy'])->name('nav-funds.destroy');

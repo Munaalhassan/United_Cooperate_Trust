@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminLayout from '@/layouts/admin-layout';
-import { useForm, Link } from '@inertiajs/react';
+import { useForm, Link, router } from '@inertiajs/react';
 import { 
     Plus, 
     Pencil, 
@@ -10,11 +10,12 @@ import {
     Search,
     ChevronLeft,
     ChevronRight,
-    ArrowUpDown
+    ArrowUpDown,
+    Download
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { store, update, destroy as remove } from '@/routes/system/mgt/nav-funds';
+import { index, store, update, destroy as remove, exportMethod } from '@/routes/system/mgt/nav-funds';
 
 interface Fund {
     id: number;
@@ -36,11 +37,28 @@ interface Props {
         from: number;
         to: number;
     };
+    filters?: {
+        search?: string;
+    };
 }
 
-export default function NavFundsIndex({ funds }: Props) {
+export default function NavFundsIndex({ funds, filters }: Props) {
     const [isEditing, setIsEditing] = useState<number | null>(null);
     const [isAdding, setIsAdding] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(filters?.search || "");
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (searchQuery !== (filters?.search || "")) {
+                router.get(index.url(), { search: searchQuery }, { 
+                    preserveState: true, 
+                    replace: true,
+                    preserveScroll: true 
+                });
+            }
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [searchQuery]);
 
     const { data, setData, post, put, delete: destroy, processing, errors, reset, clearErrors } = useForm({
         name: '',
@@ -98,19 +116,43 @@ export default function NavFundsIndex({ funds }: Props) {
         <AdminLayout title="NAV Centre Management">
             <div className="space-y-8">
                 {/* Actions Bar */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 border border-slate-200 shadow-sm rounded-sm">
-                    <div>
-                        <h2 className="text-lg font-bold text-brand-navy">Fund List</h2>
-                        <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Manage net asset values for monitored funds</p>
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white p-6 border border-slate-200 shadow-sm rounded-sm">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1 w-full lg:w-auto">
+                        <div>
+                            <h2 className="text-lg font-bold text-brand-navy">Fund List</h2>
+                            <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Manage net asset values for monitored funds</p>
+                        </div>
+                        
+                        {/* Search Bar */}
+                        <div className="relative flex-1 max-w-md w-full sm:w-64">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                            <input 
+                                type="text"
+                                placeholder="Search by name or ISIN..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full pl-10 pr-4 py-2 bg-slate-50 border-slate-200 focus:bg-white focus:border-brand-blue focus:ring-0 text-sm rounded-sm transition-all"
+                            />
+                        </div>
                     </div>
-                    {!isAdding && !isEditing && (
-                        <Button 
-                            onClick={() => setIsAdding(true)}
-                            className="bg-brand-blue hover:bg-brand-navy text-white rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs transition-all flex items-center gap-2"
+
+                    <div className="flex items-center gap-3 w-full lg:w-auto justify-end">
+                        <a 
+                            href={exportMethod.url()}
+                            className="flex items-center gap-2 px-4 py-2 border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all font-bold uppercase tracking-widest text-[10px] rounded-sm"
                         >
-                            <Plus className="w-4 h-4" /> Add New Fund
-                        </Button>
-                    )}
+                            <Download className="w-3.5 h-3.5" /> Export CSV
+                        </a>
+                        
+                        {!isAdding && !isEditing && (
+                            <Button 
+                                onClick={() => setIsAdding(true)}
+                                className="bg-brand-blue hover:bg-brand-navy text-white rounded-none px-6 py-2 font-bold uppercase tracking-widest text-xs transition-all flex items-center gap-2"
+                            >
+                                <Plus className="w-4 h-4" /> Add New Fund
+                            </Button>
+                        )}
+                    </div>
                 </div>
 
                 {/* Form Section (Conditional) */}

@@ -11,10 +11,53 @@ class NavCentreController extends Controller
 {
     public function index(Request $request)
     {
-        $funds = NavFund::orderBy('name')->paginate(20);
+        $query = NavFund::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('isin', 'like', "%{$search}%");
+            });
+        }
+
+        $funds = $query->orderBy('name')->paginate(20)->withQueryString();
         
         return Inertia::render('admin/nav-funds/index', [
-            'funds' => $funds
+            'funds' => $funds,
+            'filters' => $request->only(['search'])
+        ]);
+    }
+
+    public function export()
+    {
+        $funds = NavFund::orderBy('name')->get();
+        
+        $callback = function() use ($funds) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['Name', 'ISIN', 'Currency', 'Date', 'Price', 'Last Price', 'Change', 'Yield']);
+
+            foreach ($funds as $fund) {
+                fputcsv($file, [
+                    $fund->name,
+                    $fund->isin,
+                    $fund->ccy,
+                    $fund->date->format('Y-m-d'),
+                    $fund->price,
+                    $fund->last_price,
+                    $fund->change,
+                    $fund->yield
+                ]);
+            }
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=nav-funds-export-" . date('Y-m-d') . ".csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
         ]);
     }
 
