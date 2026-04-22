@@ -28,11 +28,13 @@ class NavCentreController extends Controller
         if ($request->filled('date')) {
             $query->whereDate('date', $request->date);
         } else {
-            // Default to latest date available if not specified
-            $latestDate = NavFund::max('date');
-            if ($latestDate) {
-                $query->whereDate('date', $latestDate);
-            }
+            // Default to showing the latest entry for each unique ISIN
+            // This ensures all funds are visible even if they have different latest dates
+            $query->whereIn('id', function($q) {
+                $q->selectRaw('MAX(id)')
+                  ->from('nav_funds')
+                  ->groupBy('isin');
+            });
         }
 
         $funds = $query->orderBy('name')->paginate(15)->withQueryString();
