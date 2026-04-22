@@ -496,14 +496,18 @@ export default function Welcome() {
                                     <div className="w-1 h-8 bg-brand-blue group-hover:h-12 transition-all duration-500" />
                                     <h4 className="text-xl font-bold">Main Office</h4>
                                 </div>
-                                <p className="text-slate-400 text-sm max-w-sm ml-5">1256 - Butantã, São Paulo - SP, 05503-000, Germany</p>
+                                <p className="text-slate-400 text-sm max-w-sm ml-5 font-light leading-relaxed">
+                                    534 Rue de Neudorf, <br /> L-2220 USA
+                                </p>
                             </div>
                             <div className="group cursor-pointer">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-1 h-8 bg-brand-gold group-hover:h-12 transition-all duration-500" />
                                     <h4 className="text-xl font-bold">Regulated by CSSF</h4>
                                 </div>
-                                <p className="text-slate-400 text-sm max-w-sm ml-5">Supervised by the Commission de Surveillance du Secteur Financier — 283 Route d'Arlon, L-1150 USA.</p>
+                                <p className="text-slate-400 text-sm max-w-sm ml-5 font-light leading-relaxed">
+                                    Commission de Surveillance du Secteur Financier <br /> 283 Route d'Arlon, L-1150 USA
+                                </p>
                             </div>
                         </div>
                     </div>

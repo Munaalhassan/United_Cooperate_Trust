@@ -21,6 +21,14 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
                         transition={{ duration: 0.8 }}
                         className="flex flex-col items-center text-center"
                     >
+                        {/* Footer Logo */}
+                        <img 
+                            src="/images/logo.png" 
+                            alt="United Cooperate Bank" 
+                            className="h-20 w-auto mb-16 grayscale brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-500 cursor-pointer" 
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        />
+
                         {/* Legal Links */}
                         <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 mb-12">
                             {([
@@ -41,7 +49,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
 
                         {/* Copyright */}
                         <p className="text-white/40 font-medium tracking-wide text-sm">
-                            ©2023 United Cooperate Trust Bank . All rights reserved.
+                            ©{new Date().getFullYear()} United Cooperate Trust Bank. All rights reserved.
                         </p>
                     </motion.div>
                 </div>

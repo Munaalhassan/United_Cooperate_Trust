@@ -64,10 +64,10 @@ const navigationData = [
 // Mobile Accordion Component
 const MobileMenuItem = ({ item }: { item: any }) => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     if (item.isLink) {
         return (
-            <Link 
+            <Link
                 href={item.href}
                 className="w-full flex items-center justify-between px-6 py-4 text-sm font-bold text-brand-navy hover:bg-slate-50 transition-colors uppercase tracking-widest text-left border-b border-slate-100 last:border-0"
             >
@@ -104,7 +104,7 @@ export function PublicHeader() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState('English');
-    
+
     const languages = [
         { code: 'EN', name: 'English' },
         { code: 'PL', name: 'Polish' },
@@ -131,10 +131,10 @@ export function PublicHeader() {
 
     const handleLanguageChange = (lang: { code: string, name: string }) => {
         setSelectedLanguage(lang.name);
-        
+
         let code = lang.code.toLowerCase();
         if (code === 'zh') code = 'zh-CN';
-        
+
         document.cookie = `googtrans=/en/${code}; path=/;`;
         document.cookie = `googtrans=/en/${code}; path=/; domain=${window.location.hostname};`;
         window.location.reload();
@@ -172,50 +172,63 @@ export function PublicHeader() {
         { title: 'Private Banking', url: '/', category: 'Services' },
     ];
 
-    const searchResults = searchQuery.trim() === '' 
-        ? [] 
-        : searchIndex.filter(item => 
-            item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const searchResults = searchQuery.trim() === ''
+        ? []
+        : searchIndex.filter(item =>
+            item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             item.category.toLowerCase().includes(searchQuery.toLowerCase())
         );
 
     return (
         <>
             <header className="w-full flex flex-col isolation-auto relative z-50">
-                {/* Top Utility Bar */}
-            <div className="bg-[#f0f0f0] text-slate-600 border-b border-gray-200">
-                <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-10">
-                     <div className="relative group/lang hidden md:flex items-center gap-1 cursor-pointer hover:text-brand-blue text-xs font-medium h-full">
-                        <Globe className="w-3.5 h-3.5 mr-1" />
-                        <span>{selectedLanguage}</span>
-                        <ChevronDown className="w-3 h-3 group-hover/lang:-rotate-180 transition-transform duration-300" />
-                        
-                        <div className="absolute top-full left-0 min-w-[140px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 -translate-y-2 group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:scale-100 group-hover/lang:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
-                            {languages.map((lang) => (
-                                <button 
-                                    key={lang.code}
-                                    onClick={() => handleLanguageChange(lang)}
-                                    className={cn(
-                                        "w-full text-left px-5 py-2.5 text-sm transition-colors flex items-center justify-between",
-                                        selectedLanguage === lang.name 
-                                            ? "bg-brand-blue/10 text-brand-blue font-bold" 
-                                            : "text-slate-700 hover:bg-slate-50 hover:text-brand-blue"
-                                    )}
-                                >
-                                    {lang.name}
-                                    <span className="text-[10px] text-slate-400 font-bold">{lang.code}</span>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
+                {/* Top Utility Bar (Logo + Utility Links) */}
+                <div className="bg-white border-b border-gray-100 py-4">
+                    <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+                        {/* Logo moved to top */}
+                        <Link href="/" className="flex items-center -ml-2">
+                            <img
+                                src="/images/logo.png"
+                                alt="United Cooperate Bank"
+                                className="h-16 md:h-20 w-auto drop-shadow-sm transition-transform hover:scale-105 duration-300"
+                            />
+                        </Link>
 
-                        <div className="flex items-center justify-end w-full md:w-auto gap-4 md:gap-6 static z-50">
+                        {/* Utility Links (Right Side) */}
+                        <div className="flex items-center gap-6 text-slate-600">
+                            {/* Language Selector */}
+                            <div className="relative group/lang flex items-center gap-1 cursor-pointer hover:text-brand-blue text-[13px] font-bold h-full py-2">
+                                <Globe className="w-4 h-4 mr-1 text-slate-400" />
+                                <span>{selectedLanguage}</span>
+                                <ChevronDown className="w-3.5 h-3.5 group-hover/lang:-rotate-180 transition-transform duration-300" />
+                                
+                                <div className="absolute top-full right-0 min-w-[140px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 -translate-y-2 group-hover/lang:opacity-100 group-hover/lang:visible group-hover/lang:scale-100 group-hover/lang:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
+                                    {languages.map((lang) => (
+                                        <button
+                                            key={lang.code}
+                                            onClick={() => handleLanguageChange(lang)}
+                                            className={cn(
+                                                "w-full text-left px-5 py-2.5 text-sm transition-colors flex items-center justify-between",
+                                                selectedLanguage === lang.name
+                                                    ? "bg-brand-blue/10 text-brand-blue font-bold"
+                                                    : "text-slate-700 hover:bg-slate-50 hover:text-brand-blue"
+                                            )}
+                                        >
+                                            {lang.name}
+                                            <span className="text-[10px] text-slate-400 font-bold">{lang.code}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="h-4 w-px bg-slate-200" />
+
                             {/* Quick Services */}
                             <div className="relative group/qs h-full flex items-center">
-                                <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-semibold cursor-pointer h-full py-2">
-                                    Quick Services <ChevronDown className="w-3 h-3 group-hover/qs:-rotate-180 transition-transform duration-300" />
+                                <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-bold cursor-pointer h-full py-2">
+                                    Quick Services <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover/qs:-rotate-180 transition-transform duration-300" />
                                 </span>
-                                <div className="absolute top-full right-0 min-w-[230px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/qs:opacity-100 group-hover/qs:visible group-hover/qs:scale-100 group-hover/qs:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
+                                <div className="absolute top-full right-0 min-w-[230px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/qs:opacity-100 group-hover/qs:visible group-hover/qs:scale-100 group-hover/qs:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md ring-1 ring-black/5">
                                     <Link href="/quick-services/e-banking-registration" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">E-Banking Registration</Link>
                                     <Link href="/quick-services/credit-cards" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Credit Cards</Link>
                                     <Link href="/quick-services/security-awareness" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Security Awareness</Link>
@@ -223,38 +236,32 @@ export function PublicHeader() {
                                 </div>
                             </div>
 
+                            <div className="h-4 w-px bg-slate-200" />
+
                             {/* Media */}
                             <div className="relative group/media h-full flex items-center">
-                                <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-semibold cursor-pointer h-full py-2">
-                                    Media <ChevronDown className="w-3 h-3 group-hover/media:-rotate-180 transition-transform duration-300" />
+                                <span className="flex items-center gap-1 hover:text-brand-blue transition-colors text-[13px] font-bold cursor-pointer h-full py-2">
+                                    Media <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover/media:-rotate-180 transition-transform duration-300" />
                                 </span>
-                                <div className="absolute top-full right-0 min-w-[200px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/media:opacity-100 group-hover/media:visible group-hover/media:scale-100 group-hover/media:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md">
+                                <div className="absolute top-full right-0 min-w-[200px] bg-white border border-gray-200 shadow-xl opacity-0 invisible scale-95 translate-y-2 group-hover/media:opacity-100 group-hover/media:visible group-hover/media:scale-100 group-hover/media:translate-y-0 transition-all duration-300 ease-out z-[100] py-2 rounded-md ring-1 ring-black/5">
                                     <Link href="/media/news-events" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">News and Events</Link>
                                     <Link href="/media/publications" className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors">Publications</Link>
                                 </div>
                             </div>
 
-                            <Link href="/contact" className="hover:text-brand-blue transition-colors font-semibold text-[13px]">Contact us</Link>
+                            <div className="h-4 w-px bg-slate-200" />
+
+                            <Link href="/contact" className="hover:text-brand-blue transition-colors font-bold text-[13px]">Contact us</Link>
                         </div>
                     </div>
                 </div>
 
-                {/* Main Navigation */}
-                <div className="bg-white shadow-[0_4px_20px_-10px_rgba(0,0,0,0.1)] sticky top-0 relative z-40 relative">
-                    <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-[85px]">
-                        {/* Logo */}
-                        <Link href="/" className="flex items-center gap-2 -ml-2">
-                            <img 
-                                src="/images/logo.png" 
-                                alt="United Cooperate Bank" 
-                                className="h-[75px] lg:h-[90px] w-auto drop-shadow-sm transition-transform hover:scale-105 duration-300 logo-recolored" 
-                            />
-                        </Link>
-
+                {/* Main Navigation (Mega Menu + E-Banking) */}
+                <div className="bg-white shadow-sm sticky top-0 relative z-40">
+                    <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-[65px]">
                         {/* Desktop Menu */}
                         <div className="hidden lg:flex items-center h-full">
-                            <div className="flex h-full items-center gap-1 xl:gap-3">
-
+                            <div className="flex h-full items-center gap-1 xl:gap-4">
                                 {navigationData.map((item, index) => (
                                     <div key={index} className="relative group/nav h-full flex items-center">
                                         {/* Trigger */}
@@ -273,18 +280,14 @@ export function PublicHeader() {
                                         {!item.isLink && item.links && (
                                             <div
                                                 className={cn(
-                                                    "absolute top-full mt-1 opacity-0 invisible scale-[0.98] -translate-y-2 group-hover/nav:opacity-100 group-hover/nav:visible group-hover/nav:scale-100 group-hover/nav:translate-y-0 transition-all duration-300 ease-out z-50",
-                                                    item.align === 'center' ? "left-1/2 -translate-x-1/2" : 
-                                                    item.align === 'right' ? "right-3 xl:right-4" : "left-3 xl:left-4"
+                                                    "absolute top-full mt-0 opacity-0 invisible scale-[0.98] -translate-y-2 group-hover/nav:opacity-100 group-hover/nav:visible group-hover/nav:scale-100 group-hover/nav:translate-y-0 transition-all duration-300 ease-out z-50",
+                                                    item.align === 'center' ? "left-1/2 -translate-x-1/2" :
+                                                        item.align === 'right' ? "right-3 xl:right-4" : "left-3 xl:left-4"
                                                 )}
                                                 style={{ width: item.width }}
                                             >
-                                                {/* Hover Bridge */}
-                                                <div className="h-6 w-full bg-transparent absolute -top-5 left-0"></div>
-
-                                                {/* Dropdown Content Box */}
+                                                <div className="h-4 w-full bg-transparent absolute -top-4 left-0"></div>
                                                 <div className="border-t-[3px] border-t-brand-blue bg-white shadow-2xl rounded-b-xl flex overflow-hidden ring-1 ring-slate-900/5">
-                                                    {/* Description Panel */}
                                                     <div className="w-[45%] bg-brand-blue/5 p-8 border-r border-slate-100 flex flex-col justify-center">
                                                         <h3 className="text-lg font-extrabold text-brand-blue mb-3 leading-tight tracking-wide">{item.title}</h3>
                                                         <p className="text-[13px] text-slate-600 mb-6 leading-relaxed">
@@ -296,7 +299,6 @@ export function PublicHeader() {
                                                         </Link>
                                                     </div>
 
-                                                    {/* Links Grid Panel */}
                                                     <div className="w-[55%] p-8 bg-white grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 content-start">
                                                         {item.links.map((link, linkIdx) => (
                                                             <Link key={linkIdx} href={link.href} className="font-semibold text-[13px] text-slate-700 hover:text-brand-blue transition-all hover:translate-x-1.5 flex items-center">
@@ -309,17 +311,20 @@ export function PublicHeader() {
                                         )}
                                     </div>
                                 ))}
-
                             </div>
                         </div>
 
                         {/* Right Actions */}
                         <div className="flex items-center gap-3 lg:gap-5">
-                            <Button variant="ghost" size="icon" onClick={() => setIsSearchOpen(true)} className="hover:text-brand-blue hidden sm:flex text-slate-800">
-                                <Search className="w-[18px] h-[18px] font-bold" />
-                            </Button>
+                            <button 
+                                onClick={() => setIsSearchOpen(true)}
+                                className="p-2 hover:bg-slate-50 rounded-full transition-colors group"
+                            >
+                                <Search className="w-5 h-5 text-slate-600 group-hover:text-brand-blue" />
+                            </button>
+
                             <Link href="/login" className="hidden sm:block">
-                                <Button className="bg-brand-navy hover:bg-[#2c3e50] text-white font-bold px-7 py-[22px] rounded-md transition-all active:scale-95 text-[14px] tracking-widest shadow-md">
+                                <Button className="bg-[#2D434A] hover:bg-[#1E2D32] text-white rounded-none px-7 py-5 h-auto text-[14px] font-bold tracking-widest transition-all">
                                     E-BANKING
                                 </Button>
                             </Link>
@@ -415,8 +420,8 @@ export function PublicHeader() {
                                         <span className="w-8 h-px bg-white/20 block"></span> Search Results ({searchResults.length})
                                     </h4>
                                     {searchResults.map((result, i) => (
-                                        <Link 
-                                            key={i} 
+                                        <Link
+                                            key={i}
                                             href={result.url}
                                             onClick={() => { setIsSearchOpen(false); setSearchQuery(''); }}
                                             className="group block bg-white/5 hover:bg-white/10 border border-white/10 rounded-sm p-6 transition-all"
