@@ -7,6 +7,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [
+        tailwindcss(),
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
             refresh: true,
@@ -17,13 +18,12 @@ export default defineConfig({
                 plugins: ['babel-plugin-react-compiler'],
             },
         }),
-        tailwindcss(),
         wayfinder({
             formVariants: true,
         }),
     ],
     server: {
-        host: '0.0.0.0',
+        host: true,
         port: 5173,
         hmr: {
             host: 'localhost',
@@ -33,6 +33,6 @@ export default defineConfig({
             methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
             allowedHeaders: ['Content-Type', 'Authorization'],
         },
-        allowedHosts: 'all',
+        allowedHosts: true,
     },
 });
