@@ -44,7 +44,7 @@ export default function LondonBranch() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <img 
-                                src="/images/london_skyline.png" 
+                                src="/images/slider_lobby.png" 
                                 alt="UCT London Branch" 
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
