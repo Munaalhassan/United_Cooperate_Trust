@@ -21,11 +21,24 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        $throttleKey = \Illuminate\Support\Str::transliterate(\Illuminate\Support\Str::lower($request->input('email')).'|'.$request->ip());
+
+        if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = \Illuminate\Support\Facades\RateLimiter::availableIn($throttleKey);
+
+            return back()->withErrors([
+                'email' => "Too many login attempts. Please try again in {$seconds} seconds.",
+            ]);
+        }
+
         if (auth('admin')->attempt($credentials)) {
+            \Illuminate\Support\Facades\RateLimiter::clear($throttleKey);
             $request->session()->regenerate();
 
             return redirect()->intended('/system-node-mgt/dashboard');
         }
+
+        \Illuminate\Support\Facades\RateLimiter::hit($throttleKey);
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
