@@ -5,7 +5,7 @@ import React from 'react';
 import { signup } from '@/routes/membership';
 
 const sidebarLinks = [
-    { name: 'UCT Bank Member', href: signup.url() },
+    { name: 'E-Banking Registration', href: '/quick-services/e-banking-registration' },
     { name: 'Credit Cards', href: '/quick-services/credit-cards' },
     { name: 'Security Awareness', href: '/quick-services/security-awareness' },
     { name: 'Third-Party Payments', href: '/quick-services/third-party-payments' },

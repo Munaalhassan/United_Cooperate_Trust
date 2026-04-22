@@ -4,10 +4,19 @@ import { QuickServicesSidebar } from '@/components/quick-services-sidebar';
 import { motion } from 'framer-motion';
 import { ChevronRight, FileText, Download, User, Landmark, Building2, ShieldCheck, Info } from 'lucide-react';
 
-export default function EBankingRegistration() {
-    const downloadForm = (formName: string) => {
-        // Mock download functionality
-        alert(`Downloading ${formName}...`);
+interface EBankingForm {
+    id: number;
+    title: string;
+    file_path: string;
+}
+
+interface Props {
+    forms: Record<string, EBankingForm[]>;
+}
+
+export default function EBankingRegistration({ forms }: Props) {
+    const downloadForm = (form: EBankingForm) => {
+        window.open(form.file_path, '_blank');
     };
 
     return (
@@ -70,13 +79,17 @@ export default function EBankingRegistration() {
                                         <h3 className="text-xl font-bold text-brand-navy uppercase tracking-widest">Natural Person</h3>
                                     </div>
                                     <div className="bg-white border border-slate-200 divide-y divide-slate-100">
-                                        <button onClick={() => downloadForm('Natural Person Application Form')} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors group">
-                                            <div className="flex items-center gap-4">
-                                                <FileText className="w-5 h-5 text-slate-400 group-hover:text-brand-blue transition-colors" />
-                                                <span className="text-sm font-medium text-slate-600">Application form</span>
-                                            </div>
-                                            <Download className="w-4 h-4 text-slate-300 group-hover:text-brand-blue transition-transform group-hover:translate-y-0.5" />
-                                        </button>
+                                        {forms['Natural Person']?.map((form) => (
+                                            <button key={form.id} onClick={() => downloadForm(form)} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors group">
+                                                <div className="flex items-center gap-4">
+                                                    <FileText className="w-5 h-5 text-slate-400 group-hover:text-brand-blue transition-colors" />
+                                                    <span className="text-sm font-medium text-slate-600">{form.title}</span>
+                                                </div>
+                                                <Download className="w-4 h-4 text-slate-300 group-hover:text-brand-blue transition-transform group-hover:translate-y-0.5" />
+                                            </button>
+                                        )) || (
+                                            <p className="p-6 text-sm text-slate-400 italic text-center">No forms currently available.</p>
+                                        )}
                                     </div>
                                 </section>
 
@@ -87,20 +100,17 @@ export default function EBankingRegistration() {
                                         <h3 className="text-xl font-bold text-brand-navy uppercase tracking-widest">Legal Entities</h3>
                                     </div>
                                     <div className="bg-white border border-slate-200 divide-y divide-slate-100">
-                                        <button onClick={() => downloadForm('Legal Entities Application Form')} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors group">
-                                            <div className="flex items-center gap-4">
-                                                <FileText className="w-5 h-5 text-slate-400 group-hover:text-brand-blue transition-colors" />
-                                                <span className="text-sm font-medium text-slate-600">Application form</span>
-                                            </div>
-                                            <Download className="w-4 h-4 text-slate-300 group-hover:text-brand-blue transition-transform group-hover:translate-y-0.5" />
-                                        </button>
-                                        <button onClick={() => downloadForm('BoD Resolutions Template')} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors group">
-                                            <div className="flex items-center gap-4">
-                                                <FileText className="w-5 h-5 text-slate-400 group-hover:text-brand-blue transition-colors" />
-                                                <span className="text-sm font-medium text-slate-600">BoD Resolutions template</span>
-                                            </div>
-                                            <Download className="w-4 h-4 text-slate-300 group-hover:text-brand-blue transition-transform group-hover:translate-y-0.5" />
-                                        </button>
+                                        {forms['Legal Entities']?.map((form) => (
+                                            <button key={form.id} onClick={() => downloadForm(form)} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors group">
+                                                <div className="flex items-center gap-4">
+                                                    <FileText className="w-5 h-5 text-slate-400 group-hover:text-brand-blue transition-colors" />
+                                                    <span className="text-sm font-medium text-slate-600">{form.title}</span>
+                                                </div>
+                                                <Download className="w-4 h-4 text-slate-300 group-hover:text-brand-blue transition-transform group-hover:translate-y-0.5" />
+                                            </button>
+                                        )) || (
+                                            <p className="p-6 text-sm text-slate-400 italic text-center">No forms currently available.</p>
+                                        )}
                                     </div>
                                 </section>
 
@@ -111,34 +121,40 @@ export default function EBankingRegistration() {
                                         <h3 className="text-xl font-bold text-brand-navy uppercase tracking-widest">Funds</h3>
                                     </div>
                                     <div className="bg-white border border-slate-200 divide-y divide-slate-100">
-                                        <button onClick={() => downloadForm('Funds Application Form')} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors group">
-                                            <div className="flex items-center gap-4">
-                                                <FileText className="w-5 h-5 text-slate-400 group-hover:text-brand-blue transition-colors" />
-                                                <span className="text-sm font-medium text-slate-600">Application form</span>
-                                            </div>
-                                            <Download className="w-4 h-4 text-slate-300 group-hover:text-brand-blue transition-transform group-hover:translate-y-0.5" />
-                                        </button>
+                                        {forms['Funds']?.map((form) => (
+                                            <button key={form.id} onClick={() => downloadForm(form)} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors group">
+                                                <div className="flex items-center gap-4">
+                                                    <FileText className="w-5 h-5 text-slate-400 group-hover:text-brand-blue transition-colors" />
+                                                    <span className="text-sm font-medium text-slate-600">{form.title}</span>
+                                                </div>
+                                                <Download className="w-4 h-4 text-slate-300 group-hover:text-brand-blue transition-transform group-hover:translate-y-0.5" />
+                                            </button>
+                                        )) || (
+                                            <p className="p-6 text-sm text-slate-400 italic text-center">No forms currently available.</p>
+                                        )}
                                     </div>
                                 </section>
 
                                 {/* Specific Conditions */}
-                                <section className="pt-8">
-                                    <div className="bg-brand-navy p-8 text-white relative overflow-hidden group">
-                                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
-                                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
-                                            <div className="flex gap-4">
-                                                <ShieldCheck className="w-10 h-10 text-brand-blue shrink-0" />
-                                                <div>
-                                                    <h3 className="text-xl font-bold mb-2">E-Banking Specific Conditions</h3>
-                                                    <p className="text-slate-400 text-sm">(applicable for all)</p>
+                                {forms['Specific Conditions']?.map((form) => (
+                                    <section key={form.id} className="pt-8">
+                                        <div className="bg-brand-navy p-8 text-white relative overflow-hidden group">
+                                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
+                                            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+                                                <div className="flex gap-4">
+                                                    <ShieldCheck className="w-10 h-10 text-brand-blue shrink-0" />
+                                                    <div>
+                                                        <h3 className="text-xl font-bold mb-2">{form.title}</h3>
+                                                        <p className="text-slate-400 text-sm">(applicable for all)</p>
+                                                    </div>
                                                 </div>
+                                                <button onClick={() => downloadForm(form)} className="px-8 py-4 bg-brand-blue text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-brand-navy transition-all flex items-center gap-2">
+                                                    Download Now <Download className="w-4 h-4" />
+                                                </button>
                                             </div>
-                                            <button onClick={() => downloadForm('E-Banking Specific Conditions')} className="px-8 py-4 bg-brand-blue text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-brand-navy transition-all flex items-center gap-2">
-                                                Download Now <Download className="w-4 h-4" />
-                                            </button>
                                         </div>
-                                    </div>
-                                </section>
+                                    </section>
+                                ))}
                             </div>
 
                             <div className="mt-20 p-8 border border-slate-200 bg-slate-100/50 text-center">

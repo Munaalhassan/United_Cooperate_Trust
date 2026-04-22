@@ -33,6 +33,12 @@ Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->gr
     Route::put('memberships/{registration}', [\App\Http\Controllers\Management\MembershipManagementController::class, 'update'])->name('memberships.update');
     Route::delete('memberships/{registration}', [\App\Http\Controllers\Management\MembershipManagementController::class, 'destroy'])->name('memberships.destroy');
 
+    // E-Banking Forms Management
+    Route::get('ebanking-forms', [\App\Http\Controllers\Admin\EBankingFormController::class, 'index'])->name('ebanking-forms.index');
+    Route::post('ebanking-forms', [\App\Http\Controllers\Admin\EBankingFormController::class, 'store'])->name('ebanking-forms.store');
+    Route::put('ebanking-forms/{ebanking_form}', [\App\Http\Controllers\Admin\EBankingFormController::class, 'update'])->name('ebanking-forms.update');
+    Route::delete('ebanking-forms/{ebanking_form}', [\App\Http\Controllers\Admin\EBankingFormController::class, 'destroy'])->name('ebanking-forms.destroy');
+
     // Profile Management
     Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
@@ -90,7 +96,7 @@ Route::prefix('fund-services')->group(function () {
 });
 
 Route::prefix('quick-services')->group(function () {
-    Route::inertia('e-banking-registration', 'quick-services/e-banking-registration')->name('quick.ebanking');
+    Route::get('e-banking-registration', [\App\Http\Controllers\Public\EBankingRegistrationController::class, 'index'])->name('quick.ebanking');
 
     Route::inertia('credit-cards', 'quick-services/credit-cards')->name('quick.cards');
     Route::inertia('security-awareness', 'quick-services/security')->name('quick.security');
@@ -116,7 +122,8 @@ Route::inertia('contact', 'contact')->name('contact');
 Route::get('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('register');
 Route::post('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'store'])->name('membership.store');
 Route::get('membership-signup', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('membership.signup');
-Route::get('quick-services/e-banking-registration', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('quick.ebanking.registration');
+// E-Banking registration page is handled by EBankingRegistrationController now
+// Route::get('quick-services/e-banking-registration', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('quick.ebanking.registration');
 
 // Admin and settings routes handled above
 
