@@ -20,6 +20,16 @@ interface Props {
 }
 
 export default function NewsDetail({ post }: Props) {
+    if (!post) {
+        return (
+            <PublicLayout>
+                <div className="py-20 text-center">
+                    <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Post not found.</p>
+                </div>
+            </PublicLayout>
+        );
+    }
+
     return (
         <PublicLayout>
             <Head title={`${post.title} | United Cooperate Trust Bank`} />

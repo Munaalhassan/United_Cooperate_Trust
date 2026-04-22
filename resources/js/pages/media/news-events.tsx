@@ -22,6 +22,16 @@ interface Props {
 }
 
 export default function NewsEvents({ posts }: Props) {
+    if (!posts || !posts.data) {
+        return (
+            <PublicLayout>
+                <div className="py-20 text-center">
+                    <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Loading news and events...</p>
+                </div>
+            </PublicLayout>
+        );
+    }
+
     return (
         <PublicLayout>
             <Head title="News and Events | United Cooperate Trust Bank" />
@@ -105,7 +115,7 @@ export default function NewsEvents({ posts }: Props) {
                     </div>
 
                     {/* Pagination */}
-                    {posts.links.length > 3 && (
+                    {posts.links?.length > 3 && (
                         <div className="mt-16 flex justify-center">
                             <div className="flex items-center gap-2">
                                 {posts.links.map((link, i) => (
