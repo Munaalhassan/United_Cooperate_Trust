@@ -41,13 +41,13 @@ class MembershipApplicationController extends Controller
             $validated['dl_upload'] = $path;
         }
 
-        EBankingRegistration::create($validated);
-
+        $reg = EBankingRegistration::create($validated);
+        
         // Notify Admins
         Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
             'New Membership Application',
             "A new application has been submitted by {$validated['first_name']} {$validated['last_name']} ({$validated['email']})",
-            route('system.mgt.memberships.index'),
+            route('system.mgt.memberships.index', ['review' => $reg->id]),
             'info'
         )));
 

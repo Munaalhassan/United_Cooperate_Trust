@@ -83,7 +83,7 @@ class NewsEventController extends Controller
         Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
             'New News/Event Created',
             "{$admin->name} created a new {$newsEvent->type}: {$newsEvent->title}",
-            route('system.mgt.news-events.index'),
+            route('system.mgt.news-events.index', ['edit' => $newsEvent->id]),
             'success'
         )));
 
@@ -160,7 +160,7 @@ class NewsEventController extends Controller
         Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
             'News/Event Updated',
             "{$admin->name} updated the {$newsEvent->type}: {$newsEvent->title}",
-            route('system.mgt.news-events.index'),
+            route('system.mgt.news-events.index', ['edit' => $newsEvent->id]),
             'info'
         )));
 

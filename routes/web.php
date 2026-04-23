@@ -29,6 +29,8 @@ Route::middleware(['admin'])->prefix('system-node-mgt')->name('system.mgt.')->gr
     // Memberships Management
     Route::get('memberships', [\App\Http\Controllers\Management\MembershipManagementController::class, 'index'])->name('memberships.index');
     Route::get('memberships/create', [\App\Http\Controllers\Management\MembershipManagementController::class, 'create'])->name('memberships.create');
+    Route::get('memberships/{registration}/edit', [\App\Http\Controllers\Management\MembershipManagementController::class, 'edit'])->name('memberships.edit');
+    Route::get('memberships/{registration}/view-id', [\App\Http\Controllers\Management\MembershipManagementController::class, 'viewId'])->name('memberships.view-id');
     Route::post('memberships', [\App\Http\Controllers\Management\MembershipManagementController::class, 'store'])->name('memberships.store');
     Route::put('memberships/{registration}', [\App\Http\Controllers\Management\MembershipManagementController::class, 'update'])->name('memberships.update');
     Route::delete('memberships/{registration}', [\App\Http\Controllers\Management\MembershipManagementController::class, 'destroy'])->name('memberships.destroy');

@@ -22,6 +22,24 @@ class MembershipManagementController extends Controller
     {
         return Inertia::render('admin/memberships/create');
     }
+ 
+    public function edit(EBankingRegistration $registration)
+    {
+        return Inertia::render('admin/memberships/edit', [
+            'member' => $registration
+        ]);
+    }
+
+    public function viewId(EBankingRegistration $registration)
+    {
+        if (!$registration->dl_upload) {
+            abort(404);
+        }
+
+        return Inertia::render('admin/memberships/view-id', [
+            'member' => $registration
+        ]);
+    }
 
     public function store(Request $request)
     {
@@ -48,14 +66,14 @@ class MembershipManagementController extends Controller
             $validated['dl_upload'] = $path;
         }
 
-        EBankingRegistration::create($validated);
+        $reg = EBankingRegistration::create($validated);
 
         // Notify Admins
         $admin = auth('admin')->user();
         Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
             'Manual Membership Added',
             "{$admin->name} manually added a new member: {$validated['first_name']} {$validated['last_name']}",
-            route('system.mgt.memberships.index'),
+            route('system.mgt.memberships.index', ['review' => $reg->id]),
             'success'
         )));
 
@@ -65,22 +83,44 @@ class MembershipManagementController extends Controller
     public function update(Request $request, EBankingRegistration $registration)
     {
         $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:255',
+            'gender' => 'required|string|max:255',
+            'dob' => 'required|date',
+            'nationality' => 'required|string|max:255',
+            'ssn' => 'required|string|max:255',
+            'dl' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'account_type' => 'required|string|max:255',
+            'occupation' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'status' => 'required|string|in:pending,approved,rejected',
             'admin_notes' => 'nullable|string',
+            'dl_upload' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('dl_upload')) {
+            if ($registration->dl_upload) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($registration->dl_upload);
+            }
+            $path = $request->file('dl_upload')->store('memberships', 'public');
+            $validated['dl_upload'] = $path;
+        }
 
         $registration->update($validated);
 
         // Notify Admins
         $admin = auth('admin')->user();
         Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
-            'Membership Status Updated',
-            "{$admin->name} updated membership for {$registration->first_name} to " . strtoupper($validated['status']),
-            route('system.mgt.memberships.index'),
+            'Membership Updated',
+            "{$admin->name} updated the record for {$registration->first_name} {$registration->last_name}",
+            route('system.mgt.memberships.index', ['review' => $registration->id]),
             'info'
         )));
 
-        return back()->with('success', 'Membership updated successfully.');
+        return redirect()->route('system.mgt.memberships.index')->with('success', 'Membership updated successfully.');
     }
 
     public function destroy(EBankingRegistration $registration)

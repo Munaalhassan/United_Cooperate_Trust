@@ -22,15 +22,13 @@ export function useFlashToast(): void {
 
         Swal.fire({
             icon: data.type,
-            title: data.type === 'success' ? 'Success!' : 'Notification',
+            title: data.type === 'success' ? 'Success!' : 
+                   data.type === 'error' ? 'Error!' : 'Notification',
             text: data.message,
-            timer: 3000,
-            timerProgressBar: true,
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-end',
+            confirmButtonColor: '#002855',
             customClass: {
-                popup: 'rounded-none border-brand-blue border-l-4',
+                popup: 'rounded-none',
+                confirmButton: 'rounded-none px-8 py-3 font-bold uppercase tracking-widest text-[10px]',
             }
         });
     }, [flash]);

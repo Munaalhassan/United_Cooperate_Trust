@@ -83,7 +83,7 @@ class NavCentreController extends Controller
         Admin::all()->each(fn($a) => $a->notify(new SystemNotification(
             'New Fund Entry',
             "{$admin->name} added a new fund: {$fund->name}",
-            route('system.mgt.nav-funds.index'),
+            route('system.mgt.nav-funds.index', ['edit' => $fund->id]),
             'success'
         )));
 
@@ -113,7 +113,7 @@ class NavCentreController extends Controller
         Admin::where('id', '!=', $admin->id)->get()->each(fn($a) => $a->notify(new SystemNotification(
             'Fund Entry Updated',
             "{$admin->name} updated fund: {$navFund->name}",
-            route('system.mgt.nav-funds.index'),
+            route('system.mgt.nav-funds.index', ['edit' => $navFund->id]),
             'info'
         )));
 

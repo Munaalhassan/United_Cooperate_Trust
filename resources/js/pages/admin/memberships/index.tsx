@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminLayout from '@/layouts/admin-layout';
-import { Head, useForm, Link } from '@inertiajs/react';
+import { Head, useForm, Link, usePage } from '@inertiajs/react';
 import { 
     Users, 
     User,
@@ -18,7 +18,12 @@ import {
     Briefcase,
     Globe,
     Landmark,
-    Plus
+    Plus,
+    Calendar,
+    Fingerprint,
+    FileText as FileIcon,
+    Shield,
+    Edit
 } from 'lucide-react';
 import { 
     Table, 
@@ -46,7 +51,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import Swal from 'sweetalert2';
-import { update as memUpdate, destroy as memDestroy, create as memCreate } from '@/routes/system/mgt/memberships';
+import { 
+    update as memUpdate, 
+    destroy as memDestroy, 
+    create as memCreate,
+    edit as memEdit 
+} from '@/routes/system/mgt/memberships';
 
 interface Membership {
     id: number;
@@ -54,10 +64,16 @@ interface Membership {
     last_name: string;
     email: string;
     phone: string;
+    gender: string;
+    dob: string;
     nationality: string;
+    ssn: string;
+    dl: string;
+    username: string;
     account_type: string;
     occupation: string;
     address: string;
+    dl_upload: string | null;
     status: 'pending' | 'approved' | 'rejected';
     admin_notes: string | null;
     created_at: string;
@@ -81,6 +97,19 @@ export default function MembershipsIndex({ registrations }: Props) {
         `${reg.first_name} ${reg.last_name}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
         reg.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    // Auto-open modal if 'review' parameter exists
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const reviewId = params.get('review');
+        
+        if (reviewId) {
+            const reg = registrations.find(r => r.id.toString() === reviewId);
+            if (reg) {
+                handleView(reg);
+            }
+        }
+    }, [registrations]);
 
     const handleView = (reg: Membership) => {
         setSelectedReg(reg);
@@ -125,13 +154,10 @@ export default function MembershipsIndex({ registrations }: Props) {
                             title: 'Deleted!',
                             text: 'Record has been deleted.',
                             icon: 'success',
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
+                            confirmButtonColor: '#002855',
                             customClass: {
-                                popup: 'rounded-none border-brand-blue border-l-4',
+                                popup: 'rounded-none',
+                                confirmButton: 'rounded-none px-8 py-3 font-bold uppercase tracking-widest text-[10px]',
                             }
                         });
                     }
@@ -266,6 +292,14 @@ export default function MembershipsIndex({ registrations }: Props) {
                                                 <DropdownMenuItem onClick={() => handleView(reg)} className="text-xs font-bold uppercase tracking-widest text-slate-600 cursor-pointer">
                                                     <Eye className="w-3.5 h-3.5 mr-2" /> View Details
                                                 </DropdownMenuItem>
+                                                <DropdownMenuItem asChild>
+                                                    <Link 
+                                                        href={memEdit.url(reg.id)}
+                                                        className="text-xs font-bold uppercase tracking-widest text-slate-600 cursor-pointer"
+                                                    >
+                                                        <Edit className="w-3.5 h-3.5 mr-2" /> Edit Member
+                                                    </Link>
+                                                </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => handleDelete(reg.id)} className="text-xs font-bold uppercase tracking-widest text-red-600 cursor-pointer">
                                                     <Trash2 className="w-3.5 h-3.5 mr-2" /> Delete Record
                                                 </DropdownMenuItem>
@@ -288,7 +322,7 @@ export default function MembershipsIndex({ registrations }: Props) {
 
             {/* View/Edit Detail Dialog */}
             <Dialog open={isViewOpen} onOpenChange={setIsViewOpen}>
-                <DialogContent className="max-w-2xl rounded-none border-slate-200 max-h-[90vh] overflow-y-auto">
+                <DialogContent className="sm:max-w-4xl rounded-none border-slate-200 max-h-[90vh] overflow-y-auto">
                     <DialogHeader className="border-b border-slate-100 pb-6 mb-6">
                         <DialogTitle className="text-2xl font-bold text-brand-navy flex items-center gap-3">
                             <Landmark className="w-6 h-6 text-brand-blue" /> Application Review
@@ -301,7 +335,7 @@ export default function MembershipsIndex({ registrations }: Props) {
                     {selectedReg && (
                         <div className="space-y-10">
                             {/* Applicant Info Grid */}
-                            <div className="grid grid-cols-2 gap-x-12 gap-y-8">
+                            <div className="grid grid-cols-3 gap-x-12 gap-y-8">
                                 <div className="space-y-1">
                                     <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><User className="w-2.5 h-2.5" /> Full Name</Label>
                                     <div className="text-sm font-bold text-brand-navy">{selectedReg.first_name} {selectedReg.last_name}</div>
@@ -319,14 +353,45 @@ export default function MembershipsIndex({ registrations }: Props) {
                                     <div className="text-sm font-bold text-brand-navy">{selectedReg.nationality}</div>
                                 </div>
                                 <div className="space-y-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><Calendar className="w-2.5 h-2.5" /> Date of Birth / Gender</Label>
+                                    <div className="text-sm font-bold text-brand-navy">{selectedReg.dob} ({selectedReg.gender})</div>
+                                </div>
+                                <div className="space-y-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><Fingerprint className="w-2.5 h-2.5" /> SSN / National ID</Label>
+                                    <div className="text-sm font-bold text-brand-navy">{selectedReg.ssn}</div>
+                                </div>
+                                <div className="space-y-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><FileIcon className="w-2.5 h-2.5" /> Driver's License</Label>
+                                    <div className="text-sm font-bold text-brand-navy">{selectedReg.dl}</div>
+                                </div>
+                                <div className="space-y-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><Shield className="w-2.5 h-2.5" /> Desired Username</Label>
+                                    <div className="text-sm font-bold text-brand-navy">{selectedReg.username}</div>
+                                </div>
+                                <div className="space-y-1">
                                     <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><Briefcase className="w-2.5 h-2.5" /> Occupation</Label>
                                     <div className="text-sm font-bold text-brand-navy">{selectedReg.occupation}</div>
                                 </div>
-                                <div className="space-y-1">
-                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><MapPin className="w-2.5 h-2.5" /> Address</Label>
+                                <div className="space-y-1 col-span-2">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5"><MapPin className="w-2.5 h-2.5" /> Residential Address</Label>
                                     <div className="text-sm font-bold text-brand-navy">{selectedReg.address}</div>
                                 </div>
                             </div>
+
+                            {selectedReg.dl_upload && (
+                                <div className="space-y-3">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">Identification Document</Label>
+                                    <div className="border border-slate-200 p-2 bg-slate-50">
+                                        <img 
+                                            src={`/storage/${selectedReg.dl_upload}`} 
+                                            alt="ID Document" 
+                                            className="w-full h-auto max-h-64 object-contain cursor-pointer hover:opacity-90 transition-opacity"
+                                            onClick={() => window.open(`/storage/${selectedReg.dl_upload}`, '_blank')}
+                                        />
+                                        <p className="text-[9px] text-center text-slate-400 mt-2 uppercase tracking-widest">Click image to view full size</p>
+                                    </div>
+                                </div>
+                            )}
 
                             <hr className="border-slate-100" />
 

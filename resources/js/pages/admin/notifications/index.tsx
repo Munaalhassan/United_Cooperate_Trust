@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { timeAgo } from '@/lib/utils';
+import { read, readAll, destroy as notifDestroy, clearAll as notifClearAll } from '@/routes/system/mgt/notifications';
 
 interface NotificationData {
     title: string;
@@ -44,25 +45,25 @@ interface Props {
 export default function NotificationsIndex({ notifications, unreadCount }: Props) {
     
     const markAsRead = (id: string) => {
-        router.post(route('system.mgt.notifications.read', id), {}, {
+        router.post(read.url(id), {}, {
             preserveScroll: true,
         });
     };
 
     const markAllAsRead = () => {
-        router.post(route('system.mgt.notifications.read-all'), {}, {
+        router.post(readAll.url(), {}, {
             preserveScroll: true,
         });
     };
 
     const deleteNotification = (id: string) => {
-        router.delete(route('system.mgt.notifications.destroy', id), {
+        router.delete(notifDestroy.url(id), {
             preserveScroll: true,
         });
     };
 
     const clearAll = () => {
-        router.delete(route('system.mgt.notifications.clear-all'), {
+        router.delete(notifClearAll.url(), {
             preserveScroll: true,
         });
     };
@@ -226,8 +227,3 @@ export default function NotificationsIndex({ notifications, unreadCount }: Props
     );
 }
 
-// Global helper for route (Inertia convention)
-function route(name: string, params?: any) {
-    const r = (window as any).route;
-    return r ? r(name, params) : '';
-}
