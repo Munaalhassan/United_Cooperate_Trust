@@ -1,7 +1,3 @@
-/**
- * UCT Bank Utility Functions
- * Restored with support for Tailwind class merging, URL handling, and time distance formatting.
- */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 

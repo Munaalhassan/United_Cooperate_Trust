@@ -263,7 +263,20 @@ export default function Register() {
                                             <input 
                                                 type="file"
                                                 id="dl_upload"
-                                                onChange={e => setData('dl_upload', e.target.files?.[0] || null)}
+                                                onChange={e => {
+                                                    const file = e.target.files?.[0] || null;
+                                                    if (file && file.size > 5 * 1024 * 1024) {
+                                                        Swal.fire({
+                                                            icon: 'warning',
+                                                            title: 'File Too Large',
+                                                            text: 'The selected file is larger than 5MB. Please choose a smaller image.',
+                                                            confirmButtonColor: '#002855',
+                                                        });
+                                                        e.target.value = '';
+                                                        return;
+                                                    }
+                                                    setData('dl_upload', file);
+                                                }}
                                                 className="hidden"
                                             />
                                             <label 

@@ -40,7 +40,7 @@ class MembershipManagementController extends Controller
             'account_type' => 'required|string|max:255',
             'occupation' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'dl_upload' => 'nullable|image|max:2048',
+            'dl_upload' => 'nullable|image|max:5120',
         ]);
 
         if ($request->hasFile('dl_upload')) {
