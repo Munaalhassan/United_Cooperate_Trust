@@ -75,6 +75,17 @@ export default function NewsEventsIndex({ newsEvents, filters, types }: Props) {
         return () => clearTimeout(timer);
     }, [searchQuery, typeFilter]);
 
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const editId = urlParams.get('edit');
+        if (editId) {
+            const item = newsEvents.data.find(n => n.id === parseInt(editId));
+            if (item) {
+                handleEdit(item);
+            }
+        }
+    }, [newsEvents.data]);
+
     const { data, setData, post, processing, errors, reset, clearErrors } = useForm({
         title: '',
         type: 'News' as 'News' | 'Event',

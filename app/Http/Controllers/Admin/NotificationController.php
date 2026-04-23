@@ -18,10 +18,14 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function markAsRead($id)
+    public function markAsRead(Request $request, $id)
     {
         $notification = auth('admin')->user()->notifications()->findOrFail($id);
         $notification->markAsRead();
+
+        if ($request->has('redirect')) {
+            return redirect($request->redirect);
+        }
 
         return back()->with('success', 'Notification marked as read.');
     }

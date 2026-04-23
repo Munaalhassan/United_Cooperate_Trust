@@ -104,7 +104,7 @@ export default function AdminLayout({ children, title }: Props) {
                             <Bell className={`w-4 h-4 ${isActive('/system-node-mgt/notifications') ? 'text-brand-blue' : ''}`} /> Notifications
                         </div>
                         {(usePage().props as any).auth?.unreadNotificationsCount > 0 && (
-                            <span className="bg-brand-blue text-white text-[10px] font-black px-1.5 py-0.5 rounded-sm">
+                            <span className="bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full ring-2 ring-white shadow-sm flex items-center justify-center min-w-[20px] h-5">
                                 {(usePage().props as any).auth.unreadNotificationsCount > 9 ? '9+' : (usePage().props as any).auth.unreadNotificationsCount}
                             </span>
                         )}

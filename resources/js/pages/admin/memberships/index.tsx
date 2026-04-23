@@ -55,7 +55,8 @@ import {
     update as memUpdate, 
     destroy as memDestroy, 
     create as memCreate,
-    edit as memEdit 
+    edit as memEdit,
+    viewId as memViewId
 } from '@/routes/system/mgt/memberships';
 
 interface Membership {
@@ -382,12 +383,18 @@ export default function MembershipsIndex({ registrations }: Props) {
                                 <div className="space-y-3">
                                     <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">Identification Document</Label>
                                     <div className="border border-slate-200 p-2 bg-slate-50">
-                                        <img 
-                                            src={`/storage/${selectedReg.dl_upload}`} 
-                                            alt="ID Document" 
-                                            className="w-full h-auto max-h-64 object-contain cursor-pointer hover:opacity-90 transition-opacity"
-                                            onClick={() => window.open(`/storage/${selectedReg.dl_upload}`, '_blank')}
-                                        />
+                                        <a 
+                                            href={memViewId.url(selectedReg.id)} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="block group relative"
+                                        >
+                                            <img 
+                                                src={`/storage/${selectedReg.dl_upload}`} 
+                                                alt="ID Document" 
+                                                className="w-full h-auto max-h-64 object-contain cursor-pointer hover:opacity-90 transition-opacity"
+                                            />
+                                        </a>
                                         <p className="text-[9px] text-center text-slate-400 mt-2 uppercase tracking-widest">Click image to view full size</p>
                                     </div>
                                 </div>

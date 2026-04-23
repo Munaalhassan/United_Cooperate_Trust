@@ -61,6 +61,17 @@ export default function NavFundsIndex({ funds, filters }: Props) {
         return () => clearTimeout(timer);
     }, [searchQuery]);
 
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const editId = urlParams.get('edit');
+        if (editId) {
+            const fund = funds.data.find(f => f.id === parseInt(editId));
+            if (fund) {
+                handleEdit(fund);
+            }
+        }
+    }, [funds.data]);
+
     const { data, setData, post, put, delete: destroy, processing, errors, reset, clearErrors } = useForm({
         name: '',
         isin: '',

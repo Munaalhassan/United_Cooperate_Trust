@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminLayout from '@/layouts/admin-layout';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { 
     Bell, 
     Check, 
@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { timeAgo } from '@/lib/utils';
+import Swal from 'sweetalert2';
 import { read, readAll, destroy as notifDestroy, clearAll as notifClearAll } from '@/routes/system/mgt/notifications';
 
 interface NotificationData {
@@ -42,7 +43,9 @@ interface Props {
     unreadCount: number;
 }
 
-export default function NotificationsIndex({ notifications, unreadCount }: Props) {
+export default function NotificationsIndex({ notifications, unreadCount: initialUnreadCount }: Props) {
+    const { props } = usePage<any>();
+    const unreadCount = props.auth?.unreadNotificationsCount ?? initialUnreadCount;
     
     const markAsRead = (id: string) => {
         router.post(read.url(id), {}, {
@@ -57,14 +60,50 @@ export default function NotificationsIndex({ notifications, unreadCount }: Props
     };
 
     const deleteNotification = (id: string) => {
-        router.delete(notifDestroy.url(id), {
-            preserveScroll: true,
+        Swal.fire({
+            title: 'Delete Notification?',
+            text: "This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0a2540',
+            cancelButtonColor: '#f1f5f9',
+            confirmButtonText: 'YES, DELETE',
+            cancelButtonText: 'CANCEL',
+            customClass: {
+                popup: 'rounded-none border-t-4 border-t-red-500',
+                confirmButton: 'rounded-none font-bold uppercase tracking-widest text-[10px] px-8 py-4',
+                cancelButton: 'rounded-none font-bold uppercase tracking-widest text-[10px] px-8 py-4 text-slate-600'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(notifDestroy.url(id), {
+                    preserveScroll: true,
+                });
+            }
         });
     };
 
     const clearAll = () => {
-        router.delete(notifClearAll.url(), {
-            preserveScroll: true,
+        Swal.fire({
+            title: 'Clear All Notifications?',
+            text: "This will remove all notifications from your inbox.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0a2540',
+            cancelButtonColor: '#f1f5f9',
+            confirmButtonText: 'YES, CLEAR ALL',
+            cancelButtonText: 'CANCEL',
+            customClass: {
+                popup: 'rounded-none border-t-4 border-t-red-500',
+                confirmButton: 'rounded-none font-bold uppercase tracking-widest text-[10px] px-8 py-4',
+                cancelButton: 'rounded-none font-bold uppercase tracking-widest text-[10px] px-8 py-4 text-slate-600'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(notifClearAll.url(), {
+                    preserveScroll: true,
+                });
+            }
         });
     };
 
@@ -98,8 +137,8 @@ export default function NotificationsIndex({ notifications, unreadCount }: Props
                             <Bell className="w-6 h-6 text-brand-blue" />
                             Notifications
                             {unreadCount > 0 && (
-                                <span className="bg-brand-blue text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">
-                                    {unreadCount > 9 ? '9+' : unreadCount} NEW
+                                <span className="bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full ring-2 ring-white shadow-sm flex items-center justify-center min-w-[20px] h-5">
+                                    {unreadCount > 9 ? '9+' : unreadCount}
                                 </span>
                             )}
                         </h2>
@@ -161,15 +200,26 @@ export default function NotificationsIndex({ notifications, unreadCount }: Props
                                             </p>
 
                                             <div className="flex items-center gap-4">
-                                                {notification.data.action_url && (
-                                                    <Link 
-                                                        href={notification.data.action_url}
-                                                        onClick={() => !notification.read_at && markAsRead(notification.id)}
-                                                        className="text-[10px] font-black text-brand-blue uppercase tracking-widest hover:underline flex items-center gap-1"
-                                                    >
-                                                        View Details <Info className="w-3 h-3" />
-                                                    </Link>
-                                                )}
+                                                {(() => {
+                                                    const url = notification.data.action_url;
+                                                    if (url) {
+                                                        return (
+                                                            <button 
+                                                                onClick={() => {
+                                                                    if (!notification.read_at) {
+                                                                        router.post(read.url(notification.id), { redirect: url });
+                                                                    } else {
+                                                                        router.get(url);
+                                                                    }
+                                                                }}
+                                                                className="text-[10px] font-black text-brand-blue uppercase tracking-widest hover:underline flex items-center gap-1"
+                                                            >
+                                                                View Details <Info className="w-3 h-3" />
+                                                            </button>
+                                                        );
+                                                    }
+                                                    return null;
+                                                })()}
                                                 {!notification.read_at && (
                                                     <button 
                                                         onClick={() => markAsRead(notification.id)}
