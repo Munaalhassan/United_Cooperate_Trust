@@ -1,14 +1,40 @@
 import { PublicHeader } from '@/components/public-header';
 import { ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import { CookieBanner } from '@/components/cookie-banner';
 import { BackToTop } from '@/components/back-to-top';
 import { OptimizedImage } from '@/components/ui/optimized-image';
+import { SmoothScroll } from '@/components/smooth-scroll';
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
+    const { scrollYProgress } = useScroll();
+
     return (
-        <div className="min-h-screen bg-slate-50 font-sans antialiased">
+        <SmoothScroll>
+            <div className="min-h-screen bg-slate-50 font-sans antialiased">
+            {/* Enhanced Scroll Progress Bar with Speedlighting Effect */}
+            <div className="fixed top-0 left-0 right-0 h-1.5 z-[9999] pointer-events-none">
+                <motion.div
+                    className="h-full bg-brand-blue origin-left relative overflow-hidden shadow-[0_0_15px_rgba(0,122,255,0.6)]"
+                    style={{ scaleX: scrollYProgress }}
+                >
+                    <motion.div 
+                        className="absolute inset-0 h-full w-[200%]"
+                        style={{
+                            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0) 75%, transparent 100%)',
+                        }}
+                        animate={{
+                            x: ['-100%', '50%']
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "linear"
+                        }}
+                    />
+                </motion.div>
+            </div>
             <PublicHeader />
             <main className="relative">
                 {children}
@@ -131,5 +157,6 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             <CookieBanner />
             <BackToTop />
         </div>
+        </SmoothScroll>
     );
 }

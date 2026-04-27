@@ -161,13 +161,65 @@
     }
 }
 
-/* Custom Progress Bar Styling */
+/* Custom Progress Bar Styling with Speedlighting Effect */
 #nprogress .bar {
-    background: #0a2540 !important;
-    height: 3px !important;
-    box-shadow: none !important;
+    background: #007AFF !important;
+    height: 4px !important;
+    box-shadow: 0 0 15px rgba(0, 122, 255, 0.6) !important;
+    position: relative;
+    overflow: hidden;
+    z-index: 10000;
+}
+
+#nprogress .bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+    animation: nprogress-shimmer 1.5s infinite linear;
+}
+
+@keyframes nprogress-shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
 }
 
 #nprogress .peg {
     box-shadow: none !important;
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0e3d6c;
+    border-radius: 100px;
+    border: 2px solid #f8fafc;
+    background-clip: padding-box;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #007AFF;
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0a2540 #f8fafc;
 }

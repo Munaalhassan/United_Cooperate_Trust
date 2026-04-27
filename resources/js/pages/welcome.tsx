@@ -15,6 +15,7 @@ import {
     MapPin
 } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
+import { fadeInLift, staggerContainer, sectionReveal } from '@/lib/animations';
 
 const slides = [
     '/images/hero/slide-1.jpg',
@@ -144,9 +145,9 @@ export default function Welcome() {
                 {/* Content */}
                 <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full">
                     <motion.div 
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                        variants={fadeInLift}
+                        initial="hidden"
+                        animate="show"
                         className="max-w-2xl"
                     >
                         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
@@ -219,15 +220,17 @@ export default function Welcome() {
                         </motion.h2>
                     </div>
 
-                    {/* Columns Container */}
-                    <div className="flex flex-col lg:flex-row h-auto lg:h-[650px] w-full gap-4 lg:gap-0 border-t border-b border-slate-200">
+                    <motion.div 
+                        variants={staggerContainer(0.15, 0.2)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="flex flex-col lg:flex-row h-auto lg:h-[650px] w-full gap-4 lg:gap-0 border-t border-b border-slate-200"
+                    >
                         {services.map((service, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.8 }}
+                                variants={fadeInLift}
                                 className="group relative flex-1 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] lg:hover:flex-[1.8] border-r last:border-r-0 border-slate-200"
                             >
                                 {/* Background Image with Color Shift */}
@@ -274,7 +277,7 @@ export default function Welcome() {
                                 <div className="absolute bottom-0 left-0 w-full h-1 bg-brand-blue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
                             </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -360,26 +363,15 @@ export default function Welcome() {
                     </div>
 
                     <motion.div 
-                        variants={{
-                            hidden: { opacity: 0 },
-                            show: {
-                                opacity: 1,
-                                transition: {
-                                    staggerChildren: 0.2
-                                }
-                            }
-                        }}
+                        variants={staggerContainer(0.2, 0.4)}
                         initial="hidden"
                         whileInView="show"
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-100px" }}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6"
                     >
                         {/* Main Digital Card */}
                         <motion.div 
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-                            }}
+                            variants={fadeInLift}
                             className="md:col-span-2 lg:col-span-8 lg:row-span-2 group relative overflow-hidden bg-brand-navy min-h-[400px] lg:min-h-0"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy to-brand-blue/30" />
@@ -402,10 +394,7 @@ export default function Welcome() {
 
                         {/* Security Card */}
                         <motion.div 
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-                            }}
+                            variants={fadeInLift}
                             className="col-span-1 lg:col-span-4 lg:row-span-1 p-8 md:p-10 bg-slate-50 border border-slate-100 flex flex-col justify-between hover:bg-white hover:shadow-2xl hover:shadow-brand-blue/5 transition-all group min-h-[200px] md:min-h-[240px]"
                         >
                             <div className="flex justify-between items-start">
@@ -420,10 +409,7 @@ export default function Welcome() {
 
                         {/* Card Solutions */}
                         <motion.div 
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-                            }}
+                            variants={fadeInLift}
                             className="col-span-1 lg:col-span-4 lg:row-span-1 p-8 md:p-10 bg-brand-gold text-white flex flex-col justify-between group overflow-hidden relative min-h-[200px] md:min-h-[240px]"
                         >
                             <div className="absolute top-[-50%] right-[-50%] w-[200px] h-[200px] bg-white/10 rounded-full blur-[40px] group-hover:scale-150 transition-transform duration-700" />
