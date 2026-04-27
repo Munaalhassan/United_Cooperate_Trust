@@ -12,13 +12,11 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::updateOrCreate(
+        \App\Models\Admin::updateOrCreate(
             ['email' => 'admin@uctbank.com'],
             [
                 'name' => 'Master Admin',
                 'password' => \Illuminate\Support\Facades\Hash::make('Admin@UCT2026!'),
-                'is_admin' => true,
-                'email_verified_at' => now(),
             ]
         );
     }
