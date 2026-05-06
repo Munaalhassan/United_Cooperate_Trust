@@ -46,7 +46,7 @@ export default function HumanResources() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_lobby.png" 
+                                src="/images/humanresources.png" 
                                 alt="UCT Culture" 
                                 width={800}
                                 height={500}

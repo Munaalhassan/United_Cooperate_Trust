@@ -45,7 +45,7 @@ export default function BusinessCards() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_lobby.png" 
+                                src="/images/BusinessCreditCards.png" 
                                 alt="UCT Business Cards" 
                                 width={800}
                                 height={500}

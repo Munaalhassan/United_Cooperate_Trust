@@ -45,7 +45,7 @@ export default function LondonBranch() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_lobby.png" 
+                                src="/images/ourpolandbranch.png" 
                                 alt="UCT London Branch" 
                                 width={800}
                                 height={500}

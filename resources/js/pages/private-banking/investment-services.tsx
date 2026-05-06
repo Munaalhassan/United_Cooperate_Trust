@@ -45,7 +45,7 @@ export default function InvestmentServices() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_wealth.png" 
+                                src="/images/investmentservices.jpg" 
                                 alt="UCT Investment Services" 
                                 width={800}
                                 height={500}

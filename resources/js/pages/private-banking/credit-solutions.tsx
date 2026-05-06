@@ -45,7 +45,7 @@ export default function CreditSolutions() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_wealth.png" 
+                                src="/images/credit-solutions.png" 
                                 alt="UCT Credit Solutions" 
                                 width={800}
                                 height={500}

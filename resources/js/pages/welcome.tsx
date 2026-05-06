@@ -31,7 +31,7 @@ const services = [
         description: "A lifelong relationship based on personal attention, trust and leading expertise.",
         linkText: "Find out more",
         href: "/private-banking/investment-services",
-        image: "/images/service-1.jpg",
+        image: "/images/Private-Bankingf088f088.png",
         reverse: false
     },
     {
@@ -39,7 +39,7 @@ const services = [
         description: "Targeted products and services, expertly tailored to support your business plans.",
         linkText: "Explore",
         href: "/corporate-banking/payment-fx",
-        image: "/images/service-2.jpg",
+        image: "/images/Corporate-Banking4b714b71.png",
         reverse: true
     },
     {
@@ -47,7 +47,7 @@ const services = [
         description: "Our focus is on providing a customized and superior quality service to our clients based on long term relationships and a team with extensive experience and expertise.",
         linkText: "Read more",
         href: "/fund-services/fund-business",
-        image: "/images/service-3.jpg",
+        image: "/images/FundServices1a310a310.png",
         reverse: false
     },
     {
@@ -55,7 +55,7 @@ const services = [
         description: "Join our global community of elite banking clients and access unparalleled financial stability.",
         linkText: "Join Now!",
         href: signup.url(),
-        image: "/images/service-4.jpg",
+        image: "/images/Governance.png",
         reverse: true
     }
 ];
@@ -287,7 +287,7 @@ export default function Welcome() {
                     {/* Image Half */}
                     <div className="w-full lg:w-1/2 relative h-[400px] lg:h-auto">
                         <OptimizedImage 
-                            src="/images/usa-hub.jpg" 
+                            src="/images/Whyusa.png" 
                             alt="United Cooperate Trust Bank Headquarters in the USA Financial Hub"
                             width={1200}
                             height={800}
