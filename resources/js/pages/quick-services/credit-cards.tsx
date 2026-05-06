@@ -3,6 +3,7 @@ import PublicLayout from '@/layouts/public-layout';
 import { QuickServicesSidebar } from '@/components/quick-services-sidebar';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 const CardMockup = ({ type }: { type: 'gold' | 'world' | 'business' }) => {
     const gradients = {
@@ -86,6 +87,16 @@ export default function CreditCards() {
                         <div className="max-w-3xl">
                             <h2 className="text-3xl font-bold text-brand-navy mb-6">The Right Credit Card for You</h2>
                             
+                            <div className="mb-10 rounded-xl overflow-hidden shadow-lg">
+                                <OptimizedImage 
+                                    src="/images/BusinessCreditCards.png" 
+                                    alt="Credit Cards"
+                                    width={800}
+                                    height={400}
+                                    className="w-full h-auto object-cover"
+                                />
+                            </div>
+
                             <div className="text-lg text-slate-600 leading-relaxed font-light mb-12">
                                 <p>
                                     We offer credit card options to suit your individual circumstances and lifestyle or your company needs.
