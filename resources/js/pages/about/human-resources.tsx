@@ -46,8 +46,8 @@ export default function HumanResources() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_lobby.png" 
-                                alt="PTB Culture" 
+                                src="/images/humanresources.png" 
+                                alt="Human Resources" 
                                 width={800}
                                 height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"

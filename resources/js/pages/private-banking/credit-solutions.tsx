@@ -45,8 +45,8 @@ export default function CreditSolutions() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_wealth.png" 
-                                alt="PTB Credit Solutions" 
+                                src="/images/credit-solutions.png" 
+                                alt="Credit Solutions" 
                                 width={800}
                                 height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"

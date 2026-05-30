@@ -45,8 +45,8 @@ export default function BusinessCards() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_lobby.png" 
-                                alt="PTB Business Cards" 
+                                src="/images/BusinessCreditCards.png" 
+                                alt="Business Credit Cards" 
                                 width={800}
                                 height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"

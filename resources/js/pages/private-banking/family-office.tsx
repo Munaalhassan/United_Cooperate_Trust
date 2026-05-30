@@ -45,8 +45,8 @@ export default function FamilyOffice() {
                         {/* Featured Image */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
-                                src="/images/slider_wealth.png" 
-                                alt="PTB Family Office Services" 
+                                src="/images/familyoffice.jpg" 
+                                alt="Family Office Services" 
                                 width={800}
                                 height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
