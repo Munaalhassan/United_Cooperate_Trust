@@ -149,7 +149,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
 
                         {/* Copyright */}
                         <p className="text-white/20 font-medium tracking-wide text-xs">
-                            ©{new Date().getFullYear()} United Cooperate Trust Bank. All rights reserved.
+                            ©{new Date().getFullYear()} Prestige Trust Bank Bank. All rights reserved.
                         </p>
                     </motion.div>
                 </div>

@@ -51,7 +51,7 @@ const services = [
         reverse: false
     },
     {
-        title: "Official UCT Bank Membership Enrollment",
+        title: "Official Prestige Trust Bank Membership Enrollment",
         description: "Join our global community of elite banking clients and access unparalleled financial stability.",
         linkText: "Join Now!",
         href: signup.url(),
@@ -62,7 +62,7 @@ const services = [
 
 const quickServices = [
     {
-        title: "UCT Bank Member",
+        title: "Prestige Trust Bank Member",
         description: "Secure, real-time access to your wealth from any device, anywhere in the world.",
         icon: Monitor,
         linkText: "Apply Now",
@@ -110,7 +110,7 @@ export default function Welcome() {
 
     return (
         <PublicLayout>
-            <Head title="United Cooperate Trust Bank" />
+            <Head title="Prestige Trust Bank Bank" />
             
             {/* Hero Section */}
             <div className="relative w-full h-[85vh] min-h-[600px] flex items-center overflow-hidden bg-slate-900">
@@ -151,7 +151,7 @@ export default function Welcome() {
                         className="max-w-2xl"
                     >
                         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
-                            <span className="sr-only">United Cooperate Trust Bank: </span>
+                            <span className="sr-only">Prestige Trust Bank Bank: </span>
                             If you think your <br />
                             <span className="text-brand-blue">Private Banking</span> needs <br />
                             are out of reach,<br />
@@ -288,7 +288,7 @@ export default function Welcome() {
                     <div className="w-full lg:w-1/2 relative h-[400px] lg:h-auto">
                         <OptimizedImage 
                             src="/images/usa-hub.jpg" 
-                            alt="United Cooperate Trust Bank Headquarters in the USA Financial Hub"
+                            alt="Prestige Trust Bank Bank Headquarters in the USA Financial Hub"
                             width={1200}
                             height={800}
                             className="w-full h-full object-cover"
@@ -380,7 +380,7 @@ export default function Welcome() {
                             
                             <div className="relative h-full p-8 md:p-12 lg:p-16 flex flex-col justify-end">
                                 <Monitor className="w-10 h-10 md:w-12 md:h-12 text-brand-blue mb-6 md:mb-8" />
-                                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">UCT Online Platform</h3>
+                                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">PTB Online Platform</h3>
                                 <p className="text-slate-400 max-w-md mb-10 text-lg leading-relaxed">
                                     A unified ecosystem for your private, corporate, and investment accounts. Secure, intuitive, and borderless.
                                 </p>
@@ -416,7 +416,7 @@ export default function Welcome() {
                             <CreditCard className="w-8 h-8 mb-4 relative z-10" />
                             <div className="relative z-10">
                                 <h4 className="text-xl font-bold mb-2">Infinite Cards</h4>
-                                <p className="text-white/80 text-sm mb-4">Request your bespoke UCT card with global limits.</p>
+                                <p className="text-white/80 text-sm mb-4">Request your bespoke PTB card with global limits.</p>
                                 <Link href="/quick-services/credit-cards">
                                     <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
                                 </Link>
@@ -480,7 +480,7 @@ export default function Welcome() {
                         <div className="space-y-4">
                             <h4 className="text-sm font-bold text-brand-navy uppercase tracking-widest">Global Licensing</h4>
                             <p className="text-xs text-slate-500 leading-relaxed">
-                                United Cooperate Trust Bank operates under a full banking license, regulated by the CSSF and international financial authorities, ensuring the highest standards of compliance and security.
+                                Prestige Trust Bank Bank operates under a full banking license, regulated by the CSSF and international financial authorities, ensuring the highest standards of compliance and security.
                             </p>
                         </div>
                         <div className="space-y-4">

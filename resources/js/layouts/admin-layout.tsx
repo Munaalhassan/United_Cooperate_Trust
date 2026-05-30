@@ -35,14 +35,14 @@ export default function AdminLayout({ children, title }: Props) {
 
     return (
         <div className="min-h-screen bg-[#f8fafc] flex font-sans">
-            <Head title={`${title} | UCT Bank Admin`} />
+            <Head title={`${title} | Prestige Trust Bank Admin`} />
 
             {/* Sidebar */}
             <aside className="w-64 bg-brand-navy text-white flex flex-col fixed inset-y-0 shadow-2xl z-40">
                 <div className="p-8 border-b border-white/5">
                     <OptimizedImage 
                         src={asset('images/logo.png')} 
-                        alt="UCT Bank Admin" 
+                        alt="Prestige Trust Bank Admin" 
                         width={120}
                         height={32}
                         priority={true}

@@ -6,7 +6,7 @@ import { ChevronRight, MapPin, ArrowRight } from 'lucide-react';
 export default function Contact() {
     return (
         <PublicLayout>
-            <Head title="Contact Us | United Cooperate Trust Bank" />
+            <Head title="Contact Us | Prestige Trust Bank Bank" />
 
             {/* Header */}
             <div className="bg-brand-navy relative overflow-hidden">

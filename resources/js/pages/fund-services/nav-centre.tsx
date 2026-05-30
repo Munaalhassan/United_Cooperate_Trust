@@ -72,7 +72,7 @@ export default function NavCentre({ funds, filters, latestDate }: NavCentreProps
 
     return (
         <PublicLayout>
-            <Head title="NAV Centre | United Cooperate Trust Bank" />
+            <Head title="NAV Centre | Prestige Trust Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

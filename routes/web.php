@@ -65,12 +65,14 @@ Route::inertia('/', 'welcome', [
 ])->name('home');
 
 Route::get('dashboard', function () {
-    $user = auth()->user();
-    
-    return $user->currentTeam 
-        ? redirect()->route('team.internal-dashboard', ['current_team' => $user->currentTeam->slug]) 
-        : redirect('/');
+    return redirect()->route('ebanking.dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// E-Banking Dashboard
+Route::middleware(['auth'])->group(function () {
+    Route::get('ebanking/dashboard', [\App\Http\Controllers\EBankingController::class, 'dashboard'])->name('ebanking.dashboard');
+    Route::post('ebanking/generate-account', [\App\Http\Controllers\EBankingController::class, 'generateAccount'])->name('ebanking.generate');
+});
 
 Route::prefix('{current_team}')
     ->name('team.')
@@ -139,6 +141,7 @@ Route::post('register', [\App\Http\Controllers\Public\MembershipApplicationContr
 Route::get('membership-signup', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('membership.signup');
 // E-Banking registration page is handled by EBankingRegistrationController now
 // Route::get('quick-services/e-banking-registration', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('quick.ebanking.registration');
+
 
 // Admin and settings routes handled above
 

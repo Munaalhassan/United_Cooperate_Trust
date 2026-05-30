@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const sections = [
     {
-        title: 'The personal data United Cooperate Trust Bank collects and processes',
+        title: 'The personal data Prestige Trust Bank Bank collects and processes',
         body: `The Bank ensures that personal data is collected lawfully and properly via its Website.
 
 "Personal data" means information which directly or indirectly identifies the Subject, such as his/her name, email address or postal address.
@@ -38,7 +38,7 @@ Although concerted efforts are made to safeguard personal data, The Bank cannot 
     },
     {
         title: 'Data recipients',
-        body: `United Cooperate Trust Bank / Globafin Group
+        body: `Prestige Trust Bank Bank / Globafin Group
 
 The recipients of personal data include the Bank, and, if lawful conditions are met, subsidiaries of the Bank's Group and associated companies whose registered offices are in countries of the European Union, which are sent data in the context of their operations.
 
@@ -58,7 +58,7 @@ Subjects must personally read the data protection and management policies on tho
 
 Subjects can also submit written objections at any time about their personal data being processed (right to object) and request that specific steps be taken, such as asking for their data to be corrected, temporarily not used, blocked, not transmitted or deleted.
 
-Objections must be sent in writing to: United Cooperate Trust Bank, Corporate Governance, USA.`,
+Objections must be sent in writing to: Prestige Trust Bank Bank, Corporate Governance, USA.`,
     },
     {
         title: 'Amendments to the personal data protection terms',
@@ -113,7 +113,7 @@ They do not enable us to track your browsing activity on other websites.`,
 export default function PersonalDataNotice() {
     return (
         <PublicLayout>
-            <Head title="Personal Data Notice | United Cooperate Trust Bank" />
+            <Head title="Personal Data Notice | Prestige Trust Bank Bank" />
 
             {/* Page Header */}
             <div className="bg-brand-navy relative overflow-hidden">
@@ -147,7 +147,7 @@ export default function PersonalDataNotice() {
                     >
                         {/* Intro */}
                         <p className="text-slate-600 text-base font-light leading-relaxed">
-                            The bank by the name of United Cooperate Trust Bank (hereinafter the Bank) would like to inform visitors or users of this website (hereinafter the Website) who provide personal data (hereinafter the Subjects) that their personal data will be processed in accordance with the rules below, the relevant provisions of USA ish law in force from time to time and European legislation on personal data, as well as the decisions, guidelines and regulatory acts of the USA ish Data Protection Authority.
+                            The bank by the name of Prestige Trust Bank Bank (hereinafter the Bank) would like to inform visitors or users of this website (hereinafter the Website) who provide personal data (hereinafter the Subjects) that their personal data will be processed in accordance with the rules below, the relevant provisions of USA ish law in force from time to time and European legislation on personal data, as well as the decisions, guidelines and regulatory acts of the USA ish Data Protection Authority.
                         </p>
 
                         {/* Sections */}

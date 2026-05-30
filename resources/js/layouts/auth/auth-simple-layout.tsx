@@ -29,7 +29,7 @@ export default function AuthSimpleLayout({
                 <Link href={home()} className="flex items-center gap-3">
                     <OptimizedImage 
                         src="/images/logo.png" 
-                        alt="United Cooperate Trust Bank" 
+                        alt="Prestige Trust Bank Bank" 
                         width={250}
                         height={70}
                         priority={true}
@@ -58,7 +58,7 @@ export default function AuthSimpleLayout({
             </div>
             
             <div className="mt-8 text-xs text-slate-400 font-light tracking-wide text-center">
-                &copy; {new Date().getFullYear()} United Cooperate Trust Bank. All rights reserved.
+                &copy; {new Date().getFullYear()} Prestige Trust Bank Bank. All rights reserved.
             </div>
         </div>
     );

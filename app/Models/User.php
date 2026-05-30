@@ -32,7 +32,8 @@ class User extends Authenticatable
         'country',
         'ssn',
         'dl',
-        'dl_path'
+        'dl_path',
+        'account_number',
     ];
 
     protected $hidden = ['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'];

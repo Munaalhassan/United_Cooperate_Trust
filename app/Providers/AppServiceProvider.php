@@ -25,9 +25,11 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
 
-        if (str_contains(request()->header('Host'), 'ngrok-free.dev') || str_contains(request()->header('Host'), 'ngrok-free.app')) {
+        if (str_contains(request()->header('Host'), 'ngrok') || str_contains(request()->header('Host'), 'loca.lt')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
+
+
     }
 
     /**

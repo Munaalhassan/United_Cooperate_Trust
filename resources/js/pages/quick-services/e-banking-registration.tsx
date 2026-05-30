@@ -21,7 +21,7 @@ export default function EBankingRegistration({ forms }: Props) {
 
     return (
         <PublicLayout>
-            <Head title="E-Banking Registration | United Cooperate Trust Bank" />
+            <Head title="E-Banking Registration | Prestige Trust Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

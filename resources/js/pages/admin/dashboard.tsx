@@ -116,7 +116,7 @@ export default function AdminDashboard({ stats }: Props) {
                         <div className="relative z-10">
                             <h3 className="text-2xl font-bold mb-6">Administrator Portal</h3>
                             <p className="text-slate-400 text-sm leading-relaxed mb-10 max-w-sm font-light">
-                                Welcome to the United Cooperate Trust Bank management system. Use this secure portal to update critical financial data and distribute public communications.
+                                Welcome to the Prestige Trust Bank Bank management system. Use this secure portal to update critical financial data and distribute public communications.
                             </p>
                         </div>
                         <div className="relative z-10 p-6 bg-white/5 border border-white/10 rounded-sm">

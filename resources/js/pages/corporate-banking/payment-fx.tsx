@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function PaymentFX() {
     return (
         <PublicLayout>
-            <Head title="Payment and FX Services | United Cooperate Trust Bank" />
+            <Head title="Payment and FX Services | Prestige Trust Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -46,7 +46,7 @@ export default function PaymentFX() {
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
                                 src="/images/slider_lobby.png" 
-                                alt="UCT Corporate Banking" 
+                                alt="PTB Corporate Banking" 
                                 width={800}
                                 height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"

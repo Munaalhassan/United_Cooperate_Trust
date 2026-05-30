@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ShieldCheck, User, Mail, Phone, Globe, Briefcase, MapPin, Landmark, Lock, Zap, Calendar, Fingerprint, FileText, Upload, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import PasswordInput from '@/components/password-input';
 import { Label } from '@/components/ui/label';
 import Swal from 'sweetalert2';
 import { signup, store } from '@/routes/membership';
@@ -53,7 +54,7 @@ export default function Register() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Application Submitted!',
-                    text: 'Your membership application has been submitted successfully. Our team will review it and get back to you soon.',
+                    text: 'Your membership application has been submitted successfully.',
                     confirmButtonColor: '#002855',
                     customClass: {
                         popup: 'rounded-xl',
@@ -66,7 +67,7 @@ export default function Register() {
 
     return (
         <div className="bg-[#f8fafc] min-h-screen font-sans">
-            <Head title="Membership Application | United Cooperate Trust Bank" />
+            <Head title="Membership Application | Prestige Trust Bank Bank" />
 
             {/* Navigation Header */}
             <div className="bg-white border-b border-slate-200 py-6 px-6 sticky top-0 z-50">
@@ -74,7 +75,7 @@ export default function Register() {
                     <Link href={home()} className="flex items-center gap-3">
                         <OptimizedImage 
                             src="/images/logo.png" 
-                            alt="United Cooperate Trust Bank" 
+                            alt="Prestige Trust Bank Bank" 
                             width={220}
                             height={60}
                             priority={true}
@@ -106,7 +107,7 @@ export default function Register() {
                             <CheckCircle2 className="w-3 h-3" /> Official Membership Enrollment
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold text-brand-navy tracking-tight mb-4 uppercase italic">
-                            UCT Bank Member <span className="text-brand-blue not-italic">.</span>
+                            Prestige Trust Bank Member <span className="text-brand-blue not-italic">.</span>
                         </h1>
                         <p className="text-slate-500 text-lg font-light max-w-2xl leading-relaxed">
                             Complete your enrollment to access premium offshore banking services, multi-currency accounts, and global wealth management solutions.
@@ -321,9 +322,9 @@ export default function Register() {
 
                                     <div className="space-y-2">
                                         <Label htmlFor="password" className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Password</Label>
-                                        <Input 
+                                        <PasswordInput 
                                             id="password"
-                                            type="password"
+                                            name="password"
                                             value={data.password}
                                             onChange={e => setData('password', e.target.value)}
                                             placeholder="••••••••"
@@ -334,9 +335,9 @@ export default function Register() {
 
                                     <div className="space-y-2">
                                         <Label htmlFor="password_confirmation" className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Confirm Password</Label>
-                                        <Input 
+                                        <PasswordInput 
                                             id="password_confirmation"
-                                            type="password"
+                                            name="password_confirmation"
                                             value={data.password_confirmation}
                                             onChange={e => setData('password_confirmation', e.target.value)}
                                             placeholder="••••••••"

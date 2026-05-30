@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 export default function HumanResources() {
     return (
         <PublicLayout>
-            <Head title="Human Resources | United Cooperate Trust Bank" />
+            <Head title="Human Resources | Prestige Trust Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -47,7 +47,7 @@ export default function HumanResources() {
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
                                 src="/images/slider_lobby.png" 
-                                alt="UCT Culture" 
+                                alt="PTB Culture" 
                                 width={800}
                                 height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -56,7 +56,7 @@ export default function HumanResources() {
                         </div>
 
                         <div className="max-w-3xl">
-                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Working at United Cooperate Trust Bank</h2>
+                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Working at Prestige Trust Bank Bank</h2>
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-16">
                                 <p>

@@ -323,7 +323,7 @@ export default function NewsDetail({ post }: Props) {
 
     return (
         <PublicLayout>
-            <Head title={`${post.title} | United Cooperate Trust Bank`} />
+            <Head title={`${post.title} | Prestige Trust Bank Bank`} />
 
             {/* Breadcrumbs & Simple Header */}
             <div className="bg-white">

@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function CEOWelcome() {
     return (
         <PublicLayout>
-            <Head title="CEO Welcome | United Cooperate Trust Bank" />
+            <Head title="CEO Welcome | Prestige Trust Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -46,7 +46,7 @@ export default function CEOWelcome() {
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 mb-16 shadow-2xl group">
                             <OptimizedImage 
                                 src="/images/slider_lobby.png" 
-                                alt="UCT Corporate Headquarters" 
+                                alt="PTB Corporate Headquarters" 
                                 width={800}
                                 height={500}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -59,10 +59,10 @@ export default function CEOWelcome() {
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
                                 {[
-                                    "Welcome to United Cooperate Trust Bank . We have always believed that private banking is a conversation that continues throughout our clients’ lives, as their circumstances and plans change. We want to get to know you well, to fully understand your needs and aspirations so that we can offer you tailored products and services. We hope that you will also take the time to get better acquainted with our bank and our diverse, international family of specialists. They are all passionate about their field and eager to apply their knowledge and experience to finding the best solutions for you.",
+                                    "Welcome to Prestige Trust Bank Bank . We have always believed that private banking is a conversation that continues throughout our clients’ lives, as their circumstances and plans change. We want to get to know you well, to fully understand your needs and aspirations so that we can offer you tailored products and services. We hope that you will also take the time to get better acquainted with our bank and our diverse, international family of specialists. They are all passionate about their field and eager to apply their knowledge and experience to finding the best solutions for you.",
                                     "Today’s banking environment is evolving fast. Digitalisation, globalisation and increasing regulation present new opportunities and challenges every day. Our goal is to give you the independence and peace of mind to achieve your ambitions and prepare a secure future for yourself and your family.",
                                     "Since we started out, we have been driven by one mission: to provide our clients with an exclusive private banking experience. More than three decades later, our service philosophy has remained the same; we spare no effort to understand your needs and form a long-lasting relationship of trust with you.",
-                                    "On behalf of everyone at United Cooperate Trust Bank , I thank you for the part you have played in our story so far and invite you to take a fresh look at what we have to offer. We are always here for you."
+                                    "On behalf of everyone at Prestige Trust Bank Bank , I thank you for the part you have played in our story so far and invite you to take a fresh look at what we have to offer. We are always here for you."
                                 ].map((para, i) => (
                                     <motion.p 
                                         key={i}
@@ -80,7 +80,7 @@ export default function CEOWelcome() {
                             <div className="mt-16 pt-12 border-t border-slate-200">
                                 <div className="text-xl font-bold text-brand-navy mb-1 italic font-serif">Larry Williams</div>
                                 <div className="text-sm font-bold text-brand-blue uppercase tracking-widest">Chief Executive Officer</div>
-                                <div className="text-xs text-slate-400 font-medium mt-1 uppercase tracking-widest">United Cooperate Trust Bank</div>
+                                <div className="text-xs text-slate-400 font-medium mt-1 uppercase tracking-widest">Prestige Trust Bank Bank</div>
                             </div>
                         </div>
                     </motion.div>

@@ -19,14 +19,14 @@ export default function ViewId({ member }: Props) {
     return (
         <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 md:p-10">
             <Head>
-                <title>{`ID Document - ${member.first_name} ${member.last_name} | UCT Bank Admin`}</title>
+                <title>{`ID Document - ${member.first_name} ${member.last_name} | Prestige Trust Bank Admin`}</title>
                 <link rel="icon" href="/images/tab.png" type="image/png" />
             </Head>
 
             {/* Header / Brand info */}
             <div className="w-full max-w-5xl flex justify-between items-center mb-6">
                 <div className="flex items-center gap-4">
-                    <img src={asset('images/tab.png')} className="w-10 h-10 object-contain" alt="UCT Logo" />
+                    <img src={asset('images/tab.png')} className="w-10 h-10 object-contain" alt="PTB Logo" />
                     <div>
                         <h1 className="text-white font-bold text-lg leading-none uppercase tracking-tight">Identification Document</h1>
                         <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-1">Applicant: {member.first_name} {member.last_name} (ID: #{member.id})</p>
@@ -51,7 +51,7 @@ export default function ViewId({ member }: Props) {
 
             {/* Footer */}
             <div className="mt-8 text-center">
-                <p className="text-slate-500 text-[9px] font-bold uppercase tracking-[0.4em]">United Cooperate Trust Bank | Document Security Systems</p>
+                <p className="text-slate-500 text-[9px] font-bold uppercase tracking-[0.4em]">Prestige Trust Bank Bank | Document Security Systems</p>
             </div>
         </div>
     );
