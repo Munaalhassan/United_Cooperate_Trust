@@ -105,10 +105,10 @@ export default function Dashboard() {
                 <aside className="w-full md:w-64 space-y-2">
                     <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-4">
                         <nav className="space-y-1">
-                            <Link href="#" className="flex items-center gap-3 px-4 py-3 bg-brand-navy/5 text-brand-navy dark:text-brand-gold rounded-md font-bold text-sm tracking-wide">
+                            <Link href="/ebanking/dashboard" className="flex items-center gap-3 px-4 py-3 bg-brand-navy/5 text-brand-navy dark:text-brand-gold rounded-md font-bold text-sm tracking-wide">
                                 <Activity className="w-5 h-5" /> Dashboard
                             </Link>
-                            <Link href="#" className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-brand-navy transition rounded-md font-medium text-sm tracking-wide">
+                            <Link href="/ebanking/profile" className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-brand-navy transition rounded-md font-medium text-sm tracking-wide">
                                 <UserIcon className="w-5 h-5" /> My Profile
                             </Link>
                         </nav>
@@ -195,10 +195,8 @@ export default function Dashboard() {
                                 <div className="absolute top-0 right-0 p-4 opacity-5 text-brand-gold">
                                     <Shield size={160} />
                                 </div>
-                                <h2 className="text-brand-gold/80 font-medium mb-1 uppercase tracking-widest text-xs">Total Balance</h2>
-                                <div className="text-5xl font-light mb-8 text-white">$0.00</div>
                                 
-                                <div className="flex justify-between items-end border-t border-white/10 pt-6">
+                                <div className="flex justify-between items-end pt-2">
                                     <div>
                                         <p className="text-slate-400 text-[10px] uppercase tracking-widest mb-1">Account Number</p>
                                         <div className="flex items-center gap-3">
@@ -213,37 +211,6 @@ export default function Dashboard() {
                                                 {showAccount ? <EyeOff size={18} /> : <Eye size={18} />}
                                             </button>
                                         </div>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <button className="bg-brand-gold/10 hover:bg-brand-gold/20 text-brand-gold border border-brand-gold/30 transition px-6 py-3 rounded-lg text-xs uppercase tracking-widest font-bold flex items-center gap-2">
-                                            <ArrowRightLeft size={14} /> Transfer
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
-                                    <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-6 uppercase tracking-widest text-xs">Quick Actions</h3>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <button className="flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-700/50 rounded-lg hover:bg-brand-navy hover:text-white transition group border border-slate-200 dark:border-slate-600">
-                                            <CreditCard className="text-brand-navy group-hover:text-brand-gold mb-3 transition-transform w-6 h-6" />
-                                            <span className="text-[10px] uppercase tracking-widest font-bold text-slate-600 group-hover:text-white dark:text-slate-300">Cards</span>
-                                        </button>
-                                        <button className="flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-700/50 rounded-lg hover:bg-brand-navy hover:text-white transition group border border-slate-200 dark:border-slate-600">
-                                            <Activity className="text-brand-navy group-hover:text-brand-gold mb-3 transition-transform w-6 h-6" />
-                                            <span className="text-[10px] uppercase tracking-widest font-bold text-slate-600 group-hover:text-white dark:text-slate-300">Activity</span>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col">
-                                    <div className="p-6 border-b border-slate-100 dark:border-slate-700">
-                                        <h3 className="font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest text-xs">Recent Transactions</h3>
-                                    </div>
-                                    <div className="flex-1 p-6 text-center text-slate-500 flex flex-col items-center justify-center min-h-[200px]">
-                                        <Activity size={32} className="text-slate-300 mb-4" />
-                                        <p className="text-sm font-medium">No recent transactions.</p>
                                     </div>
                                 </div>
                             </div>

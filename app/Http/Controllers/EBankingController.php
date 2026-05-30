@@ -16,6 +16,13 @@ class EBankingController extends Controller
         ]);
     }
 
+    public function profile(Request $request)
+    {
+        return Inertia::render('ebanking/profile', [
+            // Inertia middleware already provides auth.user
+        ]);
+    }
+
     public function generateAccount(Request $request)
     {
         $user = $request->user();

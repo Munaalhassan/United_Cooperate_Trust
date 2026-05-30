@@ -3,16 +3,15 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 
-class AccountGeneratedMail extends Mailable implements ShouldQueue
+class AccountGeneratedMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
     public $user;
 
@@ -40,7 +39,7 @@ class AccountGeneratedMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.account.generated',
+            view: 'emails.account.generated',
             with: [
                 'url' => \Illuminate\Support\Facades\URL::signedRoute('ebanking.confirm-account', ['id' => $this->user->id])
             ],

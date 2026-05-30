@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('signed')
         ->name('ebanking.confirm-account');
     Route::post('ebanking/verify-password', [\App\Http\Controllers\EBankingController::class, 'verifyPassword'])->name('ebanking.verify-password');
+    Route::get('ebanking/profile', [\App\Http\Controllers\EBankingController::class, 'profile'])->name('ebanking.profile');
 });
 
 Route::prefix('{current_team}')
@@ -138,6 +139,12 @@ Route::prefix('legal')->group(function () {
 });
 
 Route::inertia('contact', 'contact')->name('contact');
+
+// Temporary route to preview the email design
+Route::get('/preview-email', function () {
+    $user = \App\Models\User::first();
+    return new \App\Mail\AccountGeneratedMail($user);
+});
 
 // Overriding default registration to be Membership Application
 Route::get('register', [\App\Http\Controllers\Public\MembershipApplicationController::class, 'index'])->name('register');
