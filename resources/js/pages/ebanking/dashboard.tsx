@@ -83,8 +83,7 @@ export default function Dashboard() {
             <header className="bg-brand-navy shadow-sm border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                        <Shield className="w-8 h-8 text-brand-gold" />
-                        <h1 className="text-xl font-extrabold text-white uppercase tracking-widest">Fulton Bank</h1>
+                        <img src="/images/logo.png" alt="Fulton Bank Logo" className="h-10 w-auto" />
                     </div>
                     <div className="flex items-center gap-6">
                         <span className="text-xs font-bold text-slate-300 uppercase tracking-widest hidden md:inline-block">

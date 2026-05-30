@@ -11,7 +11,7 @@
         .wrapper { width: 100%; table-layout: fixed; background-color: #f8fafc; padding: 30px 0; }
         .main { background-color: #ffffff; margin: 0 auto; width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); overflow: hidden; border: 1px solid #e2e8f0; }
         
-        .header { background-color: #0f172a; padding: 30px 20px; text-align: center; border-bottom: 4px solid #2563eb; }
+        .header { background-color: #ffffff; padding: 30px 20px; text-align: center; border-bottom: 4px solid #a9c4ffff; }
         .header h1 { margin: 0; color: #ffffff; font-size: 22px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
         .header .accent { color: #3b82f6; }
         
@@ -40,7 +40,7 @@
     <div class="wrapper">
         <div class="main">
             <div class="header">
-                <h1>Fulton <span class="accent">Bank</span></h1>
+                <img src="{{ asset('images/logo.png') }}" alt="Fulton Bank" style="height: 70px; width: auto; max-width: 100%;" />
             </div>
             <div class="content">
                 <h2>Welcome, {{ $user->first_name ?? $user->name }}</h2>
