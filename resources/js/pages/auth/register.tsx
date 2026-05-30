@@ -67,7 +67,7 @@ export default function Register() {
 
     return (
         <div className="bg-[#f8fafc] min-h-screen font-sans">
-            <Head title="Membership Application | Prestige Trust Bank Bank" />
+            <Head title="Membership Application | Fulton Bank Bank" />
 
             {/* Navigation Header */}
             <div className="bg-white border-b border-slate-200 py-6 px-6 sticky top-0 z-50">
@@ -75,7 +75,7 @@ export default function Register() {
                     <Link href={home()} className="flex items-center gap-3">
                         <OptimizedImage 
                             src="/images/logo.png" 
-                            alt="Prestige Trust Bank Bank" 
+                            alt="Fulton Bank Bank" 
                             width={220}
                             height={60}
                             priority={true}
@@ -107,7 +107,7 @@ export default function Register() {
                             <CheckCircle2 className="w-3 h-3" /> Official Membership Enrollment
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold text-brand-navy tracking-tight mb-4 uppercase italic">
-                            Prestige Trust Bank Member <span className="text-brand-blue not-italic">.</span>
+                            Fulton Bank Member <span className="text-brand-blue not-italic">.</span>
                         </h1>
                         <p className="text-slate-500 text-lg font-light max-w-2xl leading-relaxed">
                             Complete your enrollment to access premium offshore banking services, multi-currency accounts, and global wealth management solutions.

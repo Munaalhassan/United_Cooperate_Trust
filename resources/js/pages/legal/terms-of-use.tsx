@@ -71,7 +71,7 @@ If one of the Terms is found to be invalid or is declared to be null and void, t
 export default function TermsOfUse() {
     return (
         <PublicLayout>
-            <Head title="Terms of Use | Prestige Trust Bank Bank" />
+            <Head title="Terms of Use | Fulton Bank Bank" />
 
             {/* Page Header */}
             <div className="bg-brand-navy relative overflow-hidden">
@@ -105,7 +105,7 @@ export default function TermsOfUse() {
                     >
                         {/* Intro */}
                         <p className="text-slate-600 text-base font-light leading-relaxed">
-                            Our website (<a href="http://www.greenpasscapital.com" className="text-brand-blue hover:underline">www.greenpasscapital.com</a>) enables you to learn more about what Prestige Trust Bank Bank does, as well as the products and services the Bank offers. Please read these terms and conditions of use before using the website.
+                            Our website (<a href="http://www.greenpasscapital.com" className="text-brand-blue hover:underline">www.greenpasscapital.com</a>) enables you to learn more about what Fulton Bank Bank does, as well as the products and services the Bank offers. Please read these terms and conditions of use before using the website.
                         </p>
 
                         {/* Sections */}

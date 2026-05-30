@@ -79,14 +79,14 @@ export default function Profile() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col">
-            <Head title="My Profile | Prestige Trust Bank" />
+            <Head title="My Profile | Fulton Bank" />
 
             {/* Header */}
             <header className="bg-brand-navy shadow-sm border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
                         <Shield className="w-8 h-8 text-brand-gold" />
-                        <h1 className="text-xl font-extrabold text-white uppercase tracking-widest">Prestige Trust Bank</h1>
+                        <h1 className="text-xl font-extrabold text-white uppercase tracking-widest">Fulton Bank</h1>
                     </div>
                     <div className="flex items-center gap-6">
                         <span className="text-xs font-bold text-slate-300 uppercase tracking-widest hidden md:inline-block">
@@ -258,7 +258,7 @@ export default function Profile() {
                                 </div>
                                 <div>
                                     <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-0.5">Account Type</p>
-                                    <p className="font-semibold text-slate-900 dark:text-slate-100">PTB Member Account</p>
+                                    <p className="font-semibold text-slate-900 dark:text-slate-100">FB Member Account</p>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@ export default function Profile() {
                         <div>
                             <p className="font-bold text-white text-sm mb-1">Security & Privacy</p>
                             <p className="text-slate-400 text-xs leading-relaxed">
-                                Your personal information is protected under strict confidentiality. Never share your account number or password with anyone. Prestige Trust Bank will never ask for your password.
+                                Your personal information is protected under strict confidentiality. Never share your account number or password with anyone. Fulton Bank will never ask for your password.
                             </p>
                         </div>
                     </div>

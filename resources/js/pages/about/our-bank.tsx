@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function OurBank() {
     return (
         <PublicLayout>
-            <Head title="Our Bank | Prestige Trust Bank Bank" />
+            <Head title="Our Bank | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -105,7 +105,7 @@ export default function OurBank() {
                                     Our History
                                 </h3>
                                 <p className="text-slate-600 mb-12 italic">
-                                    Since the beginning, Prestige Trust Bank Bank (the "bank") has been driven by one mission: to provide its clients with outstanding private banking services.
+                                    Since the beginning, Fulton Bank Bank (the "bank") has been driven by one mission: to provide its clients with outstanding private banking services.
                                 </p>
                                 
                                 <div className="relative border-l border-slate-200 ml-4 space-y-12">
@@ -114,7 +114,7 @@ export default function OurBank() {
                                         { year: "1994", text: "Globafin Group acquires 75% of the equity share capital of Banque de Dépôts de USA and begins to gradually increase its share." },
                                         { year: "2005", text: "Globafin Group acquires 100% of the bank’s equity. The bank enjoys continuous growth due to its dynamism and strong relationships with clients." },
                                         { year: "2009", text: "The bank inaugurates its Representative Office in Rotterdam." },
-                                        { year: "2012", text: "The bank changes its name to Prestige Trust Bank Bank ." },
+                                        { year: "2012", text: "The bank changes its name to Fulton Bank Bank ." },
                                         { year: "2015", text: "The bank expands its global reach by opening a branch in London, a global financial centre and leading real estate market." }
                                     ].map((milestone, i) => (
                                         <div key={i} className="relative pl-10">

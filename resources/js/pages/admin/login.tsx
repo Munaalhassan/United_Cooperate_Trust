@@ -23,7 +23,7 @@ export default function AdminLogin({ status }: { status?: string }) {
                         height={60}
                         priority={true}
                         className="h-12 w-auto brightness-0 invert"
-                        alt="Prestige Trust Bank Admin"
+                        alt="Fulton Bank Admin"
                     />
                 </div>
                 <h2 className="text-center text-2xl font-extrabold text-white tracking-tight uppercase">

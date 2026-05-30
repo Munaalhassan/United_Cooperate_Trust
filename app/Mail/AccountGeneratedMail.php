@@ -29,7 +29,7 @@ class AccountGeneratedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your E-Banking Account Number - Prestige Trust Bank',
+            subject: 'Your E-Banking Account Number - Fulton Bank',
         );
     }
 

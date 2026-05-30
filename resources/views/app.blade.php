@@ -68,24 +68,24 @@
         @endif
 
         <x-inertia::head>
-            <title inertia>{{ config('app.name', 'Prestige Trust Bank Bank') }}</title>
-            <meta name="description" content="Prestige Trust Bank Bank offers secure online banking, personal and corporate accounts, investment services, and global financing solutions. Experience premium banking with local trust and global reach.">
-            <meta name="keywords" content="Prestige Trust Bank Bank, secure online banking, corporate banking USA, personal investment services, global trade finance, private banking, digital banking solutions">
-            <meta name="author" content="Prestige Trust Bank Bank">
+            <title inertia>{{ config('app.name', 'Fulton Bank Bank') }}</title>
+            <meta name="description" content="Fulton Bank Bank offers secure online banking, personal and corporate accounts, investment services, and global financing solutions. Experience premium banking with local trust and global reach.">
+            <meta name="keywords" content="Fulton Bank Bank, secure online banking, corporate banking USA, personal investment services, global trade finance, private banking, digital banking solutions">
+            <meta name="author" content="Fulton Bank Bank">
             <meta name="robots" content="index, follow">
             <link rel="canonical" href="{{ url()->current() }}">
 
             <!-- Open Graph / Facebook -->
             <meta property="og:type" content="website">
             <meta property="og:url" content="{{ url()->current() }}">
-            <meta property="og:title" content="Prestige Trust Bank Bank | Secure & Innovative Banking">
-            <meta property="og:description" content="Manage your wealth with confidence. Join Prestige Trust Bank Bank for premium personal and business financial services.">
+            <meta property="og:title" content="Fulton Bank Bank | Secure & Innovative Banking">
+            <meta property="og:description" content="Manage your wealth with confidence. Join Fulton Bank Bank for premium personal and business financial services.">
             <meta property="og:image" content="{{ asset('images/slider_wealth.png') }}">
 
             <!-- Twitter -->
             <meta property="twitter:card" content="summary_large_image">
             <meta property="twitter:url" content="{{ url()->current() }}">
-            <meta property="twitter:title" content="Prestige Trust Bank Bank | Global Financial Excellence">
+            <meta property="twitter:title" content="Fulton Bank Bank | Global Financial Excellence">
             <meta property="twitter:description" content="Secure, reliable, and forward-thinking banking services for individuals and corporations worldwide.">
             <meta property="twitter:image" content="{{ asset('images/slider_wealth.png') }}">
 
@@ -94,11 +94,11 @@
             {
                 "@@context": "https://schema.org",
                 "@@type": "BankOrCreditUnion",
-                "name": "Prestige Trust Bank Bank",
-                "alternateName": "Prestige Trust Bank",
+                "name": "Fulton Bank Bank",
+                "alternateName": "Fulton Bank",
                 "url": "{{ url('/') }}",
                 "logo": "{{ asset('images/logo.png') }}",
-                "description": "Prestige Trust Bank Bank is a leading financial institution providing innovative banking solutions, secure online management, and global investment strategies.",
+                "description": "Fulton Bank Bank is a leading financial institution providing innovative banking solutions, secure online management, and global investment strategies.",
                 "address": {
                     "@@type": "PostalAddress",
                     "streetAddress": "Global Financial District",
@@ -109,7 +109,7 @@
                 },
                 "contactPoint": {
                     "@@type": "ContactPoint",
-                    "telephone": "+1-555-PTB-BANK",
+                    "telephone": "+1-555-FB-BANK",
                     "contactType": "customer service",
                     "areaServed": "Worldwide",
                     "availableLanguage": ["English", "Spanish", "German", "French"]

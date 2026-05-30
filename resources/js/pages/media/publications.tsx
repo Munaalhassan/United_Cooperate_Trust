@@ -60,7 +60,7 @@ export default function Publications({ publications, filters }: Props) {
 
     return (
         <PublicLayout>
-            <Head title="Publications | Prestige Trust Bank Bank" />
+            <Head title="Publications | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

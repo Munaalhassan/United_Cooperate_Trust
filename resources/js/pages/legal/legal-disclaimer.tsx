@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 export default function LegalDisclaimer() {
     return (
         <PublicLayout>
-            <Head title="Legal Disclaimer | Prestige Trust Bank Bank" />
+            <Head title="Legal Disclaimer | Fulton Bank Bank" />
 
             {/* Page Header */}
             <div className="bg-brand-navy relative overflow-hidden">
@@ -41,7 +41,7 @@ export default function LegalDisclaimer() {
                         <div className="space-y-8 text-slate-600 leading-relaxed text-base font-light">
 
                             <p>
-                                You are connected to the website of Prestige Trust Bank Bank., <a href="http://www.greenpasscapital.com" className="text-brand-blue hover:underline">www.greenpasscapital.com</a>.
+                                You are connected to the website of Fulton Bank Bank., <a href="http://www.greenpasscapital.com" className="text-brand-blue hover:underline">www.greenpasscapital.com</a>.
                             </p>
 
                             <p>
@@ -57,7 +57,7 @@ export default function LegalDisclaimer() {
                             </p>
 
                             <p>
-                                This website is owned and maintained by Prestige Trust Bank Bank. By accessing the Bank's website and or using the information provided on or via this website the user agrees to be bound by the content of this Disclaimer set out herein regarding the use of the Bank's website.
+                                This website is owned and maintained by Fulton Bank Bank. By accessing the Bank's website and or using the information provided on or via this website the user agrees to be bound by the content of this Disclaimer set out herein regarding the use of the Bank's website.
                             </p>
 
                             <p>
@@ -73,11 +73,11 @@ export default function LegalDisclaimer() {
                             </p>
 
                             <p>
-                                The copyright and material and contents of the website are owned by Prestige Trust Bank Bank. Any reproduction or representation, in whole or in part, of the pages and data, is forbidden.
+                                The copyright and material and contents of the website are owned by Fulton Bank Bank. Any reproduction or representation, in whole or in part, of the pages and data, is forbidden.
                             </p>
 
                             <p>
-                                This website and its Disclaimer shall be governed by the laws of the Grand Duchy of USA. In all disputes the Courts of USA, Grand Duchy of USA, shall have exclusive jurisdiction, unless Prestige Trust Bank Bank. chooses to bring an action against the user before any other court having jurisdiction, including the courts of a country where assets of the user are located.
+                                This website and its Disclaimer shall be governed by the laws of the Grand Duchy of USA. In all disputes the Courts of USA, Grand Duchy of USA, shall have exclusive jurisdiction, unless Fulton Bank Bank. chooses to bring an action against the user before any other court having jurisdiction, including the courts of a country where assets of the user are located.
                             </p>
 
                         </div>

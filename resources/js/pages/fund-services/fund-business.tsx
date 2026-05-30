@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function FundBusiness() {
     return (
         <PublicLayout>
-            <Head title="Fund Business | Prestige Trust Bank Bank" />
+            <Head title="Fund Business | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -59,7 +59,7 @@ export default function FundBusiness() {
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-12">
                                 <p>
-                                    We are pleased to introduce the personal loan services offered by Prestige Trust Bank Bank. As a retail banking institution, we understand the diverse financial needs of individuals like yourself and strive to provide tailored solutions to meet your requirements.
+                                    We are pleased to introduce the personal loan services offered by Fulton Bank Bank. As a retail banking institution, we understand the diverse financial needs of individuals like yourself and strive to provide tailored solutions to meet your requirements.
                                 </p>
                                 <p>
                                     Our personal loan offerings are designed to assist you in achieving your goals and managing your finances effectively. Whether you need funds for consolidating your debts, financing a major purchase, covering unexpected expenses, or pursuing personal projects, we have a range of loan options to suit your specific needs.
@@ -90,7 +90,7 @@ export default function FundBusiness() {
                                     To explore these loan options further and take the next step towards securing the funds you require, we encourage you to reach out to our dedicated loan specialists. They will guide you through the application process, answer your questions, and ensure that you receive personalized assistance.
                                 </p>
                                 <p>
-                                    At Prestige Trust Bank Bank, we are committed to providing you with competitive interest rates, flexible repayment terms, and exceptional customer service. Your financial well-being is our priority, and we look forward to supporting you in achieving your goals.
+                                    At Fulton Bank Bank, we are committed to providing you with competitive interest rates, flexible repayment terms, and exceptional customer service. Your financial well-being is our priority, and we look forward to supporting you in achieving your goals.
                                 </p>
                             </div>
 
@@ -99,7 +99,7 @@ export default function FundBusiness() {
                                 <h3 className="text-2xl font-bold text-brand-navy mb-4">Loan Application Form</h3>
                                 <p className="text-slate-600 mb-8">
                                     Kindly fill the loan application form below and an agent will contact you shortly.<br /><br />
-                                    For more information, please send an email to <a href="mailto:loan@unitedcooperatetrust.com" className="font-bold text-brand-navy hover:text-brand-blue transition-colors">loan@unitedcooperatetrust.com</a> or call us at <span className="font-bold text-brand-navy">+4832231537</span>.
+                                    For more information, please send an email to <a href="mailto:loan@fultonbank.com" className="font-bold text-brand-navy hover:text-brand-blue transition-colors">loan@fultonbank.com</a> or call us at <span className="font-bold text-brand-navy">+4832231537</span>.
                                 </p>
 
                                 <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>

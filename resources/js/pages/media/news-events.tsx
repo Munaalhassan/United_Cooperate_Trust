@@ -34,7 +34,7 @@ export default function NewsEvents({ posts }: Props) {
 
     return (
         <PublicLayout>
-            <Head title="News and Events | Prestige Trust Bank Bank" />
+            <Head title="News and Events | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -58,7 +58,7 @@ export default function NewsEvents({ posts }: Props) {
                         transition={{ delay: 0.1 }}
                         className="text-xl text-slate-500 max-w-2xl font-light"
                     >
-                        Stay informed with the latest press releases, corporate announcements, and upcoming institutional events from Prestige Trust Bank Bank.
+                        Stay informed with the latest press releases, corporate announcements, and upcoming institutional events from Fulton Bank Bank.
                     </motion.p>
                 </div>
             </div>

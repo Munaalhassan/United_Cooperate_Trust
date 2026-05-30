@@ -7,7 +7,7 @@ import { ChevronRight, ServerCog } from 'lucide-react';
 export default function ThirdPartyPayments() {
     return (
         <PublicLayout>
-            <Head title="Third-Party Payment Services | Prestige Trust Bank Bank" />
+            <Head title="Third-Party Payment Services | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -59,10 +59,10 @@ export default function ThirdPartyPayments() {
                                 
                                 <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
                                     <p>
-                                        In accordance with the provisions of the Revised Payment Services Directive (PSD2), Prestige Trust Bank Bank (hereafter referred to as “Prestige Trust Bank Bank”) will grant access to Third Party Providers (hereafter referred to as TPPs) to client accounts if they have received the client consent.
+                                        In accordance with the provisions of the Revised Payment Services Directive (PSD2), Fulton Bank Bank (hereafter referred to as “Fulton Bank Bank”) will grant access to Third Party Providers (hereafter referred to as TPPs) to client accounts if they have received the client consent.
                                     </p>
                                     <p>
-                                        In that context, Prestige Trust Bank Bank has implemented LUXHUB's API solution.
+                                        In that context, Fulton Bank Bank has implemented LUXHUB's API solution.
                                     </p>
                                 </div>
                                 

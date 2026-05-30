@@ -46,7 +46,7 @@ const CardMockup = ({ type }: { type: 'gold' | 'world' | 'business' }) => {
 export default function CreditCards() {
     return (
         <PublicLayout>
-            <Head title="Credit Cards | Prestige Trust Bank Bank" />
+            <Head title="Credit Cards | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

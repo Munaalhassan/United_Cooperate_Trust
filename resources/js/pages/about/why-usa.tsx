@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function WhyUSA() {
     return (
         <PublicLayout>
-            <Head title="Why USA? | Prestige Trust Bank Bank" />
+            <Head title="Why USA? | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

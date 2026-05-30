@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function TradeFinance() {
     return (
         <PublicLayout>
-            <Head title="Trade Finance Services | Prestige Trust Bank Bank" />
+            <Head title="Trade Finance Services | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

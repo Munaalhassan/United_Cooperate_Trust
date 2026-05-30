@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function FamilyOffice() {
     return (
         <PublicLayout>
-            <Head title="Family Office | Prestige Trust Bank Bank" />
+            <Head title="Family Office | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

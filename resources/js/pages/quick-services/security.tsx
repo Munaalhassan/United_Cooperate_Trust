@@ -109,7 +109,7 @@ const securityTips = [
 export default function SecurityAwareness() {
     return (
         <PublicLayout>
-            <Head title="Security Awareness | Prestige Trust Bank Bank" />
+            <Head title="Security Awareness | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -152,7 +152,7 @@ export default function SecurityAwareness() {
                             
                             <div className="text-lg text-slate-600 leading-relaxed font-light mb-8 space-y-6">
                                 <p>
-                                    Discover our security tips and best practices for secure online browsing, in particular on our online 24/7 platforms. Prestige Trust Bank Bank recommends the following practices to protect your data and information in order to ensure higher security when you browse the Internet.
+                                    Discover our security tips and best practices for secure online browsing, in particular on our online 24/7 platforms. Fulton Bank Bank recommends the following practices to protect your data and information in order to ensure higher security when you browse the Internet.
                                 </p>
                             </div>
 

@@ -6,7 +6,7 @@ import { ChevronRight, MapPin, ArrowRight } from 'lucide-react';
 export default function Contact() {
     return (
         <PublicLayout>
-            <Head title="Contact Us | Prestige Trust Bank Bank" />
+            <Head title="Contact Us | Fulton Bank Bank" />
 
             {/* Header */}
             <div className="bg-brand-navy relative overflow-hidden">
@@ -89,9 +89,9 @@ export default function Contact() {
                             <div className="space-y-0 flex flex-col">
                                 
                                 {/* Directory Item */}
-                                <a href="mailto:info@unitedcooperatetrust.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
+                                <a href="mailto:info@fultonbank.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
                                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 group-hover:text-brand-blue transition-colors">For general inquiries</h3>
-                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">info@unitedcooperatetrust.com</span>
+                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">info@fultonbank.com</span>
                                     
                                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-blue group-hover:bg-brand-blue transition-all duration-300">
                                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
@@ -99,9 +99,9 @@ export default function Contact() {
                                 </a>
 
                                 {/* Directory Item */}
-                                <a href="mailto:customerservice@unitedcooperatetrust.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
+                                <a href="mailto:customerservice@fultonbank.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
                                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 group-hover:text-brand-blue transition-colors">For customer service</h3>
-                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">customerservice@unitedcooperatetrust.com</span>
+                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">customerservice@fultonbank.com</span>
                                     
                                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-blue group-hover:bg-brand-blue transition-all duration-300">
                                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
@@ -109,9 +109,9 @@ export default function Contact() {
                                 </a>
 
                                 {/* Directory Item */}
-                                <a href="mailto:loan@unitedcooperatetrust.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
+                                <a href="mailto:loan@fultonbank.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
                                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 group-hover:text-brand-blue transition-colors">For loan inquiries</h3>
-                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">loan@unitedcooperatetrust.com</span>
+                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">loan@fultonbank.com</span>
                                     
                                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-blue group-hover:bg-brand-blue transition-all duration-300">
                                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
@@ -119,9 +119,9 @@ export default function Contact() {
                                 </a>
 
                                 {/* Directory Item */}
-                                <a href="mailto:newsletters@unitedcooperatetrust.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
+                                <a href="mailto:newsletters@fultonbank.com" className="group flex flex-col py-6 border-b border-slate-100 hover:border-brand-blue transition-colors relative">
                                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 group-hover:text-brand-blue transition-colors">For newsletters</h3>
-                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">newsletters@unitedcooperatetrust.com</span>
+                                    <span className="font-light tracking-wide text-lg sm:text-xl text-brand-navy group-hover:text-brand-blue transition-colors break-all pr-12">newsletters@fultonbank.com</span>
                                     
                                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-blue group-hover:bg-brand-blue transition-all duration-300">
                                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />

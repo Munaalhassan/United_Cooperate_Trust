@@ -9,7 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 export default function PaymentFX() {
     return (
         <PublicLayout>
-            <Head title="Payment and FX Services | Prestige Trust Bank Bank" />
+            <Head title="Payment and FX Services | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">

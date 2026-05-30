@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 export default function HumanResources() {
     return (
         <PublicLayout>
-            <Head title="Human Resources | Prestige Trust Bank Bank" />
+            <Head title="Human Resources | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -56,7 +56,7 @@ export default function HumanResources() {
                         </div>
 
                         <div className="max-w-3xl">
-                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Working at Prestige Trust Bank Bank</h2>
+                            <h2 className="text-3xl font-bold text-brand-navy mb-8">Working at Fulton Bank Bank</h2>
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-16">
                                 <p>

@@ -78,13 +78,13 @@ export default function Dashboard() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col">
-            <Head title="E-Banking Dashboard | Prestige Trust Bank" />
+            <Head title="E-Banking Dashboard | Fulton Bank" />
             
             <header className="bg-brand-navy shadow-sm border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
                         <Shield className="w-8 h-8 text-brand-gold" />
-                        <h1 className="text-xl font-extrabold text-white uppercase tracking-widest">Prestige Trust Bank</h1>
+                        <h1 className="text-xl font-extrabold text-white uppercase tracking-widest">Fulton Bank</h1>
                     </div>
                     <div className="flex items-center gap-6">
                         <span className="text-xs font-bold text-slate-300 uppercase tracking-widest hidden md:inline-block">
@@ -123,7 +123,7 @@ export default function Dashboard() {
                                 <div className="w-20 h-20 bg-brand-navy/5 rounded-full flex items-center justify-center mb-6">
                                     <Shield className="w-10 h-10 text-brand-navy" />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Welcome to Prestige Trust Bank</h2>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Welcome to Fulton Bank</h2>
                                 <p className="text-slate-500 mb-8 max-w-md">
                                     Hi {user.first_name || user.name}, your application is approved! Click below to instantly generate your official account number and dispatch it to your email.
                                 </p>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Your Account Number - Prestige Trust Bank</title>
+    <title>Your Account Number - Fulton Bank</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -40,11 +40,11 @@
     <div class="wrapper">
         <div class="main">
             <div class="header">
-                <h1>Prestige Trust <span class="accent">Bank</span></h1>
+                <h1>Fulton <span class="accent">Bank</span></h1>
             </div>
             <div class="content">
                 <h2>Welcome, {{ $user->first_name ?? $user->name }}</h2>
-                <p>Thank you for choosing Prestige Trust Bank. Your secure E-Banking profile has been fully verified. We are pleased to issue your official account number.</p>
+                <p>Thank you for choosing Fulton Bank. Your secure E-Banking profile has been fully verified. We are pleased to issue your official account number.</p>
                 
                 <div class="account-box">
                     <p class="label">Your Official Account Number</p>
@@ -62,12 +62,12 @@
                 <p style="margin-bottom: 0; font-size: 12px; color: #94a3b8; font-weight: 500;">If you have any questions or require concierge assistance, our private banking support team is at your disposal 24/7.</p>
             </div>
             <div class="footer">
-                <strong>Prestige Trust Bank</strong> &copy; {{ date('Y') }}<br>
+                <strong>Fulton Bank</strong> &copy; {{ date('Y') }}<br>
                 <span style="margin-top: 5px; display: inline-block;">London, United Kingdom</span><br>
                 <span style="font-size: 10px; margin-top: 10px; display: block; color: #cbd5e1; letter-spacing: 2px; text-transform: uppercase; font-weight: 800;">Excellence in Global Finance</span>
             </div>
         </div>
-        <p class="security"><strong>SECURITY NOTICE:</strong> Prestige Trust Bank will never ask for your password or full account details via email. If you did not request this communication, please contact us immediately.</p>
+        <p class="security"><strong>SECURITY NOTICE:</strong> Fulton Bank will never ask for your password or full account details via email. If you did not request this communication, please contact us immediately.</p>
     </div>
 </body>
 </html>

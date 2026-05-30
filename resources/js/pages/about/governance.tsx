@@ -8,7 +8,7 @@ import { AboutSidebar } from '@/components/about-sidebar';
 export default function Governance() {
     return (
         <PublicLayout>
-            <Head title="Governance | Prestige Trust Bank Bank" />
+            <Head title="Governance | Fulton Bank Bank" />
 
             {/* Breadcrumbs & Header */}
             <div className="bg-white border-b border-slate-100">
@@ -46,7 +46,7 @@ export default function Governance() {
                             
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light mb-16">
                                 <p>
-                                    Ethical conduct is of paramount importance at Prestige Trust Bank Bank . We were one of the first banks in USA to sign the ICMA Private Banking Wealth Management Charter of Quality. In doing so, we pledged our commitment to the three main principles on which the charter is founded: integrity, transparency and professionalism.
+                                    Ethical conduct is of paramount importance at Fulton Bank Bank . We were one of the first banks in USA to sign the ICMA Private Banking Wealth Management Charter of Quality. In doing so, we pledged our commitment to the three main principles on which the charter is founded: integrity, transparency and professionalism.
                                 </p>
                                 <p>
                                     Our governance bodies and practices comply with the strictest requirements of the European Union and the European legislative and regulatory framework.

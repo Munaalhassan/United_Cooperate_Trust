@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 export default function Complaints() {
     return (
         <PublicLayout>
-            <Head title="Complaints | Prestige Trust Bank Bank" />
+            <Head title="Complaints | Fulton Bank Bank" />
 
             {/* Page Header */}
             <div className="bg-brand-navy relative overflow-hidden">
@@ -60,7 +60,7 @@ export default function Complaints() {
                             </p>
 
                             <p>
-                                If you are not satisfied with the response given by Prestige Trust Bank Bank, you can submit a request for an out-of-court complaint settlement to the Commission de Surveillance du Secteur Financier ("CSSF") at the following address:
+                                If you are not satisfied with the response given by Fulton Bank Bank, you can submit a request for an out-of-court complaint settlement to the Commission de Surveillance du Secteur Financier ("CSSF") at the following address:
                             </p>
 
                             {/* CSSF Address Block */}
@@ -74,10 +74,10 @@ export default function Complaints() {
                             <div className="bg-slate-50 border border-slate-200 p-8 rounded-sm mt-10">
                                 <h3 className="text-lg font-bold text-brand-navy mb-4 uppercase tracking-wider">Submit a Complaint</h3>
                                 <p className="text-slate-600 text-sm mb-4">
-                                    To submit a complaint to Prestige Trust Bank Bank, please contact us via email or write to us at our registered address.
+                                    To submit a complaint to Fulton Bank Bank, please contact us via email or write to us at our registered address.
                                 </p>
                                 <div className="space-y-2 text-sm">
-                                    <p><span className="font-semibold text-brand-navy">Email:</span> <a href="mailto:customerservice@unitedcooperatetrust.com" className="text-brand-blue hover:underline">customerservice@unitedcooperatetrust.com</a></p>
+                                    <p><span className="font-semibold text-brand-navy">Email:</span> <a href="mailto:customerservice@fultonbank.com" className="text-brand-blue hover:underline">customerservice@fultonbank.com</a></p>
                                     <p><span className="font-semibold text-brand-navy">Address:</span> 1256 - Butantã, São Paulo - SP, 05503-000, USA</p>
                                 </div>
                             </div>
