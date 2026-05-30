@@ -72,6 +72,10 @@ Route::get('dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('ebanking/dashboard', [\App\Http\Controllers\EBankingController::class, 'dashboard'])->name('ebanking.dashboard');
     Route::post('ebanking/generate-account', [\App\Http\Controllers\EBankingController::class, 'generateAccount'])->name('ebanking.generate');
+    Route::get('ebanking/confirm-account/{id}', [\App\Http\Controllers\EBankingController::class, 'confirmAccount'])
+        ->middleware('signed')
+        ->name('ebanking.confirm-account');
+    Route::post('ebanking/verify-password', [\App\Http\Controllers\EBankingController::class, 'verifyPassword'])->name('ebanking.verify-password');
 });
 
 Route::prefix('{current_team}')

@@ -10,8 +10,10 @@ Thank you for logging in to your new E-Banking profile. Your secure account numb
 
 Please keep this number secure, as you will need it for future transactions and support inquiries.
 
-<x-mail::button :url="route('ebanking.dashboard')">
-Go to Dashboard
+To complete your setup and access your dashboard, please confirm receipt of this account number:
+
+<x-mail::button :url="$url">
+Confirm Account Number
 </x-mail::button>
 
 If you did not request this or believe there is an error, please contact our support team immediately.

@@ -41,6 +41,9 @@ class AccountGeneratedMail extends Mailable implements ShouldQueue
     {
         return new Content(
             markdown: 'emails.account.generated',
+            with: [
+                'url' => \Illuminate\Support\Facades\URL::signedRoute('ebanking.confirm-account', ['id' => $this->user->id])
+            ],
         );
     }
 
